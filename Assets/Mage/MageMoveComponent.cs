@@ -1,50 +1,58 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
 public class MageMoveComponent : MonoBehaviour
 {
     #region Variables   
     public float moveSpeed = 3f;
-    public Transform cameraTransform; public Transform avatarCameraTarget;
-    public Transform leftController; public Transform avatarLeftHandTarget;
-    public Transform rightController; public Transform avatarRightHandTarget;
+
+    public InputActionProperty moveAction;
+
+    public Transform cameraTransform;           // 실제 카메라 위치
+    public Transform leftController;            // 실제 왼쪽 컨트롤러 위치
+    public Transform rightController;           // 실제 오른쪽 컨트롤러 위치
+
+    public Transform avatarCameraTarget;        // 실제 카메라에 비례해서 아바타 매시에 가상 카메라 위치
+    public Transform avatarLeftHandTarget;      // 실제 카메라 - 실제 왼쪽 컨트롤러에 비례해서, 아바타 매시에서 왼손의 위치
+    public Transform avatarRightHandTarget;     // 실제 카메라 - 실제 오른쪽 컨트롤러에 비례해서, 아바타 매시에서 오른손의 위치
 
     private int currentIdleIndex = 0;           // 현재 Idle Pose 인덱스 값
     private float moveForward;                  // 앞으로 움직이는 값, 뒤는 음수
     private float moveRight;                    // 오른쪽으로 움직이는 값, 왼쪽은 음수
 
     private Animator mageAnimator;
-    private Rigidbody mageRigidBody;
-    private LineRenderer mageLineRenderer;
     #endregion
 
     #region Unity Functions
     private void Awake()
     {
         mageAnimator = GetComponent<Animator>();
-        //mageRigidBody = GetComponent<Rigidbody>();
-        mageLineRenderer = GetComponent<LineRenderer>();
-    }
-
-    private void Start()
-    {
-        // StartCoroutine(nameof(Co_ChangeIdlePose));
-
-        leftController.transform.position = mageAnimator.GetIKHintPosition(AvatarIKHint.LeftElbow);
-        rightController.transform.position = mageAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
     }
 
     private void Update()
     {
-        avatarLeftHandTarget.position = leftController.position;
-        avatarLeftHandTarget.rotation = leftController.rotation;
+        // 아바타에서 왼쪽손이 위치할 곳 조정
+        avatarLeftHandTarget.position = avatarCameraTarget.position + leftController.position - cameraTransform.position;
+        // 아바타에서 외쪽손의 회전 크기 조정
+        Quaternion leftRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * leftController.rotation;
+        avatarLeftHandTarget.rotation = avatarCameraTarget.rotation * leftRotationOffset;
 
-        
+        // 아바타에서 오른손이 위치할 곳 조정
+        avatarRightHandTarget.position = avatarCameraTarget.position + rightController.position - cameraTransform.position;
+        // 아바타에서 오른손의 회전 크기 조정
+        Quaternion rightRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
+        avatarRightHandTarget.rotation = avatarCameraTarget.rotation * rightRotationOffset;
+    }
 
-        avatarRightHandTarget.position = rightController.position;
-        avatarRightHandTarget.rotation = rightController.rotation;
+    private void FixedUpdate()
+    {
+        Vector2 moveValue = moveAction.action.ReadValue<Vector2>();
+
+        mageAnimator.SetFloat("Move Forward", moveValue.x);
+        mageAnimator.SetFloat("Move Right", moveValue.y);
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -54,14 +62,14 @@ public class MageMoveComponent : MonoBehaviour
         mageAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
         mageAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
 
-        mageAnimator.SetIKPosition(AvatarIKGoal.LeftHand, leftController.position);
-        mageAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftController.rotation);
+        mageAnimator.SetIKPosition(AvatarIKGoal.LeftHand, avatarLeftHandTarget.position);
+        mageAnimator.SetIKRotation(AvatarIKGoal.LeftHand, avatarLeftHandTarget.rotation);
 
         mageAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f);
         mageAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1.0f);
 
-        mageAnimator.SetIKPosition(AvatarIKGoal.RightHand, rightController.position);
-        mageAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightController.rotation);
+        mageAnimator.SetIKPosition(AvatarIKGoal.RightHand, avatarRightHandTarget.position);
+        mageAnimator.SetIKRotation(AvatarIKGoal.RightHand, avatarRightHandTarget.rotation);
     }
     #endregion
 
