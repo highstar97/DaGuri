@@ -17,18 +17,20 @@ public class MageMoveComponent : MonoBehaviour
 
     private Animator mageAnimator;
     private Rigidbody mageRigidBody;
+    private LineRenderer mageLineRenderer;
     #endregion
 
     #region Unity Functions
     private void Awake()
     {
         mageAnimator = GetComponent<Animator>();
-        mageRigidBody = GetComponent<Rigidbody>();
+        //mageRigidBody = GetComponent<Rigidbody>();
+        mageLineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Start()
     {
-        StartCoroutine(nameof(Co_ChangeIdlePose));
+        // StartCoroutine(nameof(Co_ChangeIdlePose));
 
         leftController.transform.position = mageAnimator.GetIKHintPosition(AvatarIKHint.LeftElbow);
         rightController.transform.position = mageAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
@@ -38,6 +40,8 @@ public class MageMoveComponent : MonoBehaviour
     {
         avatarLeftHandTarget.position = leftController.position;
         avatarLeftHandTarget.rotation = leftController.rotation;
+
+        
 
         avatarRightHandTarget.position = rightController.position;
         avatarRightHandTarget.rotation = rightController.rotation;
@@ -76,7 +80,7 @@ public class MageMoveComponent : MonoBehaviour
             moveRight = inputVelocity.y;
             mageAnimator.SetFloat("Move Right", moveRight);
 
-            mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
+            //mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
         }
     }
 
@@ -93,7 +97,7 @@ public class MageMoveComponent : MonoBehaviour
             moveRight = inputVelocity.y;
             mageAnimator.SetFloat("Move Right", moveRight);
 
-            mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
+           // mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
         }
     }
     #endregion
