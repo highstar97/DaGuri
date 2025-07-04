@@ -16,6 +16,8 @@ public class ControllerTracking : MonoBehaviour
     private List<Vector3> positions = new List<Vector3>();
 
     private bool isTracking = false;
+    private float elapsedTime = 0f;
+    private float trackingInterval = 0.1f;
     private Coroutine stopTrackingCoroutine;
     #endregion
 
@@ -35,6 +37,7 @@ public class ControllerTracking : MonoBehaviour
     {
         float triggerValue = triggerAction.action.ReadValue<float>();
         bool isPressed = triggerValue > 0.1f;
+        elapsedTime += Time.deltaTime;
 
         if (isPressed)
         {
@@ -43,7 +46,11 @@ public class ControllerTracking : MonoBehaviour
                 InitTracking();
             }
 
-            TrackPosition();    // Line Renderer에 현재 위치 추가
+            if(elapsedTime >= trackingInterval)
+            {
+                TrackPosition();    // Line Renderer에 현재 위치 추가
+                elapsedTime -= trackingInterval;
+            }            
 
             if (stopTrackingCoroutine != null)     // 버튼 누르는 동안은 리셋 타이머 중지
             {
