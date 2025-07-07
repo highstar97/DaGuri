@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     #region Variables
-
     public List<string> prefabs;
     public List<Transform> instantiateTransforms;
     public DemonicAltar_Controller demonicAlterController;
@@ -26,15 +25,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (character.GetComponent<PhotonView>().IsMine)
         {
-            var audio = character.GetComponent<AudioSource>();
+            var audio = character.GetComponent<AudioListener>();
             if (audio != null)
             {
                 audio.enabled = true;
-                Debug.Log("[Audio] 내 캐릭터의 AudioSource 활성화");
+                Debug.Log("[Audio] 내 캐릭터의 AudioListener 활성화");
             }
             else
             {
-                Debug.LogWarning("[Audio] AudioSource가 없습니다!");
+                Debug.LogWarning("[Audio] AudioListener 없습니다!");
             }
         }
 

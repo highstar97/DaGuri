@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class PhotonNetworkManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    UnityEvent joinedRoomEvent;
-
     #region Unity Functions
     private void Start()
     {
@@ -26,8 +23,6 @@ public class PhotonNetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log($"방 입장 성공 : {PhotonNetwork.CurrentRoom.Name}");
-
-        joinedRoomEvent.Invoke();
     }
     #endregion
 

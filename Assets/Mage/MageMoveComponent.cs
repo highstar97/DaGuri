@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
+using Photon.Pun;
 
-public class MageMoveComponent : MonoBehaviour
+public class MageMoveComponent : MonoBehaviourPun
 {
     #region Variables   
     public float moveSpeed = 3f;
@@ -34,6 +33,8 @@ public class MageMoveComponent : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine) return;
+
         // 아바타에서 왼쪽손이 위치할 곳 조정
         avatarLeftHandTarget.position = avatarCameraTarget.position + leftController.position - cameraTransform.position;
         // 아바타에서 외쪽손의 회전 크기 조정
@@ -49,6 +50,8 @@ public class MageMoveComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
         Vector2 moveValue = moveAction.action.ReadValue<Vector2>();
 
         mageAnimator.SetFloat("Move Forward", moveValue.x);
@@ -57,6 +60,8 @@ public class MageMoveComponent : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
+        if (!photonView.IsMine) return;
+
         if (mageAnimator == null || leftController == null) return;
 
         mageAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
@@ -78,6 +83,8 @@ public class MageMoveComponent : MonoBehaviour
     // Send Massage
     public void OnMove(InputValue value)
     {
+        if (!photonView.IsMine) return;
+
         Vector2 inputVelocity = value.Get<Vector2>();
 
         if (inputVelocity != null)
@@ -95,6 +102,8 @@ public class MageMoveComponent : MonoBehaviour
     // Invoke Unity Events
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine) return;
+
         Vector2 inputVelocity = context.ReadValue<Vector2>();
 
         if (inputVelocity != null)
