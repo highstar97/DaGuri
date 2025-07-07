@@ -1,3 +1,6 @@
+#define LOCAL_TEST
+//#define PHOTON
+
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +39,12 @@ public class BossHandPhysics : MonoBehaviourPun
 
     void Update()
     {
-        if(!photonView.IsMine) return;
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON       
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
 
         // 손 모델링과 실제 손 사이의 거리가
         float distance = Vector3.Distance(transform.position, targetController.position);
@@ -54,8 +62,12 @@ public class BossHandPhysics : MonoBehaviourPun
     }
     private void FixedUpdate()
     {
-        if (!photonView.IsMine) return;
-
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON       
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
         rb.velocity = (targetController.position - transform.position) / Time.fixedDeltaTime;
 
         // 타켓과 나의 회전량의 차이를 구하기 위한 Quaternion 계산식 

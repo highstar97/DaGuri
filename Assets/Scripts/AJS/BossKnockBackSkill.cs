@@ -1,10 +1,12 @@
+#define LOCAL_TEST
+//#define PHOTON
+
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit; // Input System 사용
-
 [RequireComponent(typeof(Rigidbody))]
 public class BossKnockBackSkill : MonoBehaviourPun
 {
@@ -39,7 +41,14 @@ public class BossKnockBackSkill : MonoBehaviourPun
 
     private void OnEnable()
     {
-        if (!photonView.IsMine) return;
+
+        // 이 스킬이 로컬 플레이어에 의해서만 시작되도록 합니다.
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON       
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
 
         // 그립 액션 누르면, 넉백 스킬 체크 시작
         gripAction.action.performed += OnKnockBackStart;
@@ -48,7 +57,13 @@ public class BossKnockBackSkill : MonoBehaviourPun
     }
     private void OnDisable()
     {
-        if (!photonView.IsMine) return;
+
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON       
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
 
         gripAction.action.performed -= OnKnockBackStart;
         gripAction.action.canceled -= OnKnockBackEnd;
@@ -104,7 +119,12 @@ public class BossKnockBackSkill : MonoBehaviourPun
     // --- 트리거 충돌 감지 (Is Trigger가 체크된 Collider) ---
     private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine) return;
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON       
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
 
         // 넉백 스킬 시전 중이고, 충돌한 오브젝트의 Layer가 Floor Layer에 속하는지 확인
         if (isKnockBackCheck && (floorLayer.value & (1 << other.gameObject.layer)) > 0)
