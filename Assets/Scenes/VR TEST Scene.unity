@@ -3586,7 +3586,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.07
-  m_Center: {x: 0.03, y: 0.04, z: 0.05}
+  m_Center: {x: 0.06, y: 0.04, z: -0.02}
 --- !u!120 &763665024806536203
 LineRenderer:
   serializedVersion: 2
@@ -6968,8 +6968,8 @@ MonoBehaviour:
     type: 3}
   gripAction: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  maxDetectionTime: 1.5
-  minHeightDifference: 0.3
+  maxDetectionTime: 1
+  minHeightDifference: 0.25
   floorLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -7012,6 +7012,7 @@ GameObject:
   - component: {fileID: 2756246385814414051}
   - component: {fileID: 8890366523828327638}
   - component: {fileID: 8890366523828327639}
+  - component: {fileID: 8890366523828327640}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -7775,7 +7776,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.07
-  m_Center: {x: -0.04, y: 0.04, z: 0.05}
+  m_Center: {x: -0.04, y: 0.02, z: 0.05}
 --- !u!114 &8890366523828327639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7793,11 +7794,38 @@ MonoBehaviour:
     type: 3}
   gripAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  maxDetectionTime: 1.5
-  minHeightDifference: 0.3
+  maxDetectionTime: 1
+  minHeightDifference: 0.25
   floorLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!54 &8890366523828327640
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182482495995675231}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!33 &9039092735612824737
 MeshFilter:
   m_ObjectHideFlags: 0
