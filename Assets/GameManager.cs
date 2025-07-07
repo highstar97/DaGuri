@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     #region User Functions
     public void OnJoinedRoom()
     {
-        int numOfCurrentJoinedPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
+        int numOfCurrentJoinedPlayer = PhotonNetwork.CurrentRoom.PlayerCount -1;
         PhotonNetwork.Instantiate(prefabs[numOfCurrentJoinedPlayer], instantiateTransforms[numOfCurrentJoinedPlayer].position, instantiateTransforms[numOfCurrentJoinedPlayer].rotation);
 
         demonicAlterController.ToggleDemonicAltar();

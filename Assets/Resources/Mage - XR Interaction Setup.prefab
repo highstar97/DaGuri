@@ -1236,6 +1236,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1767192437, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_BackGroundColor.a
       value: 1
