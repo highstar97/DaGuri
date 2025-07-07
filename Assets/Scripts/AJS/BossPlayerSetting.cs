@@ -33,7 +33,6 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject leftHandPresence;
     [SerializeField] private GameObject leftDirectInteractor;
 
-
     [Header("Right Controller")]
     [SerializeField] private ActionBasedControllerManager rightActionBasedControllerManager;
     [SerializeField] private ActionBasedController rightXRController;
