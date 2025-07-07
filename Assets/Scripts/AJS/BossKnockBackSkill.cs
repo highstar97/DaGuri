@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem; // Input System 사용
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit; // Input System 사용
 
 public class BossKnockBackSkill : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class BossKnockBackSkill : MonoBehaviour
     private float initialControllerY; // 트리거 처음 눌렀을 때, 컨트롤로 Y 좌표
     private Coroutine smashDetectionCoroutine;
     private bool isTriggerPressed = false; // 트리거가 눌려있는지 상태 추적
+
+    // 테스트
+    public XRDirectInteractor directInteractor;
+
 
     // --- 활성화 시 Input Action 콜백 구독 ---
     void OnEnable()
@@ -56,7 +61,9 @@ public class BossKnockBackSkill : MonoBehaviour
     // --- 컨트롤러 트리거 눌림 감지 ---
     private void OnTriggerPressed(InputAction.CallbackContext context)
     {
-        
+        // 들고 있는게 있으면 넉백 불가능
+        if (directInteractor.interactablesSelected.Count != 0) return;
+
         isTriggerPressed = true;
         // 이미 스매쉬 코루틴이 실행 중이면 중복 방지 (이전 코루틴 중지 및 재시작)
         if (smashDetectionCoroutine != null)
