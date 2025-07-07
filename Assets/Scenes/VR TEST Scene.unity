@@ -3152,10 +3152,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 2756246385814414051}
   - {fileID: 0}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 0}
-    overrideGroupMembers:
-    - {fileID: 2756246385814414051}
+  m_StartingInteractionOverridesMap: []
 --- !u!114 &992320141128346485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5829,10 +5826,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 6083699194806096662}
   - {fileID: 0}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 0}
-    overrideGroupMembers:
-    - {fileID: 6083699194806096662}
+  m_StartingInteractionOverridesMap: []
 --- !u!1001 &6627034318317576020
 PrefabInstance:
   m_ObjectHideFlags: 0
