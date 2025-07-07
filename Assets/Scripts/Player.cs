@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         // VR 컨트롤러 위치를 IK 타겟에 전달
         if (rightHandController != null && rightHandIKTarget != null)
         {
-            rightHandIKTarget.position = rightHandController.position;
+            rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
             rightHandIKTarget.rotation = rightHandController.rotation;
         }
     }
