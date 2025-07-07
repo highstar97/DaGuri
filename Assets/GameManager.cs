@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     public List<Transform> instantiateTransforms;
 
     public DemonicAltar_Controller demonicAlterController;
-
-    private static int numOfCurrentJoinedPlayer = 0;
     #endregion
 
     #region Unity Functions
@@ -22,8 +20,8 @@ public class GameManager : MonoBehaviour
     #region User Functions
     public void OnJoinedRoom()
     {
+        int numOfCurrentJoinedPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
         PhotonNetwork.Instantiate(prefabs[numOfCurrentJoinedPlayer], instantiateTransforms[numOfCurrentJoinedPlayer].position, instantiateTransforms[numOfCurrentJoinedPlayer].rotation);
-        ++numOfCurrentJoinedPlayer;
 
         demonicAlterController.ToggleDemonicAltar();
     }
