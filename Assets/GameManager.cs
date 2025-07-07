@@ -6,7 +6,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Variables
-    string prefabName = "Mage - XR Interaction Setup";
+
+    public List<string> prefabs;
+
+    public List<Transform> instantiateTransforms;
+
+    public DemonicAltar_Controller demonicAlterController;
+
+    private static int numOfCurrentJoinedPlayer = 0;
     #endregion
 
     #region Unity Functions
@@ -15,7 +22,10 @@ public class GameManager : MonoBehaviour
     #region User Functions
     public void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate(prefabName, Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate(prefabs[numOfCurrentJoinedPlayer], instantiateTransforms[numOfCurrentJoinedPlayer].position, instantiateTransforms[numOfCurrentJoinedPlayer].rotation);
+        ++numOfCurrentJoinedPlayer;
+
+        demonicAlterController.ToggleDemonicAltar();
     }
     #endregion
 }
