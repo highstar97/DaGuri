@@ -1136,7 +1136,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2693775938311612801}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &510118508696173575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4083,6 +4083,8 @@ GameObject:
   - component: {fileID: 8311039564890594700}
   - component: {fileID: 2545244793893289982}
   - component: {fileID: 6343442559583924438}
+  - component: {fileID: 8312269332181634033}
+  - component: {fileID: 2540984394548549394}
   m_Layer: 0
   m_Name: RPGHeroPolyart
   m_TagString: Untagged
@@ -4327,6 +4329,45 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8481020075582228098, guid: 07981939ba5555b4b81b1a83adc93907,
     type: 3}
   firePoint: {fileID: 9047791576482559703}
+--- !u!114 &8312269332181634033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765955785222111650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 2540984394548549394}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2540984394548549394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765955785222111650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7788155372252540344
 GameObject:
   m_ObjectHideFlags: 0
