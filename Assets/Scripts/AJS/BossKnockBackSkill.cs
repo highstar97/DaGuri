@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit; // Input System 사용
 
+[RequireComponent(typeof(Rigidbody))]
 public class BossKnockBackSkill : MonoBehaviour
 {
     public XRDirectInteractor directInteractor;
@@ -14,14 +15,26 @@ public class BossKnockBackSkill : MonoBehaviour
 
     // --- 스킬 발동 조건 설정 ---
     [Header("Skill Conditions")]
-    public float maxDetectionTime = 1.5f;       // 트리거 누른 후 바닥에 닿을 수 있는 최대 시간 (초)
-    public float minHeightDifference = 0.3f;    // 최초 누른 Y값과 닿은 Y값의 최소 차이 (미터)
+    public float maxDetectionTime;       // 트리거 누른 후 바닥에 닿을 수 있는 최대 시간 (초)
+    public float minHeightDifference;    // 최초 누른 Y값과 닿은 Y값의 최소 차이 (미터)
     public LayerMask floorLayer;                // Floor 오브젝트의 Layer Mask
 
     // --- 내부 변수 ---
     private float initialControllerY; // 트리거 처음 눌렀을 때, 컨트롤로 Y 좌표
     private Coroutine smashDetectionCoroutine;
     private bool isKnockBackCheck = false; // 넉백스킬을 체크 중인지
+
+    private void Reset()
+    {     
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        floorLayer = LayerMask.GetMask("Floor");
+
+        maxDetectionTime = 1f;
+        minHeightDifference = 0.25f;
+    }
 
     private void OnEnable()
     {
@@ -133,6 +146,7 @@ public class BossKnockBackSkill : MonoBehaviour
     private void ActivateKnockbackSkill(Vector3 impactPoint)
     {
         Debug.Log("넉백 발동");
-        // 이펙트, 사운드 등 추가
+        // 넉백 성공시 진동
+        directInteractor.xrController.SendHapticImpulse(1f, 0.2f);
     }
 }
