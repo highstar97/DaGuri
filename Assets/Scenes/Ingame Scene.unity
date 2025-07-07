@@ -165,7 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - Mage - XR Interaction Setup
-  instantiateTransforms: []
+  - RPGHeroPolyart
+  instantiateTransforms:
+  - {fileID: 543434760}
+  - {fileID: 1907647388}
   demonicAlterController: {fileID: 1127759017}
 --- !u!1 &543434759
 GameObject:
