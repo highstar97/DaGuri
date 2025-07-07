@@ -245,6 +245,7 @@ Transform:
   - {fileID: 5313796801864547191}
   - {fileID: 1774310404938045169}
   - {fileID: 817079508721769406}
+  - {fileID: 7655309185825326380}
   - {fileID: 7175824911201632416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -593,6 +594,52 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+--- !u!1 &6028700464982067039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7655309185825326380}
+  - component: {fileID: 2445482098769570381}
+  m_Layer: 2
+  m_Name: FireBall Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7655309185825326380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028700464982067039}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 569404853059897947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2445482098769570381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028700464982067039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b595ebe63bf797e48aaf1c933e5e2056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBallPrefab: {fileID: 9180878091285115639, guid: 8b09e27e7cf6a7040ab4dc788aa2d69a,
+    type: 3}
 --- !u!1 &8121763786333802318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1066,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8805931859538118849}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 8909327788018189334}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
         type: 3}
@@ -1069,6 +1120,32 @@ MonoBehaviour:
   avatarCameraTarget: {fileID: 2510986222001776606}
   avatarLeftHandTarget: {fileID: 7785723424246273660}
   avatarRightHandTarget: {fileID: 5967524053463285923}
+--- !u!114 &8805931859538118849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796177480841235995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack:
+    baseValue: 0
+  attackSpeed:
+    baseValue: 0
+  criticalRate:
+    baseValue: 0
+  criticalCoefficient:
+    baseValue: 0
+  maxHealth:
+    baseValue: 0
+  currentHealth:
+    baseValue: 0
+  moveVelocity:
+    baseValue: 0
 --- !u!114 &8909327788018189334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b5e268c81d40743b44b6226d9144f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicOffset: {fileID: 7785723424246273660}
+  fireBallSpawner: {fileID: 2445482098769570381}
   controllerTracking: {fileID: 7554912490308340592}
 --- !u!114 &967282428541960105
 MonoBehaviour:
@@ -1094,6 +1173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b5e268c81d40743b44b6226d9144f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicOffset: {fileID: 5967524053463285923}
+  fireBallSpawner: {fileID: 2445482098769570381}
   controllerTracking: {fileID: 2074319106769846110}
 --- !u!1001 &8377469563827908238
 PrefabInstance:
