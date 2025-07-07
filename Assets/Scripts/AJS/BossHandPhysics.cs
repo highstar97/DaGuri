@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 public class BossHandPhysics : MonoBehaviour
 {
     private Rigidbody rb;
-
+    private Collider[] handColliders; // 손 콜라이더
     [Header("Hand Controller")]
     [SerializeField]
     private Transform targetController;
@@ -30,6 +30,7 @@ public class BossHandPhysics : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        handColliders = GetComponentsInChildren<Collider>(); // 손에 있는 손가락 콜라이더 컴포넌트 가져오기
     }
 
     void Update()
@@ -63,5 +64,28 @@ public class BossHandPhysics : MonoBehaviour
 
         // 해당 정보들로, 자연스럽게 돌게 시킴
         rb.angularVelocity = rotationDifferenceInDegree * Mathf.Deg2Rad / Time.fixedDeltaTime;
+    }
+    public void DisableHandCollider()
+    {
+        // 물건을 집을 때, 손 콜라이더 비활성화
+        foreach (Collider collider in handColliders)
+        {
+            collider.enabled = false;
+        }
+    }
+
+    public void EnableHandCollider()
+    {
+        // 물건 놓으면 다시 활성화
+        foreach(Collider collider in handColliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+    public void EnableHandColliderDelay(float delay)
+    {
+        // 물건 튕기지 않게. 0.5초 후에 콜라이더 활성화 하기
+        Invoke("EnableHandCollider", delay);
     }
 }
