@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit; // Input System 사용
 
 [RequireComponent(typeof(Rigidbody))]
-public class BossKnockBackSkill : MonoBehaviour
+public class BossKnockBackSkill : MonoBehaviourPun
 {
     public XRDirectInteractor directInteractor;
     // --- Input Actions 설정 ---
@@ -38,6 +39,8 @@ public class BossKnockBackSkill : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!photonView.IsMine) return;
+
         // 그립 액션 누르면, 넉백 스킬 체크 시작
         gripAction.action.performed += OnKnockBackStart;
         // 그립 액션 떼면, 넉백 스킬 체크 종료
@@ -45,6 +48,8 @@ public class BossKnockBackSkill : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (!photonView.IsMine) return;
+
         gripAction.action.performed -= OnKnockBackStart;
         gripAction.action.canceled -= OnKnockBackEnd;
     }
@@ -99,6 +104,8 @@ public class BossKnockBackSkill : MonoBehaviour
     // --- 트리거 충돌 감지 (Is Trigger가 체크된 Collider) ---
     private void OnTriggerEnter(Collider other)
     {
+        if (!photonView.IsMine) return;
+
         // 넉백 스킬 시전 중이고, 충돌한 오브젝트의 Layer가 Floor Layer에 속하는지 확인
         if (isKnockBackCheck && (floorLayer.value & (1 << other.gameObject.layer)) > 0)
         {

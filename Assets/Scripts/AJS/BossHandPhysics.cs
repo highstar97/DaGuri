@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BossHandPhysics : MonoBehaviour
+public class BossHandPhysics : MonoBehaviourPun
 {
     private Rigidbody rb;
     private Collider[] handColliders; // 손 콜라이더
@@ -35,6 +36,8 @@ public class BossHandPhysics : MonoBehaviour
 
     void Update()
     {
+        if(!photonView.IsMine) return;
+
         // 손 모델링과 실제 손 사이의 거리가
         float distance = Vector3.Distance(transform.position, targetController.position);
         // 일정 거리 이상이면
@@ -51,6 +54,8 @@ public class BossHandPhysics : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
         rb.velocity = (targetController.position - transform.position) / Time.fixedDeltaTime;
 
         // 타켓과 나의 회전량의 차이를 구하기 위한 Quaternion 계산식 
