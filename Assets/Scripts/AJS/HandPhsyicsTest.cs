@@ -7,10 +7,34 @@ public class HandPhsyicsTest : MonoBehaviour
     public Transform target;
     private Rigidbody rb;
 
+    //public Renderer nonPhysicalHand; // 실제 컨트롤로 위치를 보여줄 랜더러
+    public GameObject nonPhysicalHandTest; // Hack: 실제 컨트롤로 위치를 보여줄 랜더러인데 지금은 GameObject
+    public float shonwNonPhysicalHandDistance = 0.05f; // 컨트롤 위치를 보여 줄 거리 차이
+
     private void Start()
     {
-       rb = GetComponent<Rigidbody>();       
+       rb = GetComponent<Rigidbody>();          
+
     }
+
+    private void Update()
+    {
+        // 손 모델링과 실제 손 사이의 거리가
+        float distance = Vector3.Distance(transform.position, target.position);
+        // 일정 거리 이상이면
+        if (distance > shonwNonPhysicalHandDistance)
+        {
+            // 손 랜더러 활성화
+            // nonPhysicalHand.enabled = true;
+            nonPhysicalHandTest.gameObject.SetActive(true); // Hack: GameObject 여서 임시적으로 이렇게 설정
+        }
+        else
+        {
+            // nonPhysicalHand.enabled = false;
+            nonPhysicalHandTest.gameObject.SetActive(false);
+        }
+    }
+   
 
     private void FixedUpdate()
     {
