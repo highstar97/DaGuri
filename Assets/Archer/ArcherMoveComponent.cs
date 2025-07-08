@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
+using Photon.Pun;
 
-public class ArcherMoveComponent : MonoBehaviour
+public class ArcherMoveComponent : MonoBehaviourPun
 {
     #region Variables   
     public float moveSpeed = 3f;
@@ -40,6 +41,8 @@ public class ArcherMoveComponent : MonoBehaviour
 
     private void Update()
     {
+        if (!photonView.IsMine) return;
+
         // 아바타에서 왼쪽손이 위치할 곳 조정
         avatarLeftHandTarget.position = avatarCameraTarget.position + leftController.position - cameraTransform.position;
         // 아바타에서 외쪽손의 회전 크기 조정
@@ -51,10 +54,14 @@ public class ArcherMoveComponent : MonoBehaviour
         // 아바타에서 오른손의 회전 크기 조정
         Quaternion rightRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
         avatarRightHandTarget.rotation = avatarCameraTarget.rotation * rightRotationOffset;
+
+        photonView.RPC("UpdateHandTargets", RpcTarget.Others, avatarLeftHandTarget.position, avatarLeftHandTarget.rotation, avatarRightHandTarget.position, avatarRightHandTarget.rotation);
     }
 
     private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
         Vector2 moveValue = moveAction.action.ReadValue<Vector2>();
 
         archerAnimator.SetFloat("MoveX", moveValue.x);
@@ -65,36 +72,6 @@ public class ArcherMoveComponent : MonoBehaviour
 
     private void OnAnimatorIK(int layerIndex)
     {
-        //if (archerAnimator == null || leftController == null || rightController ==null || cameraTransform ==null) return;
-
-
-        ////왼손 설정
-        //archerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
-        //archerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
-
-        ////VR 컨트롤러의 위치및 회전 설정
-        //Vector3 leftRelativePos = leftController.position - cameraTransform.position;
-        //Quaternion leftRelativeRot = Quaternion.Inverse(cameraTransform.rotation) * leftController.rotation;
-
-        ////최종 월드 위치 계산
-        //Vector3 finalLeftPos = transform.position + leftRelativePos;
-        //Quaternion finalLeftRot = transform.rotation * leftRelativeRot;
-
-        ////최종 IK위치 적용
-
-        //archerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, finalLeftPos + finalLeftRot * leftHandLocalOffset);
-        //archerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, finalLeftRot * leftHandLocalRotationOffset);
-
-        ////오른손 설정
-        //Vector3 rightRelativePos = rightController.position - cameraTransform.position;
-        //Quaternion rightRelativeRot = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
-
-        //Vector3 finalRightPos = transform.position + rightRelativePos;
-        //Quaternion finalRightRot = transform.rotation * rightRelativeRot;
-
-        //archerAnimator.SetIKPosition(AvatarIKGoal.RightHand, finalRightPos + finalRightRot * rightHandLocalOffset);
-        //archerAnimator.SetIKRotation(AvatarIKGoal.RightHand, finalRightRot * rightHandLocalRotationOffset);
-
         if (archerAnimator == null || leftController == null) return;
 
         archerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
@@ -116,6 +93,8 @@ public class ArcherMoveComponent : MonoBehaviour
     // Send Massage
     public void OnMove(InputValue value)
     {
+        if (!photonView.IsMine) return;
+
         Vector2 inputVelocity = value.Get<Vector2>();
 
         if (inputVelocity != null)
@@ -133,6 +112,8 @@ public class ArcherMoveComponent : MonoBehaviour
     // Invoke Unity Events
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine) return;
+
         Vector2 inputVelocity = context.ReadValue<Vector2>();
 
         if (inputVelocity != null)
@@ -149,37 +130,14 @@ public class ArcherMoveComponent : MonoBehaviour
     #endregion
 
     #region User Functions
-    // Idle Pose를 바꾸어줌.
-    //IEnumerator Co_ChangeIdlePose()
-    //{
-    //    const float changeTime = 5.0f;      // Pose 변경할 시간 interval
-    //    while (true)
-    //    {
-    //        // 랜덤 Idle Index 생성
-    //        int nextIdleIndex = 0;
-    //        do
-    //        {
-    //            nextIdleIndex = Random.Range(0, 4);
-    //        } while (currentIdleIndex == nextIdleIndex);
+    [PunRPC]
+    private void UpdateHandTargets(Vector3 leftPos, Quaternion leftRot, Vector3 rightPos, Quaternion rightRot)
+    {
+        avatarLeftHandTarget.position = leftPos;
+        avatarLeftHandTarget.rotation = leftRot;
 
-    //        // 시간 경과에 따른 부드런 Idle Pose 변경
-    //        float elapsedTime = 0f;
-    //        float startIndex = currentIdleIndex;
-    //        float changingIndex = startIndex;
-
-    //        while (elapsedTime <= 1f)
-    //        {
-    //            elapsedTime += Time.deltaTime;
-    //            changingIndex = Mathf.Lerp(startIndex, nextIdleIndex, elapsedTime);
-    //            archerAnimator.SetFloat("Idle Index", changingIndex);
-    //            yield return null;
-    //        }
-
-    //        currentIdleIndex = nextIdleIndex;
-
-    //        // changeTime 마다 Pose 변경
-    //        yield return new WaitForSeconds(changeTime);
-    //    }
-    //}
+        avatarRightHandTarget.position = rightPos;
+        avatarRightHandTarget.rotation = rightRot;
+    }
     #endregion
 }
