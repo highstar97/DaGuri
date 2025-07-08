@@ -119,11 +119,11 @@ public class Player : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-        if (!photonView.IsMine || animator == null)
-        {
-            return;
-        }
-       // if (animator == null) return;
+        //if (!photonView.IsMine || animator == null)
+        //{
+        //    return;
+        //}
+       if (animator == null) return;
 
         // 손 위치 IK
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
