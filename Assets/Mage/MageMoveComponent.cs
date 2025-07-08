@@ -46,6 +46,8 @@ public class MageMoveComponent : MonoBehaviourPun
         // 아바타에서 오른손의 회전 크기 조정
         Quaternion rightRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
         avatarRightHandTarget.rotation = avatarCameraTarget.rotation * rightRotationOffset;
+
+        photonView.RPC("UpdateHandTargets", RpcTarget.Others, avatarLeftHandTarget.position, avatarLeftHandTarget.rotation, avatarRightHandTarget.position, avatarRightHandTarget.rotation);
     }
 
     private void FixedUpdate()
@@ -120,6 +122,16 @@ public class MageMoveComponent : MonoBehaviourPun
     #endregion
 
     #region User Functions
+    [PunRPC]
+    private void UpdateHandTargets(Vector3 leftPos, Quaternion leftRot, Vector3 rightPos, Quaternion rightRot)
+    {
+        avatarLeftHandTarget.position = leftPos;
+        avatarLeftHandTarget.rotation = leftRot;
+
+        avatarRightHandTarget.position = rightPos;
+        avatarRightHandTarget.rotation = rightRot;
+    }
+
     // Idle Pose를 바꾸어줌.
     IEnumerator Co_ChangeIdlePose()
     {

@@ -23,19 +23,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         Debug.Log($"[Photon] {prefabs[actorIndex]} 프리팹을 생성했습니다.");
 
-        if (character.GetComponent<PhotonView>().IsMine)
-        {
-            var audio = character.GetComponent<AudioListener>();
-            if (audio != null)
-            {
-                audio.enabled = true;
-                Debug.Log("[Audio] 내 캐릭터의 AudioListener 활성화");
-            }
-            else
-            {
-                Debug.LogWarning("[Audio] AudioListener 없습니다!");
-            }
-        }
+        bool isMine = character.GetComponent<PhotonView>().IsMine;
+
+        character.GetComponentInChildren<AudioListener>().enabled = isMine;
+        character.GetComponentInChildren<Camera>().enabled = isMine;
+        character.GetComponentInChildren<CharacterController>().enabled = isMine;
 
         if (PhotonNetwork.IsMasterClient)
         {
