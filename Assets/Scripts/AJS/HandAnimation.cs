@@ -1,9 +1,12 @@
+//#define LOCAL_TEST
+#define PHOTON
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class HandAnimation : MonoBehaviour
+using Photon.Pun;
+public class HandAnimation : MonoBehaviourPun
 {
     [Header("Animator Component")]
     [SerializeField] private Animator handAnimator;
@@ -14,6 +17,13 @@ public class HandAnimation : MonoBehaviour
 
     private void Update()
     {
+#if LOCAL_TEST
+        bool isLocalPlayer = true;
+#elif PHOTON
+        bool isLocalPlayer = photonView.IsMine;
+#endif
+        if (!isLocalPlayer) return;
+
         float triggerValue = 0f;
         if (triggerInput != null && triggerInput.action != null && triggerInput.action.enabled)
         {

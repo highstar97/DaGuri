@@ -4495,6 +4495,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7729873619573459485}
+    - targetCorrespondingSourceObject: {fileID: 5736729822518543612, guid: a97442cccd10b6e4e820949fc5de838b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4712635704355523710}
   m_SourcePrefab: {fileID: 100100000, guid: a97442cccd10b6e4e820949fc5de838b, type: 3}
 --- !u!114 &450834893616026571 stripped
 MonoBehaviour:
@@ -4536,6 +4540,29 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4712635704355523710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298946257544833406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 7729873619573459485}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &6743715089276881993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4702,6 +4729,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8712342700459382874}
+    - targetCorrespondingSourceObject: {fileID: 2570836349661874348, guid: ba5168536808af14786773909ba012b9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5401808081934293657}
   m_SourcePrefab: {fileID: 100100000, guid: ba5168536808af14786773909ba012b9, type: 3}
 --- !u!4 &2018260288272356187 stripped
 Transform:
@@ -4743,3 +4774,26 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &5401808081934293657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8990045599451607523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8712342700459382874}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
