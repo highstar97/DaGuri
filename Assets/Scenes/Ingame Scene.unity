@@ -164,9 +164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
+  - Boss XR Origin Photon
   - Mage - XR Interaction Setup
   - RPGHeroPolyart
   instantiateTransforms:
+  - {fileID: 1841911906}
   - {fileID: 543434760}
   - {fileID: 1907647388}
   demonicAlterController: {fileID: 1127759017}
@@ -349,9 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b2e0869e5d1334f869d03282eaed1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinedRoomEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &781410230
 Transform:
   m_ObjectHideFlags: 0

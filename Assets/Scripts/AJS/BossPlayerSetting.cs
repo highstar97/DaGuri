@@ -54,23 +54,23 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
         {
             // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
             // 카메라 활성화 (다른 플레이어의 카메라는 비활성화)
-            camera.GetComponent<Camera>().enabled = true;
-            audioListener.GetComponent<AudioListener>().enabled = true;
-            trackedPoseDriver.GetComponent<TrackedPoseDriver>().enabled = true;
-            universalAdditionalCameraData.GetComponent<UniversalAdditionalCameraData>().enabled = true;
+            camera.enabled = true;
+            audioListener.enabled = true;
+            trackedPoseDriver.enabled = true;
+            universalAdditionalCameraData.enabled = true;
 
             // LeftController
-            leftActionBasedControllerManager.GetComponent<ActionBasedControllerManager>().enabled = true;
-            leftXRController.GetComponent<ActionBasedController>().enabled = true;
-            leftXRInteractionGroup.GetComponent<XRInteractionGroup>().enabled = true;
+            leftActionBasedControllerManager.enabled = true;
+            leftXRController.enabled = true;
+            leftXRInteractionGroup.enabled = true;
 
             leftHandPresence.SetActive(true);
             leftDirectInteractor.SetActive(true);
 
             // RightController
-            rightActionBasedControllerManager.GetComponent<ActionBasedControllerManager>().enabled = true;
-            rightXRController.GetComponent<ActionBasedController>().enabled = true;
-            rightXRInteractionGroup.GetComponent<XRInteractionGroup>().enabled = true;
+            rightActionBasedControllerManager.enabled = true;
+            rightXRController.enabled = true;
+            rightXRInteractionGroup.enabled = true;
 
             rightHandPresence.SetActive(true);
             rightDirectInteractor.SetActive(true);
