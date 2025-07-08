@@ -2505,12 +2505,15 @@ MonoBehaviour:
   leftXRInteractionGroup: {fileID: 8907045512440197206}
   leftHandPresence: {fileID: 6947014527668221382}
   leftDirectInteractor: {fileID: 1830928540153347927}
+  leftBossHandPhysics: {fileID: 450834893616026571}
+  leftRgidbody: {fileID: 521043576008220403}
   rightActionBasedControllerManager: {fileID: 5325733074714118852}
   rightXRController: {fileID: 8172840899163245106}
   rightXRInteractionGroup: {fileID: 540297720971086763}
   rightHandPresence: {fileID: 4240405212749880731}
   rightDirectInteractor: {fileID: 6662430070882474799}
   rightBossHandPhysics: {fileID: 8926606125331646139}
+  rightrRgidbody: {fileID: 6511483444544279440}
   leftStabilized: {fileID: 8481620478166117801}
   rightStabilized: {fileID: 7843361136094564153}
   locomotionSytem: {fileID: 6872138163145197585}
@@ -2537,6 +2540,7 @@ MonoBehaviour:
   - {fileID: 2217929283217376991}
   - {fileID: 6377473522207558279}
   - {fileID: 7946083016792153138}
+  - {fileID: 8902794366579762248}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4485,6 +4489,11 @@ PrefabInstance:
       propertyPath: targetController
       value: 
       objectReference: {fileID: 6108110427657507802}
+    - target: {fileID: 4290853580298515313, guid: a97442cccd10b6e4e820949fc5de838b,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5736729822518543612, guid: a97442cccd10b6e4e820949fc5de838b,
         type: 3}
       propertyPath: m_Name
@@ -4557,6 +4566,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf7de2772fb4b649aaa167cdefa4a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &521043576008220403 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4290853580298515313, guid: a97442cccd10b6e4e820949fc5de838b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4375021396525313410}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5536021992623049204 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8098831590569010294, guid: a97442cccd10b6e4e820949fc5de838b,
@@ -4656,6 +4671,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6648264913230927133}
     m_Modifications:
+    - target: {fileID: 374664552476076767, guid: ba5168536808af14786773909ba012b9,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2570836349661874348, guid: ba5168536808af14786773909ba012b9,
         type: 3}
       propertyPath: m_Name
@@ -4738,6 +4758,12 @@ PrefabInstance:
 --- !u!4 &2018260288272356187 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4858312887218874900, guid: ba5168536808af14786773909ba012b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 6876570971292203343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &6511483444544279440 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 374664552476076767, guid: ba5168536808af14786773909ba012b9,
     type: 3}
   m_PrefabInstance: {fileID: 6876570971292203343}
   m_PrefabAsset: {fileID: 0}
