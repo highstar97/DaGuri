@@ -2493,6 +2493,7 @@ MonoBehaviour:
   rightXRInteractionGroup: {fileID: 540297720971086763}
   rightHandPresence: {fileID: 4240405212749880731}
   rightDirectInteractor: {fileID: 6662430070882474799}
+  rightBossHandPhysics: {fileID: 8926606125331646139}
   leftStabilized: {fileID: 8481620478166117801}
   rightStabilized: {fileID: 7843361136094564153}
   locomotionSytem: {fileID: 6872138163145197585}
@@ -2516,8 +2517,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5205340826385761843}
-  - {fileID: 7729873619573459485}
-  - {fileID: 8712342700459382874}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4663,6 +4662,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2634553163001790452, guid: ba5168536808af14786773909ba012b9,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634553163001790452, guid: ba5168536808af14786773909ba012b9,
+        type: 3}
       propertyPath: bossHandPresence
       value: 
       objectReference: {fileID: 4240405212749880731}
@@ -4747,7 +4751,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 6876570971292203343}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8990045599451607523}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cf7de2772fb4b649aaa167cdefa4a0a, type: 3}
   m_Name: 

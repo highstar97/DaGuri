@@ -42,6 +42,9 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject rightHandPresence;
     [SerializeField] private GameObject rightDirectInteractor;
 
+    [Header("Right Hand Physics")]
+    [SerializeField] private BossHandPhysics rightBossHandPhysics;
+
     [Header("Controller Stabilized")]
     [SerializeField] private GameObject leftStabilized;
     [SerializeField] private GameObject rightStabilized;
@@ -78,6 +81,9 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
             rightActionBasedControllerManager.enabled = true;
             rightXRController.enabled = true;
             rightXRInteractionGroup.enabled = true;
+
+            // Hack : 동기화 테스트
+            rightBossHandPhysics.enabled = true;
 
             rightHandPresence.SetActive(true);
             rightDirectInteractor.SetActive(true);
