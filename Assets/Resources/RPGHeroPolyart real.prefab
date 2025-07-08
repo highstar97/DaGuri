@@ -497,6 +497,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4228937523598464428}
+  - {fileID: 4833625873618799014}
   m_Father: {fileID: 8805895073743165115}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1552091206357552113
@@ -1307,6 +1308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4833625873618799014}
+  - component: {fileID: 5436398320228022284}
   m_Layer: 0
   m_Name: root
   m_TagString: Untagged
@@ -1322,16 +1324,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2880568295451918662}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: -0.05060407}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6822455519721487343}
   - {fileID: 553158337434732953}
   - {fileID: 8280529513628061053}
-  m_Father: {fileID: 8805895073743165115}
+  m_Father: {fileID: 8295829614239204240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5436398320228022284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880568295451918662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2964774183471694428
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,7 +4171,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5509382347793581526}
-  - {fileID: 4833625873618799014}
   - {fileID: 8295829614239204240}
   - {fileID: 6401101679522740435}
   - {fileID: 2935326813635803328}
@@ -4202,7 +4219,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8096499614819749749}
   - {fileID: 4677714460491642337}
-  - {fileID: 1183814269966986102}
   - {fileID: 1051093448178385979}
   - {fileID: 799799115506482503}
   sceneViewId: 0
@@ -4552,7 +4568,7 @@ Transform:
   m_GameObject: {fileID: 8157210623419417401}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.508, y: 1.09, z: -0.194}
+  m_LocalPosition: {x: 0.54, y: 1.09, z: 0.078}
   m_LocalScale: {x: 0.78787, y: 0.78787, z: 0.78787}
   m_ConstrainProportionsScale: 0
   m_Children: []

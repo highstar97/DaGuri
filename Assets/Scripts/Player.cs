@@ -103,24 +103,6 @@ public class Player : MonoBehaviourPun
             rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
             rightHandIKTarget.rotation = rightHandController.rotation;
         }
-        ////
-        else
-        {
-            // 원격 플레이어는 네트워크로 받은 위치로 rightHandController 위치 갱신
-            if (rightHandController != null)
-            {
-                rightHandController.position = remoteRightHandPos;
-                rightHandController.rotation = remoteRightHandRot;
-            }
-
-            // IK 타겟은 로컬과 동일하게 위치 보정 (필요 시)
-            if (rightHandIKTarget != null)
-            {
-                rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
-                rightHandIKTarget.rotation = rightHandController.rotation;
-            }
-        }
-
     }
 
     private void FixedUpdate()
