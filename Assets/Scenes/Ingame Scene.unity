@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - Boss XR Origin Photon
-  - Mage - XR Interaction Setup
+  - Boss XR Origin Photon
   - RPGHeroPolyart
   instantiateTransforms:
   - {fileID: 1841911906}

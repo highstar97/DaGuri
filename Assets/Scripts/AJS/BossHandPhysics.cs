@@ -1,5 +1,5 @@
-#define LOCAL_TEST
-//#define PHOTON
+//#define LOCAL_TEST
+#define PHOTON
 
 using Photon.Pun;
 using System.Collections;
