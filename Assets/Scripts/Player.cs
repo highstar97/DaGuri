@@ -5,8 +5,10 @@ using Photon.Pun;
 public class Player : MonoBehaviourPun 
 {
     [Header("References")]
+    [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform rightHandController;
-    [SerializeField] private Transform rightHandIKTarget;
+    [SerializeField] private Transform rightHandTarget;
+    [SerializeField] private Transform avatarCameraTarget;
     [SerializeField] private Transform rightElbowHint;  
     [SerializeField] private Animator animator;
 
@@ -96,13 +98,10 @@ public class Player : MonoBehaviourPun
         {
             return;
         }
-
-        // VR 컨트롤러 위치를 IK 타겟에 전달
-        if (rightHandController != null && rightHandIKTarget != null)
-        {
-            rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
-            rightHandIKTarget.rotation = rightHandController.rotation;
-        }
+        // 아바타에서 오른손이 위치할 곳 조정
+        rightHandTarget.position = avatarCameraTarget.position + rightHandController.position - cameraTransform.position;
+        // 아바타에서 오른손의 회전 크기 조정
+        rightHandTarget.rotation = avatarCameraTarget.rotation * Quaternion.Inverse(cameraTransform.rotation) * rightHandController.rotation;
     }
 
     private void FixedUpdate()
@@ -125,14 +124,14 @@ public class Player : MonoBehaviourPun
     private void OnAnimatorIK(int layerIndex)
     {
 
-        if (rightHandIKTarget == null || animator == null) return;
+        if (rightHandTarget == null || animator == null) return;
        // if (animator == null) return;
 
         // 손 위치 IK
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
-        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandIKTarget.position);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIKTarget.rotation);
+        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position);
+        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.rotation);
 
         // 팔꿈치 힌트
         if (rightElbowHint != null)
