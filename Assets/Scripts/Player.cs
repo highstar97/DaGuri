@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using Photon.Pun;
-public class Player : MonoBehaviourPun
+public class Player : MonoBehaviourPun , IPunObservable
 {
     [Header("References")]
     [SerializeField] private Transform rightHandController;
     [SerializeField] private Transform rightHandIKTarget;
-    [SerializeField] private Transform rightElbowHint;
+    [SerializeField] private Transform rightElbowHint;  
     [SerializeField] private Animator animator;
 
     [Header("Movement Settings")]
@@ -20,6 +20,10 @@ public class Player : MonoBehaviourPun
     public Shield shield;
     public SkillShooter skillShooter;
 
+
+
+    private Vector3 remoteRightHandPos;
+    private Quaternion remoteRightHandRot;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -99,6 +103,24 @@ public class Player : MonoBehaviourPun
             rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
             rightHandIKTarget.rotation = rightHandController.rotation;
         }
+        ////
+        else
+        {
+            // 원격 플레이어는 네트워크로 받은 위치로 rightHandController 위치 갱신
+            if (rightHandController != null)
+            {
+                rightHandController.position = remoteRightHandPos;
+                rightHandController.rotation = remoteRightHandRot;
+            }
+
+            // IK 타겟은 로컬과 동일하게 위치 보정 (필요 시)
+            if (rightHandIKTarget != null)
+            {
+                rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
+                rightHandIKTarget.rotation = rightHandController.rotation;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -138,5 +160,18 @@ public class Player : MonoBehaviourPun
         }
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) // 내 플레이어
+        {
+            stream.SendNext(rightHandController.position);
+            stream.SendNext(rightHandController.rotation);
+        }
+        else // 원격 플레이어
+        {
+            remoteRightHandPos = (Vector3)stream.ReceiveNext();
+            remoteRightHandRot = (Quaternion)stream.ReceiveNext();
+        }
+    }
     
 }
