@@ -9,12 +9,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
-public class BossPlayerSetting : MonoBehaviourPunCallbacks
+public class MagePlayerSetting : MonoBehaviourPunCallbacks
 {
     [Header("XR Origin")]
     [SerializeField] private XROrigin xrOrigin;
     [SerializeField] private CharacterController characterController;
-    [SerializeField] private CharacterControllerDriver characterControllerDriver; 
+    [SerializeField] private CharacterControllerDriver characterControllerDriver;
     [SerializeField] private XRInputModalityManager xRInputModalityManager;
 
     [Header("Main Camera")]
@@ -30,12 +30,10 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [SerializeField] private XRInteractionGroup leftXRInteractionGroup;
 
     [Header("In Childeren")]
-    [SerializeField] private GameObject leftHandPresence;
+    [SerializeField] private GameObject leftPokeInteractor;
     [SerializeField] private GameObject leftDirectInteractor;
-
-    [Header("Left Hand Physics")]
-    [SerializeField] private BossHandPhysics leftBossHandPhysics;
-    [SerializeField] private Rigidbody leftRgidbody;
+    [SerializeField] private GameObject leftRayInteractor;
+    [SerializeField] private GameObject leftTeleportInteractor;
 
     [Header("Right Controller")]
     [SerializeField] private ActionBasedControllerManager rightActionBasedControllerManager;
@@ -43,12 +41,10 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [SerializeField] private XRInteractionGroup rightXRInteractionGroup;
 
     [Header("In Childeren")]
-    [SerializeField] private GameObject rightHandPresence;
+    [SerializeField] private GameObject rightPokeInteractor;
     [SerializeField] private GameObject rightDirectInteractor;
-
-    [Header("Right Hand Physics")]
-    [SerializeField] private BossHandPhysics rightBossHandPhysics;
-    [SerializeField] private Rigidbody rightrRgidbody;
+    [SerializeField] private GameObject rightRayInteractor;
+    [SerializeField] private GameObject rightTeleportInteractor;
 
     [Header("Controller Stabilized")]
     [SerializeField] private GameObject leftStabilized;
@@ -79,24 +75,20 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
             leftXRController.enabled = true;
             leftXRInteractionGroup.enabled = true;
 
-            leftHandPresence.SetActive(true);
+            leftPokeInteractor.SetActive(true);
             leftDirectInteractor.SetActive(true);
-
-            // Hack : 동기화 테스트
-            leftBossHandPhysics.enabled = true;
-            leftRgidbody.isKinematic = false; // 다른 서버에서는 위치로만 동기화
+            leftRayInteractor.SetActive(true);
+            leftTeleportInteractor.SetActive(true);
 
             // RightController
             rightActionBasedControllerManager.enabled = true;
             rightXRController.enabled = true;
             rightXRInteractionGroup.enabled = true;
 
-            // Hack : 동기화 테스트
-            rightBossHandPhysics.enabled = true;
-            rightrRgidbody.isKinematic = false; // 다른 서버에서는 위치로만 동기화
-
-            rightHandPresence.SetActive(true);
+            rightPokeInteractor.SetActive(true);
             rightDirectInteractor.SetActive(true);
+            rightRayInteractor.SetActive(true);
+            rightTeleportInteractor.SetActive(true);
 
             leftStabilized.SetActive(true);
             rightStabilized.SetActive(true);
@@ -109,3 +101,4 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
         }
     }
 }
+
