@@ -1,28 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using Unity.XR.CoreUtils;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ArcherAttackComponent : MonoBehaviour
 {
-    #region Variables
-    public ControllerTracking controllerTracking; //궤적을 추적하는 스크립트 할당
-    #endregion
+    public Transform ArrowOffset; //화살 발사 지점
+    public Bow bow;
 
-    #region Unity Functions
+    public ArrowSpawner arrowSpawner; //화살 스포너
+    public ControllerTracking controllerTracking; //컨트롤러 트래킹
+
+    public InputActionProperty aBtnAction; //a버튼 액션 등록
+
+  
+
+ 
     private void Start()
     {
-        controllerTracking.OnTrackingFinished += CheckGesture;
+        if (controllerTracking != null)
+        {
+            controllerTracking.OnTrackingFinished += CheckGesture;
+        }
+        else
+        {
+            this.enabled = false;
+        }
     }
-    #endregion
 
-    #region User Functions
     private void CheckGesture()
     {
         var trail = controllerTracking.Positions;
 
         if (GestureUtils.IsLineGesture(trail))
-            Debug.Log("직선 운동시 - 화살공격진행");
+        {
+            arrowSpawner.SpawnArrow(ArrowOffset.position, this.transform.forward, this.gameObject);
+        }
     }
-    #endregion
+    
+
+
 }

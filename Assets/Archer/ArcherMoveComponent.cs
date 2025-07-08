@@ -15,11 +15,17 @@ public class ArcherMoveComponent : MonoBehaviour
     public Transform leftController;            // 실제 왼쪽 컨트롤러 위치
     public Transform rightController;           // 실제 오른쪽 컨트롤러 위치
 
+    //[Header("케릭터 손 조정")]
+    //public Vector3 leftHandLocalOffset = Vector3.zero;
+    //public Quaternion leftHandLocalRotationOffset = Quaternion.identity;
+    //public Vector3 rightHandLocalOffset = Vector3.zero;
+    //public Quaternion rightHandLocalRotationOffset = Quaternion.identity;
+
     public Transform avatarCameraTarget;        // 실제 카메라에 비례해서 아바타 매시에 가상 카메라 위치
     public Transform avatarLeftHandTarget;      // 실제 카메라 - 실제 왼쪽 컨트롤러에 비례해서, 아바타 매시에서 왼손의 위치
     public Transform avatarRightHandTarget;     // 실제 카메라 - 실제 오른쪽 컨트롤러에 비례해서, 아바타 매시에서 오른손의 위치
 
-    private int currentIdleIndex = 0;           // 현재 Idle Pose 인덱스 값
+    //private int currentIdleIndex = 0;           // 현재 Idle Pose 인덱스 값
     private float moveForward;                  // 앞으로 움직이는 값, 뒤는 음수
     private float moveRight;                    // 오른쪽으로 움직이는 값, 왼쪽은 음수
 
@@ -53,10 +59,42 @@ public class ArcherMoveComponent : MonoBehaviour
 
         archerAnimator.SetFloat("MoveX", moveValue.x);
         archerAnimator.SetFloat("MoveZ", moveValue.y);
+        //archerAnimator.SetFloat("MoveX", moveForward);
+        //archerAnimator.SetFloat("MoveZ", moveRight);
     }
 
     private void OnAnimatorIK(int layerIndex)
     {
+        //if (archerAnimator == null || leftController == null || rightController ==null || cameraTransform ==null) return;
+
+
+        ////왼손 설정
+        //archerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
+        //archerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
+
+        ////VR 컨트롤러의 위치및 회전 설정
+        //Vector3 leftRelativePos = leftController.position - cameraTransform.position;
+        //Quaternion leftRelativeRot = Quaternion.Inverse(cameraTransform.rotation) * leftController.rotation;
+
+        ////최종 월드 위치 계산
+        //Vector3 finalLeftPos = transform.position + leftRelativePos;
+        //Quaternion finalLeftRot = transform.rotation * leftRelativeRot;
+
+        ////최종 IK위치 적용
+
+        //archerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, finalLeftPos + finalLeftRot * leftHandLocalOffset);
+        //archerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, finalLeftRot * leftHandLocalRotationOffset);
+
+        ////오른손 설정
+        //Vector3 rightRelativePos = rightController.position - cameraTransform.position;
+        //Quaternion rightRelativeRot = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
+
+        //Vector3 finalRightPos = transform.position + rightRelativePos;
+        //Quaternion finalRightRot = transform.rotation * rightRelativeRot;
+
+        //archerAnimator.SetIKPosition(AvatarIKGoal.RightHand, finalRightPos + finalRightRot * rightHandLocalOffset);
+        //archerAnimator.SetIKRotation(AvatarIKGoal.RightHand, finalRightRot * rightHandLocalRotationOffset);
+
         if (archerAnimator == null || leftController == null) return;
 
         archerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
@@ -83,10 +121,10 @@ public class ArcherMoveComponent : MonoBehaviour
         if (inputVelocity != null)
         {
             moveForward = inputVelocity.x;
-            archerAnimator.SetFloat("MoveX", moveForward);
+            //archerAnimator.SetFloat("MoveX", moveForward);
 
             moveRight = inputVelocity.y;
-            archerAnimator.SetFloat("MoveZ", moveRight);
+            //archerAnimator.SetFloat("MoveZ", moveRight);
 
             //mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
         }
@@ -100,10 +138,10 @@ public class ArcherMoveComponent : MonoBehaviour
         if (inputVelocity != null)
         {
             moveForward = inputVelocity.x;
-            archerAnimator.SetFloat("MoveX", moveForward);
+            //archerAnimator.SetFloat("MoveX", moveForward);
 
             moveRight = inputVelocity.y;
-            archerAnimator.SetFloat("MoveZ", moveRight);
+            //archerAnimator.SetFloat("MoveZ", moveRight);
 
            // mageRigidBody.velocity = new Vector3(moveForward * moveSpeed, 0, moveRight * moveSpeed);
         }

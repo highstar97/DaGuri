@@ -10,11 +10,15 @@ public static class GestureUtils
     /// /// <param name="lineTolerance">직선 허용 오차 (작을수록 정밀)</param>
     /// <returns>원형 제스처로 인식되면 true</returns>
     
-    // Archer가 공격을 할때 오른손이 직선이 되는지 판단하는 함수 - 하정우
-    public static bool IsLineGesture(List<Vector3> positions, float lineTolerance = 0.3f)
+    // Archer가 공격을 할때 오른손이 직선이 되는지 판단하는 함수
+    public static bool IsLineGesture(List<Vector3> positions, float lineTolerance = 0.05f)
     {
         //직선이지만 점을 3개로 두어 약간의 오차범위를 생각하는 직선으로 판단한다.
-        if (positions.Count < 3) return false;
+        if (positions.Count < 3)
+        {
+            return false;
+        }
+        
 
         Vector3 start = positions[0];
         Vector3 end = positions[positions.Count-1];
@@ -31,12 +35,22 @@ public static class GestureUtils
 
         //평균을 너무 넘지 않으면 직선으로 간주함.
         float averageDeviation = totalDeviation / (positions.Count - 2);
-        if (averageDeviation > lineTolerance) return false;
+        if (averageDeviation > lineTolerance)
+        {
+            return false;
+        }
 
         //충분한 길이의 직선인지 확인
-        float minLength = 0.5f; //최소 직선거리
-        if(Vector3.Distance(start, end) < minLength) return false;
+        float minLength = 0.05f; //최소 직선거리
+        float currentGestureLength = Vector3.Distance(start, end);
+        if(currentGestureLength < minLength)
+        {
+            return false;
+        }
+        
         return true;
+        //if (Vector3.Distance(start, end) < minLength) return false;
+        //return true;
     }
 
 
