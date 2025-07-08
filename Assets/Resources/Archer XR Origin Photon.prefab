@@ -4400,6 +4400,7 @@ GameObject:
   - component: {fileID: 5976879593180414196}
   - component: {fileID: 2284840389299173098}
   - component: {fileID: 991047248086005034}
+  - component: {fileID: 1204305321947358940}
   - component: {fileID: 6160548622158037366}
   - component: {fileID: 1394543838166876736}
   - component: {fileID: 1394543838166876741}
@@ -4471,6 +4472,43 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &1204305321947358940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976879593180414199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99d702cf6f6c044a9c4e4f216feac07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xrOrigin: {fileID: 6160548622158037366}
+  characterController: {fileID: 1394543838166876736}
+  characterControllerDriver: {fileID: 1394543838166876741}
+  xRInputModalityManager: {fileID: 1585000321739482603}
+  camera: {fileID: 4982461958370400685}
+  audioListener: {fileID: 4982461958370400687}
+  trackedPoseDriver: {fileID: 1394543838166876745}
+  universalAdditionalCameraData: {fileID: 8882595059750789837}
+  leftActionBasedControllerManager: {fileID: 534482463956432315}
+  leftXRController: {fileID: 4982461958827178446}
+  leftXRInteractionGroup: {fileID: 5201881409397041767}
+  leftPokeInteractor: {fileID: 7038797795368922480}
+  leftDirectInteractor: {fileID: 1684817793921289287}
+  leftRayInteractor: {fileID: 4146756432544571267}
+  leftTeleportInteractor: {fileID: 4982461957713696222}
+  rightActionBasedControllerManager: {fileID: 846522295378508176}
+  rightXRController: {fileID: 4982461958198114606}
+  rightXRInteractionGroup: {fileID: 1840730336218746725}
+  rightPokeInteractor: {fileID: 4634680269944195433}
+  rightDirectInteractor: {fileID: 7299261357839154610}
+  rightRayInteractor: {fileID: 4195787442972623624}
+  rightTeleportInteractor: {fileID: 7267163467937837511}
+  leftStabilized: {fileID: 581305785499722821}
+  rightStabilized: {fileID: 7152163626630769664}
+  locomotionSytem: {fileID: 188424085191126097}
 --- !u!114 &6160548622158037366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6177,15 +6215,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1198489838310940712}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2763580488212226067}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1016744657280971996}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6588361025490120232}
   m_SourcePrefab: {fileID: 100100000, guid: f374bc51cbb40dd4fa276464909f821a, type: 3}
 --- !u!1 &304318751009328967 stripped
 GameObject:
@@ -6235,6 +6273,13 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 204263337052229419}
+  - {fileID: 5813315018800752665}
+  - {fileID: 1701613718063727722}
+  - {fileID: 4590175975120614243}
+  - {fileID: 675766789652656825}
+  - {fileID: 8838707136036955781}
+  - {fileID: 8019059121772494421}
+  - {fileID: 7181124042171821562}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -6270,6 +6315,32 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
+--- !u!114 &1198489838310940712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304318751009328967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack:
+    baseValue: 0
+  attackSpeed:
+    baseValue: 0
+  criticalRate:
+    baseValue: 0
+  criticalCoefficient:
+    baseValue: 0
+  maxHealth:
+    baseValue: 0
+  currentHealth:
+    baseValue: 0
+  moveVelocity:
+    baseValue: 0
 --- !u!114 &2763580488212226067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6330,32 +6401,6 @@ MonoBehaviour:
   avatarCameraTarget: {fileID: 2139127828692296096}
   avatarLeftHandTarget: {fileID: 8704305757205329524}
   avatarRightHandTarget: {fileID: 5155062589983983880}
---- !u!114 &6588361025490120232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304318751009328967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d6c6a3f63104874492b2d876f4dda0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack:
-    baseValue: 0
-  attackSpeed:
-    baseValue: 0
-  criticalRate:
-    baseValue: 0
-  criticalCoefficient:
-    baseValue: 0
-  maxHealth:
-    baseValue: 0
-  currentHealth:
-    baseValue: 0
-  moveVelocity:
-    baseValue: 0
 --- !u!4 &1113225725560133117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f374bc51cbb40dd4fa276464909f821a,

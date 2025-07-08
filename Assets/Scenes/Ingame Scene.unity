@@ -164,10 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Mage XR Origin Photon
-  - Mage XR Origin Photon
-  - RPGHeroPolyart
   - Boss XR Origin Photon
+  - Mage XR Origin Photon
+  - Archer XR Origin Photon
+  - RPGHeroPolyart
   instantiateTransforms:
   - {fileID: 1841911906}
   - {fileID: 543434760}

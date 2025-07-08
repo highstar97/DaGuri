@@ -54,14 +54,14 @@ public class ArrowSpawner : MonoBehaviour
         Arrow arrow = arrowPool.Get();
         arrow.transform.position = position;
         arrow.transform.forward = direction;
-        arrow.ownerStart = owner.GetComponent<StartComponent>();
+        arrow.ownerStat = owner.GetComponent<StatComponent>();
     }
     public void SpawnSkillArrow(Vector3 position, Vector3 direction, GameObject owner)
     {
         Arrow arrow = SkillarrowPool.Get();
         arrow.transform.position = position;
         arrow.transform.forward = direction;
-        arrow.ownerStart = owner.GetComponent<StartComponent>();
+        arrow.ownerStat = owner.GetComponent<StatComponent>();
     }
 
     public void Release(Arrow arrow)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public float arrowSpeed = 8f; //화살 속도
-    public StartComponent ownerStart;
+    public StatComponent ownerStat;
 
     public System.Action<Arrow> OnArrowCollapsed;
     void Update()
@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour
         ITakeDamaged victim = other.GetComponent<ITakeDamaged>();
         if(victim == null) return;
 
-        victim.TakeDamage(ownerStart.attack.baseValue);
+        victim.TakeDamage(ownerStat.attack.baseValue);
         OnArrowCollapsed.Invoke(this);
     }
 }
