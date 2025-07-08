@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Photon.Pun;
 
-public class MageMoveComponent : MonoBehaviourPun
+public class MageMoveComponent : MonoBehaviourPun, IPunObservable
 {
     #region Variables   
     public float moveSpeed = 3f;
@@ -46,8 +46,6 @@ public class MageMoveComponent : MonoBehaviourPun
         // 아바타에서 오른손의 회전 크기 조정
         Quaternion rightRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
         avatarRightHandTarget.rotation = avatarCameraTarget.rotation * rightRotationOffset;
-
-        photonView.RPC("UpdateHandTargets", RpcTarget.Others, avatarLeftHandTarget.position, avatarLeftHandTarget.rotation, avatarRightHandTarget.position, avatarRightHandTarget.rotation);
     }
 
     private void FixedUpdate()
@@ -58,6 +56,28 @@ public class MageMoveComponent : MonoBehaviourPun
 
         mageAnimator.SetFloat("Move Forward", moveValue.x);
         mageAnimator.SetFloat("Move Right", moveValue.y);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) // 내 플레이어
+        {
+            stream.SendNext(avatarCameraTarget.position);
+            stream.SendNext(avatarCameraTarget.rotation);
+            stream.SendNext(avatarLeftHandTarget.position);
+            stream.SendNext(avatarLeftHandTarget.rotation);
+            stream.SendNext(avatarRightHandTarget.position);
+            stream.SendNext(avatarRightHandTarget.rotation);
+        }
+        else // 원격 플레이어
+        {
+            avatarCameraTarget.position = (Vector3)stream.ReceiveNext();
+            avatarCameraTarget.rotation = (Quaternion)stream.ReceiveNext();
+            avatarLeftHandTarget.position = (Vector3)stream.ReceiveNext();
+            avatarLeftHandTarget.rotation = (Quaternion)stream.ReceiveNext();
+            avatarRightHandTarget.position = (Vector3)stream.ReceiveNext();
+            avatarRightHandTarget.rotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -122,16 +142,6 @@ public class MageMoveComponent : MonoBehaviourPun
     #endregion
 
     #region User Functions
-    [PunRPC]
-    private void UpdateHandTargets(Vector3 leftPos, Quaternion leftRot, Vector3 rightPos, Quaternion rightRot)
-    {
-        avatarLeftHandTarget.position = leftPos;
-        avatarLeftHandTarget.rotation = leftRot;
-
-        avatarRightHandTarget.position = rightPos;
-        avatarRightHandTarget.rotation = rightRot;
-    }
-
     // Idle Pose를 바꾸어줌.
     IEnumerator Co_ChangeIdlePose()
     {
