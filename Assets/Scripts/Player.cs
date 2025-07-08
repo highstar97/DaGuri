@@ -38,8 +38,8 @@ public class Player : MonoBehaviourPun , IPunObservable
             // 컨트롤러 스크립트, 카메라 비활성화
             GetComponent<PlayerInput>()?.DeactivateInput();
             GetComponentInChildren<Camera>()?.gameObject.SetActive(false);
-            this.enabled = false;
-            return;
+            //this.enabled = false;
+            //return;
         }
 
 
