@@ -37,6 +37,8 @@ public class Player : MonoBehaviourPun
             this.enabled = false;
             return;
         }
+
+
     }
 
     // Input System에서 호출됨 (Move 액션 이벤트 연결 필요)
@@ -120,8 +122,9 @@ public class Player : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-      
-       if (animator == null) return;
+
+        if (rightHandIKTarget == null || animator == null) return;
+       // if (animator == null) return;
 
         // 손 위치 IK
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
