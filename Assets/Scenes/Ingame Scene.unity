@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Boss XR Origin Photon
+  - RPGHeroPolyart real
   - Archer XR Origin Photon
   - Mage XR Origin Photon
   - RPGHeroPolyart

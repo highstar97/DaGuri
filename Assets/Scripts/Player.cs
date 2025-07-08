@@ -98,8 +98,6 @@ public class Player : MonoBehaviourPun
         {
             rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
             rightHandIKTarget.rotation = rightHandController.rotation;
-
-          
         }
     }
 
