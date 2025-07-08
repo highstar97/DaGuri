@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Mage - XR Interaction Setup
+  - Mage - XR Interaction Setup Photon
   - RPGHeroPolyart
   instantiateTransforms:
   - {fileID: 543434760}
@@ -349,9 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b2e0869e5d1334f869d03282eaed1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinedRoomEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &781410230
 Transform:
   m_ObjectHideFlags: 0

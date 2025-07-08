@@ -95,6 +95,8 @@ public class Player : MonoBehaviourPun
         {
             rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
             rightHandIKTarget.rotation = rightHandController.rotation;
+
+            photonView.RPC("UpdateRightHandTarget", RpcTarget.Others, rightHandIKTarget.position, rightHandIKTarget.rotation);
         }
     }
 
@@ -137,5 +139,10 @@ public class Player : MonoBehaviourPun
         }
     }
 
-    
+    [PunRPC]
+    private void UpdateRightHandTarget(Vector3 rightPos, Quaternion rightRot)
+    {
+        rightHandIKTarget.position = rightPos;
+        rightHandIKTarget.rotation = rightRot;
+    }
 }

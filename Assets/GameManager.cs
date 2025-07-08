@@ -27,7 +27,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         character.GetComponentInChildren<AudioListener>().enabled = isMine;
         character.GetComponentInChildren<Camera>().enabled = isMine;
-        character.GetComponentInChildren<CharacterController>().enabled = isMine;
+        
+        if(character.GetComponentInChildren<CharacterController>() != null)
+        {
+            character.GetComponentInChildren<CharacterController>().enabled = isMine;
+        }
 
         if (PhotonNetwork.IsMasterClient)
         {
