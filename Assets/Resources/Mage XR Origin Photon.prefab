@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Camera: {fileID: 1783957943733948453}
   m_OriginBaseGameObject: {fileID: 1087200251345095039}
   m_CameraFloorOffsetObject: {fileID: 1783957943675309056}
-  m_RequestedTrackingOriginMode: 1
+  m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.36144
 --- !u!143 &5674197669103963080
 CharacterController:
@@ -3573,6 +3573,9 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1644687751097337962}
+  - {fileID: 5149111816238891652}
+  - {fileID: 6879932321659746548}
+  - {fileID: 7200085394688833470}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
