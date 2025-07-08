@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using Photon.Pun;
-public class Player : MonoBehaviourPun , IPunObservable
+public class Player : MonoBehaviourPun 
 {
     [Header("References")]
     [SerializeField] private Transform rightHandController;
@@ -160,18 +160,6 @@ public class Player : MonoBehaviourPun , IPunObservable
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting) // 내 플레이어
-        {
-            stream.SendNext(rightHandController.position);
-            stream.SendNext(rightHandController.rotation);
-        }
-        else // 원격 플레이어
-        {
-            remoteRightHandPos = (Vector3)stream.ReceiveNext();
-            remoteRightHandRot = (Quaternion)stream.ReceiveNext();
-        }
-    }
+   
     
 }
