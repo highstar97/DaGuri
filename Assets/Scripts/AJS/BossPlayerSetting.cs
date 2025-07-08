@@ -33,6 +33,10 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject leftHandPresence;
     [SerializeField] private GameObject leftDirectInteractor;
 
+    [Header("Left Hand Physics")]
+    [SerializeField] private BossHandPhysics leftBossHandPhysics;
+    [SerializeField] private Rigidbody leftRgidbody;
+
     [Header("Right Controller")]
     [SerializeField] private ActionBasedControllerManager rightActionBasedControllerManager;
     [SerializeField] private ActionBasedController rightXRController;
@@ -44,6 +48,7 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
 
     [Header("Right Hand Physics")]
     [SerializeField] private BossHandPhysics rightBossHandPhysics;
+    [SerializeField] private Rigidbody rightrRgidbody;
 
     [Header("Controller Stabilized")]
     [SerializeField] private GameObject leftStabilized;
@@ -77,6 +82,10 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
             leftHandPresence.SetActive(true);
             leftDirectInteractor.SetActive(true);
 
+            // Hack : 동기화 테스트
+            leftBossHandPhysics.enabled = true;
+            leftRgidbody.isKinematic = false; // 다른 서버에서는 위치로만 동기화
+
             // RightController
             rightActionBasedControllerManager.enabled = true;
             rightXRController.enabled = true;
@@ -84,6 +93,7 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
 
             // Hack : 동기화 테스트
             rightBossHandPhysics.enabled = true;
+            rightrRgidbody.isKinematic = false; // 다른 서버에서는 위치로만 동기화
 
             rightHandPresence.SetActive(true);
             rightDirectInteractor.SetActive(true);
