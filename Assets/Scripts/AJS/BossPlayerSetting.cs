@@ -48,11 +48,18 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
 
     [Header("Locomotion Sytem")]
     [SerializeField] private GameObject locomotionSytem;
+
     void Awake()
     {
+        // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
         if (photonView.IsMine)
         {
-            // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
+            // XR Origin
+            xrOrigin.enabled = true;
+            characterController.enabled = true;
+            characterControllerDriver.enabled = true;
+            xRInputModalityManager.enabled = true;
+
             // 카메라 활성화 (다른 플레이어의 카메라는 비활성화)
             camera.enabled = true;
             audioListener.enabled = true;
@@ -79,6 +86,10 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
             rightStabilized.SetActive(true);
 
             locomotionSytem.SetActive(true);
+        }
+        else
+        {
+
         }
     }
 }
