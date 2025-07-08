@@ -1,15 +1,11 @@
-using Mono.Cecil;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [System.Serializable]
 public class StatProperty
 {
     public float baseValue;
 
-    public System.Action<float> OnValueChanged /*= (baseValue) => { Debug.Log($"Value Changed : {baseValue}"); }*/;
+    public System.Action<float> OnValueChanged = (baseValue) => { Debug.Log($"Value Changed : {baseValue}"); };
 
     public float BaseValue => baseValue;
 

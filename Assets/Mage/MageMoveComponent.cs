@@ -62,7 +62,7 @@ public class MageMoveComponent : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-        if (!photonView.IsMine) return;
+        // if (!photonView.IsMine) return;
 
         if (mageAnimator == null || leftController == null) return;
 

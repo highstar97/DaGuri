@@ -164,13 +164,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Boss XR Origin Photon
-  - Boss XR Origin Photon
+  - Mage XR Origin Photon
+  - Mage XR Origin Photon
   - RPGHeroPolyart
+  - Boss XR Origin Photon
   instantiateTransforms:
   - {fileID: 1841911906}
   - {fileID: 543434760}
   - {fileID: 1907647388}
+  - {fileID: 562909011}
   demonicAlterController: {fileID: 1127759017}
 --- !u!82 &319558003 stripped
 AudioSource:
