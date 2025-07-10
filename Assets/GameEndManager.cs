@@ -18,12 +18,21 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트 파괴
+        }
+
     }
 
     private void Start()
     {
         alivePlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+        Debug.Log($"[GameEndManager] 초기 플레이어 수: {alivePlayers}");
     }
 
     // 플레이어 사망 시 외부에서 호출
@@ -31,27 +40,46 @@ public class GameEndManager : MonoBehaviourPunCallbacks
     {
         if (gameEnded) return;
 
-        alivePlayers--;
-        Debug.Log($"[게임] 플레이어 사망. 남은 인원: {alivePlayers}");
-
-        if (!isBossDead && alivePlayers <= 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            EndGame(false); // 게임 오버
+            photonView.RPC("RpcPlayerDied", RpcTarget.All);
         }
     }
 
+
     // 보스 사망 시 외부에서 호출
+    //보스 사망은 마스터 클라이언트에서만 처리하고 RPC로 동기화
     public void NotifyBossDied()
     {
         if (gameEnded) return;
 
-        isBossDead = true;
-        Debug.Log("보스 사망! 게임 종료 조건 충족.");
-
-        EndGame(true); // 클리어 성공
+        if (PhotonNetwork.IsMasterClient)
+        {
+            isBossDead = true;
+            Debug.Log("[GameEndManager] 보스 사망");
+            photonView.RPC("EndGame", RpcTarget.All ,true);
+        }
     }
 
-    // 종료 처리 (모든 클라이언트 동기화)
+    // 플레이어 사망을 모든 클라이언트에 동기화하는 RPC
+    [PunRPC]
+    private void RpcPlayerDied()
+    {
+        if (gameEnded) return;
+
+        alivePlayers--;
+        Debug.Log($"[GameEndManager] 플레이어 사망. 남은 인원: {alivePlayers}");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (!isBossDead && alivePlayers <= 0)
+            {
+                //모든 플레이어 사망 , 보스가 죽지않았다면 패배
+                photonView.RPC("EndGame", RpcTarget.All , false); 
+            }
+        }
+    }
+  //  게임 종료를 모든 클라이언트에 동기화하는 RPC
     [PunRPC]
     private void EndGame(bool isClear)
     {
@@ -61,10 +89,15 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
         Debug.Log(isClear ? " 승리! 클리어 성공!" : " 전멸. 게임 오버.");
 
-        // 결과 UI 표시 등 추가 가능
+        if (GameEndUIController.Instance != null)
+        {
+            GameEndUIController.Instance.ShowResult(isClear);
+        }
+        else
+        {
+            Debug.LogError("[GameEndManager] GameEndUIController.Instance가 씬에 없습니다. UI를 표시할 수 없습니다.");
+        }
 
-
-        
         StartCoroutine(LeaveRoomAfterDelay());
     }
 
@@ -87,6 +120,7 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        Instance = null;
         SceneManager.LoadScene(returnSceneName);
     }
 }

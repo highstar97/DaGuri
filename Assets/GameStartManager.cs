@@ -14,16 +14,7 @@ public class GameStartManager : MonoBehaviourPun
         instance = this;
     }
 
-    public void NotifyPlayerReady()
-    {
-        playerReady++;
 
-        if (!gameStarted && PhotonNetwork.IsMasterClient && playerReady >= 4)
-        {
-            gameStarted = true;
-            photonView.RPC("StartGame", RpcTarget.All);
-        }
-    }
     // Start is called before the first frame update
     [PunRPC]
     void StartGame()

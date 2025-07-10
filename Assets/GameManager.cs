@@ -47,8 +47,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             demonicAlterController.ToggleDemonicAltar();
         }
     }
-
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+  public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         Debug.Log($"[Photon] 플레이어 입장: {newPlayer.NickName} (ActorNumber: {newPlayer.ActorNumber})");
 
@@ -58,6 +57,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             photonView.RPC("StartGame", RpcTarget.All);
         }
     }
+  
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {

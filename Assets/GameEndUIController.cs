@@ -12,6 +12,21 @@ public class GameEndUIController : MonoBehaviour
 
     // UI를 플레이어 카메라 앞 fixedPosition 거리만큼 띄움
     public Vector3 offsetFromCamera = new Vector3(0f, 0f, 2f);
+    public static GameEndUIController Instance;
+
+    private void Awake()
+    {
+        // 싱글톤 패턴 구현
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // 필요하다면 씬 전환 시 파괴되지 않도록 설정
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트 파괴
+        }
+    }
 
     void LateUpdate()
     {
