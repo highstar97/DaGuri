@@ -26,6 +26,7 @@ public class GameEndUIController : MonoBehaviour
         {
             Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트 파괴
         }
+        panel.SetActive(false);
     }
 
     void LateUpdate()
@@ -40,7 +41,7 @@ public class GameEndUIController : MonoBehaviour
             // UI 패널이 카메라를 바라보도록 회전합니다.
             panel.transform.LookAt(Camera.main.transform);
 
-            // panel.transform.Rotate(0, 180, 0);
+            panel.transform.Rotate(0, 180, 0);
         }
     }
 
