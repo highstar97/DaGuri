@@ -11,12 +11,20 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public List<string> prefabs;
     public List<Transform> instantiateTransforms;
     public DemonicAltar_Controller demonicAlterController;
+
     public Text currentTimeUI;      // 남은시간 표기
 
     private float currentTime;      // 현재 시간
     #endregion
 
     #region Unity Functions
+    private void Awake()
+    {
+        if (!(PhotonNetwork.PrefabPool is ProjectilePool))
+        {
+            PhotonNetwork.PrefabPool = new ProjectilePool();
+        }
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -29,7 +37,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
     #endregion
-
+    
     #region User Functions
     IEnumerator CoStartTime() {
         while (true)

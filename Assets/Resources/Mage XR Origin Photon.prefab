@@ -1990,7 +1990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 485890988168318192}
-  - component: {fileID: 5580871852312355729}
+  - component: {fileID: 2197361358169488859}
   m_Layer: 2
   m_Name: FireBall Spawner
   m_TagString: Untagged
@@ -2013,7 +2013,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1087200251345095036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5580871852312355729
+--- !u!114 &2197361358169488859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2022,11 +2022,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4551198873947491971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b595ebe63bf797e48aaf1c933e5e2056, type: 3}
+  m_Script: {fileID: 11500000, guid: adf8d7c52cda1024c92d20c707d820ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireBallPrefab: {fileID: 9180878091285115639, guid: 8b09e27e7cf6a7040ab4dc788aa2d69a,
-    type: 3}
 --- !u!1 &4770272675259736039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,7 +3683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 40345852024348576}
-  fireBallSpawner: {fileID: 5580871852312355729}
+  fireBallSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 313937521762157228}
 --- !u!114 &7056962894386771573
 MonoBehaviour:
@@ -3700,7 +3698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 4491148624502589823}
-  fireBallSpawner: {fileID: 5580871852312355729}
+  fireBallSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 8091370245721372290}
 --- !u!4 &4150115054039866749 stripped
 Transform:
