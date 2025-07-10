@@ -67,6 +67,7 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
         moveVelocity.SetBaseValue(2.0f);
     }
 
+    [PunRPC]
     public void TakeDamage(float damageAmount)
     {
         float remainingCurrentHealth = currentHealth.BaseValue - damageAmount;
