@@ -57,6 +57,16 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
         {
             currentHealth.SetBaseValue(0.0f);
             OnCurrentHealthBeZero.Invoke();
+
+            if (GameEndManager.Instance != null)
+            {
+                GameEndManager.Instance.NotifyPlayerDied();
+            }
+            else
+            {
+                Debug.LogError("GameEndManager.Instance가 씬에 없습니다. 플레이어 사망을 알릴 수 없습니다.");
+            }
+
             return;
         }
 

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"[Photon] 플레이어 입장: {newPlayer.NickName} (ActorNumber: {newPlayer.ActorNumber})");
 
-        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 4)
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount == 2) //테스트 플레이어 2명
         {
             Debug.Log("[Photon] 모든 플레이어 입장 완료. 게임 로직 시작 가능.");
             photonView.RPC("StartGame", RpcTarget.All);
