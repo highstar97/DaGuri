@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - RPGHeroPolyart real
+  - Boss XR Origin Photon
   - Archer XR Origin Photon
   - Mage XR Origin Photon
   - RPGHeroPolyart
@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 1748716900}
   - component: {fileID: 1748716899}
   - component: {fileID: 1748716898}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

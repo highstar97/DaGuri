@@ -24,6 +24,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
     public float floorY;                // Floor 오브젝트의 Layer Mask
 
     [Header("Skill Stat")]
+    public GameObject handControllerPhysics; // 넉백 스킬을 발사하는 손 위치
     public float attackRangeLength = 5f; // 사각형 공격 범위의 길이 (전방으로 뻗어나가는 길이)
     public float attackRangeWidth = 3f;  // 사각형 공격 범위의 너비 (좌우 폭)
     public LayerMask playerLayer;                // Player 오브젝트의 Layer Mask
@@ -145,7 +146,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
             {
                 //Debug.Log($"성공! 시작 Y: {initialControllerY}, 현재 Y: {currentControllerY}, 차이: {initialControllerY - currentControllerY}");
                 Debug.Log(currentControllerVector);
-                ActivateKnockbackSkill(currentControllerVector); // 스킬 발동
+                ActivateKnockbackSkill(handControllerPhysics.transform.position); // 스킬 발동
 
                 if (smashDetectionCoroutine != null)
                 {
@@ -188,7 +189,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
         Vector3 skillStartPoint = new Vector3(impactPoint.x, floorY, impactPoint.z);
 
         // 시작 위치를 바탕으로 평평한 전방 벡터 계산: Y축을 0으로 만들고 정규화
-        Vector3 flatForward = transform.forward;
+        Vector3 flatForward = handControllerPhysics.transform.forward;
         flatForward.y = 0f;
 
         // 넉백 스킬 범위 중심 좌표 계산
