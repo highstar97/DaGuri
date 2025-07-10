@@ -13,8 +13,6 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
 {
     [Header("XR Origin")]
     [SerializeField] private XROrigin xrOrigin;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private CharacterControllerDriver characterControllerDriver; 
     [SerializeField] private XRInputModalityManager xRInputModalityManager;
 
     [Header("Main Camera")]
@@ -57,15 +55,13 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [Header("Locomotion Sytem")]
     [SerializeField] private GameObject locomotionSytem;
 
-    void Awake()
+    void Start()
     {
         // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
         if (photonView.IsMine)
         {
             // XR Origin
             xrOrigin.enabled = true;
-            characterController.enabled = true;
-            characterControllerDriver.enabled = true;
             xRInputModalityManager.enabled = true;
 
             // 카메라 활성화 (다른 플레이어의 카메라는 비활성화)
