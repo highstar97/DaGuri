@@ -13,8 +13,6 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
 {
     [Header("XR Origin")]
     [SerializeField] private XROrigin xrOrigin;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private CharacterControllerDriver characterControllerDriver; 
     [SerializeField] private XRInputModalityManager xRInputModalityManager;
 
     [Header("Main Camera")]
@@ -64,8 +62,6 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
         {
             // XR Origin
             xrOrigin.enabled = true;
-            characterController.enabled = true;
-            characterControllerDriver.enabled = true;
             xRInputModalityManager.enabled = true;
 
             // 카메라 활성화 (다른 플레이어의 카메라는 비활성화)

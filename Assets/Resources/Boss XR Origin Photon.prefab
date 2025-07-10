@@ -2321,8 +2321,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1405936664912433732}
   - component: {fileID: 2035290530803305343}
-  - component: {fileID: 5415204825463085195}
-  - component: {fileID: 7894358130872532633}
   - component: {fileID: 2803358755964318392}
   - component: {fileID: 1552631913112584481}
   - component: {fileID: 5205340826385761843}
@@ -2369,47 +2367,6 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 3080726242630728163}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.36144
---- !u!143 &5415204825463085195
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5453555879278813003}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Height: 1.36144
-  m_Radius: 0.1
-  m_SlopeLimit: 45
-  m_StepOffset: 0.5
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.76072, z: 0}
---- !u!114 &7894358130872532633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5453555879278813003}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6bf904e410ee8479f9093d8830d1f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LocomotionProvider: {fileID: 4498431798558611389}
-  m_MinHeight: 0
-  m_MaxHeight: Infinity
 --- !u!114 &2803358755964318392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2495,8 +2452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 2035290530803305343}
-  characterController: {fileID: 5415204825463085195}
-  characterControllerDriver: {fileID: 7894358130872532633}
+  characterController: {fileID: 0}
+  characterControllerDriver: {fileID: 0}
   xRInputModalityManager: {fileID: 2803358755964318392}
   camera: {fileID: 7578190771447504535}
   audioListener: {fileID: 5418994041687267279}
