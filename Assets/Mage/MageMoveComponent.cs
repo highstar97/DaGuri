@@ -46,8 +46,6 @@ public class MageMoveComponent : MonoBehaviourPun
         // 아바타에서 오른손의 회전 크기 조정
         Quaternion rightRotationOffset = Quaternion.Inverse(cameraTransform.rotation) * rightController.rotation;
         avatarRightHandTarget.rotation = avatarCameraTarget.rotation * rightRotationOffset;
-
-        photonView.RPC("UpdateHandTargets", RpcTarget.Others, avatarLeftHandTarget.position, avatarLeftHandTarget.rotation, avatarRightHandTarget.position, avatarRightHandTarget.rotation);
     }
 
     private void FixedUpdate()
@@ -62,7 +60,7 @@ public class MageMoveComponent : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-        if (!photonView.IsMine) return;
+        // if (!photonView.IsMine) return;
 
         if (mageAnimator == null || leftController == null) return;
 

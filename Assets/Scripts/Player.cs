@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements.Experimental;
 using Photon.Pun;
-public class Player : MonoBehaviourPun
+public class Player : MonoBehaviourPun 
 {
     [Header("References")]
+    [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform rightHandController;
-    [SerializeField] private Transform rightHandIKTarget;
-    [SerializeField] private Transform rightElbowHint;
+    [SerializeField] private Transform rightHandTarget;
+    [SerializeField] private Transform avatarCameraTarget;
+    [SerializeField] private Transform rightElbowHint;  
     [SerializeField] private Animator animator;
 
     [Header("Movement Settings")]
@@ -20,6 +22,10 @@ public class Player : MonoBehaviourPun
     public Shield shield;
     public SkillShooter skillShooter;
 
+
+
+    private Vector3 remoteRightHandPos;
+    private Quaternion remoteRightHandRot;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -34,9 +40,11 @@ public class Player : MonoBehaviourPun
             // 컨트롤러 스크립트, 카메라 비활성화
             GetComponent<PlayerInput>()?.DeactivateInput();
             GetComponentInChildren<Camera>()?.gameObject.SetActive(false);
-            this.enabled = false;
-            return;
+            //this.enabled = false;
+            //return;
         }
+
+
     }
 
     // Input System에서 호출됨 (Move 액션 이벤트 연결 필요)
@@ -82,6 +90,7 @@ public class Player : MonoBehaviourPun
         }
     }
 
+    
 
     private void Update()
     {
@@ -89,15 +98,10 @@ public class Player : MonoBehaviourPun
         {
             return;
         }
-
-        // VR 컨트롤러 위치를 IK 타겟에 전달
-        if (rightHandController != null && rightHandIKTarget != null)
-        {
-            rightHandIKTarget.position = rightHandController.position + new Vector3(0, 0, 3f);
-            rightHandIKTarget.rotation = rightHandController.rotation;
-
-            photonView.RPC("UpdateRightHandTarget", RpcTarget.Others, rightHandIKTarget.position, rightHandIKTarget.rotation);
-        }
+        // 아바타에서 오른손이 위치할 곳 조정
+        rightHandTarget.position = avatarCameraTarget.position + rightHandController.position - cameraTransform.position;
+        // 아바타에서 오른손의 회전 크기 조정
+        rightHandTarget.rotation = avatarCameraTarget.rotation * Quaternion.Inverse(cameraTransform.rotation) * rightHandController.rotation;
     }
 
     private void FixedUpdate()
@@ -119,17 +123,15 @@ public class Player : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-        if (!photonView.IsMine || animator == null)
-        {
-            return;
-        }
+
+        if (rightHandTarget == null || animator == null) return;
        // if (animator == null) return;
 
         // 손 위치 IK
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
-        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandIKTarget.position);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandIKTarget.rotation);
+        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position);
+        animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.rotation);
 
         // 팔꿈치 힌트
         if (rightElbowHint != null)
@@ -139,10 +141,6 @@ public class Player : MonoBehaviourPun
         }
     }
 
-    [PunRPC]
-    private void UpdateRightHandTarget(Vector3 rightPos, Quaternion rightRot)
-    {
-        rightHandIKTarget.position = rightPos;
-        rightHandIKTarget.rotation = rightRot;
-    }
+   
+    
 }
