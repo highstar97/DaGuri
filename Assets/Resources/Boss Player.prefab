@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 8194576107150087249}
   - component: {fileID: 3571904710190697129}
   - component: {fileID: 2373695552433190055}
+  - component: {fileID: 5947199974240593102}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -745,6 +746,28 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &5947199974240593102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830928540153347927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3080726242630728163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3665,6 +3688,7 @@ GameObject:
   - component: {fileID: 8035146733257104251}
   - component: {fileID: 850793159775780534}
   - component: {fileID: 8802000098157532552}
+  - component: {fileID: 8924237857588149183}
   m_Layer: 0
   m_Name: Direct Interactor
   m_TagString: Untagged
@@ -3890,6 +3914,28 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &8924237857588149183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662430070882474799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6758663902477894745
 GameObject:
   m_ObjectHideFlags: 0
