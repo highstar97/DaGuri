@@ -46,7 +46,7 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(currentHealth);
+            stream.SendNext(currentHealth.BaseValue);
         }
         else
         {

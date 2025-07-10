@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 07b57f10-a337-4f5b-b0bf-cd1a0507e004
+    AppIdRealtime: 87700089-ecc8-4412-861d-40acfb8d1e04
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: 
@@ -42,7 +42,10 @@ MonoBehaviour:
   - UpdateHandTargets
   - UpdateRightHandTarget
   - ShowHitEffect
-  - ReMainTimer
+  - StartGame
+  - EndGame
+  - RpcPlayerDied
+  - RpcAdventureDied
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
