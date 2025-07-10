@@ -2441,8 +2441,8 @@ GameObject:
   - component: {fileID: 4050230681117294721}
   - component: {fileID: 4461774033872559168}
   m_Layer: 2
-  m_Name: Boss XR Origin Photon
-  m_TagString: Untagged
+  m_Name: Boss Player
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

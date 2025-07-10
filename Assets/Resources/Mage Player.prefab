@@ -212,8 +212,8 @@ GameObject:
   - component: {fileID: 5195935616340487267}
   - component: {fileID: 6708749129834444083}
   m_Layer: 2
-  m_Name: Mage XR Origin Photon
-  m_TagString: Untagged
+  m_Name: Mage Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

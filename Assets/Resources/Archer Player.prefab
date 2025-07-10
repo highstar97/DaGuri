@@ -2399,7 +2399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 404235495220499494}
-  - component: {fileID: 5891034841506843621}
+  - component: {fileID: 2340766991130151577}
   m_Layer: 0
   m_Name: ArrowSpawner
   m_TagString: Untagged
@@ -2422,7 +2422,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5976879593180414196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5891034841506843621
+--- !u!114 &2340766991130151577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2431,13 +2431,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4205085941316971395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0372d53d0b748e4087fecf9e95abef6, type: 3}
+  m_Script: {fileID: 11500000, guid: adf8d7c52cda1024c92d20c707d820ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefabs: {fileID: 805228650084806457, guid: 178d2c6132ecd6b408b99e60e91360c5,
-    type: 3}
-  skillarrowPrefabs: {fileID: 805228650084806457, guid: bbe127bc4d6eee44f80542aa9ac5d8d2,
-    type: 3}
 --- !u!1 &4634680269944195433
 GameObject:
   m_ObjectHideFlags: 0
@@ -3705,7 +3701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackingType: 2
+  m_TrackingType: 0
   m_UpdateType: 0
   m_IgnoreTrackingState: 0
   m_PositionInput:
@@ -4407,8 +4403,8 @@ GameObject:
   - component: {fileID: 1585000321739482603}
   - component: {fileID: 71746737040080059}
   m_Layer: 2
-  m_Name: Archer XR Origin Photon
-  m_TagString: Untagged
+  m_Name: Archer Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6357,21 +6353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowOffset: {fileID: 8525264346969776728}
-  bow: {fileID: 4624399523467951047}
-  arrowSpawner: {fileID: 5891034841506843621}
+  arrowSpawner: {fileID: 0}
   controllerTracking: {fileID: 7669849065665860813}
-  aBtnAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: A Btn
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 884ffeea-0873-4bb7-8c7f-536bfd294b0b
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
 --- !u!114 &1016744657280971996
 MonoBehaviour:
   m_ObjectHideFlags: 0
