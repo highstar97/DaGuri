@@ -4402,7 +4402,7 @@ GameObject:
   - component: {fileID: 1394543838166876741}
   - component: {fileID: 1585000321739482603}
   - component: {fileID: 71746737040080059}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Archer Player
   m_TagString: Player
   m_Icon: {fileID: 0}
