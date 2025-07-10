@@ -733,6 +733,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table
       objectReference: {fileID: 0}
+    - target: {fileID: 1714979373892827947, guid: 410097c3423f9364c9ad0e0cee7e4908,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 2981247522482600446, guid: 410097c3423f9364c9ad0e0cee7e4908,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1034,7 +1039,7 @@ GameObject:
   - component: {fileID: 1841911906}
   m_Layer: 0
   m_Name: Transform 1
-  m_TagString: Untagged
+  m_TagString: ChairPosition
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

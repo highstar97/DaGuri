@@ -70,8 +70,6 @@ public class BossHandPhysics : MonoBehaviourPun
         if (!isLocalPlayer) return;
         rb.velocity = (targetController.position - transform.position) / Time.fixedDeltaTime;
 
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName);
-
         // 타켓과 나의 회전량의 차이를 구하기 위한 Quaternion 계산식 
         // 타켓의 rotation에 내 역회전량을 곱한다
         Quaternion rotationDifference = targetController.rotation * Quaternion.Inverse(transform.rotation);
