@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Target
-  - ChairPosition
   layers:
   - Default
   - TransparentFX
@@ -17,7 +16,7 @@ TagManager:
   - RightHandLayer
   - LeftHandLayer
   - Floor
-  - 
+  - Player
   - 
   - 
   - 

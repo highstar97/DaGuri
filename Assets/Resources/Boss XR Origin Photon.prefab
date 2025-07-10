@@ -711,6 +711,11 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 512
+  attackRangeLength: 20
+  attackRangeWidth: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!54 &8194576107150087249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3876,6 +3881,11 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 512
+  attackRangeLength: 40
+  attackRangeWidth: 40
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &6758663902477894745
 GameObject:
   m_ObjectHideFlags: 0
