@@ -27,7 +27,7 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
     public StatProperty currentHealth = new();
     public StatProperty moveVelocity = new();
 
-    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); };
+    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); GameEndManager.Instance.NotifyAdventureDied(); };
     #endregion
 
     #region Unity Functions
@@ -57,16 +57,10 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
         {
             currentHealth.SetBaseValue(0.0f);
             OnCurrentHealthBeZero.Invoke();
-
-            if (GameEndManager.Instance != null)
+            if(this.gameObject.CompareTag("Boss"))
             {
-                GameEndManager.Instance.NotifyPlayerDied();
+                GameEndManager.Instance.NotifyBossDied();
             }
-            else
-            {
-                Debug.LogError("GameEndManager.Instance가 씬에 없습니다. 플레이어 사망을 알릴 수 없습니다.");
-            }
-
             return;
         }
 

@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("[게임 시작] 모든 플레이어 준비 완료, 게임을 시작합니다.");
         demonicAlterController.ToggleDemonicAltar(); // 예시: 보스 등장
-                                                     // 추가: 게임 타이머 시작, UI 숨기기 등
+        GameEndManager.Instance.InitializeAlivePlayers();
     }
     #endregion
 }

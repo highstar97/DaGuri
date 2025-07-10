@@ -12,7 +12,7 @@ public class GameEndManager : MonoBehaviourPunCallbacks
     public string returnSceneName = "Ingame Scene"; 
     public float delayBeforeExit = 5f;
 
-    private int alivePlayers = 0;
+    private int aliveAdventures = 0;
     private bool isBossDead = false;
     private bool gameEnded = false;
 
@@ -29,23 +29,13 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
     }
 
-    private void Start()
-    {
-        alivePlayers = PhotonNetwork.CurrentRoom.PlayerCount;
-        Debug.Log($"[GameEndManager] 초기 플레이어 수: {alivePlayers}");
-    }
-
     // 플레이어 사망 시 외부에서 호출
-    public void NotifyPlayerDied()
+    public void NotifyAdventureDied()
     {
         if (gameEnded) return;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("RpcPlayerDied", RpcTarget.All);
-        }
+        photonView.RPC("RpcAdventureDied", RpcTarget.All);
     }
-
 
     // 보스 사망 시 외부에서 호출
     //보스 사망은 마스터 클라이언트에서만 처리하고 RPC로 동기화
@@ -57,41 +47,45 @@ public class GameEndManager : MonoBehaviourPunCallbacks
         {
             isBossDead = true;
             Debug.Log("[GameEndManager] 보스 사망");
-            photonView.RPC("EndGame", RpcTarget.All ,true);
+            photonView.RPC("EndGame", RpcTarget.All);
         }
+    }
+
+    public void InitializeAlivePlayers()
+    {
+        aliveAdventures = PhotonNetwork.CurrentRoom.PlayerCount - 1;
+        Debug.Log($"[GameEndManager] 게임 시작 시 초기 플레이어 수: {aliveAdventures}");
     }
 
     // 플레이어 사망을 모든 클라이언트에 동기화하는 RPC
     [PunRPC]
-    private void RpcPlayerDied()
+    private void RpcAdventureDied()
     {
         if (gameEnded) return;
 
-        alivePlayers--;
-        Debug.Log($"[GameEndManager] 플레이어 사망. 남은 인원: {alivePlayers}");
+        aliveAdventures--;
+        Debug.Log($"[GameEndManager] 플레이어 사망. 남은 인원: {aliveAdventures}");
 
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && aliveAdventures == 0)
         {
-            if (!isBossDead && alivePlayers <= 0)
-            {
-                //모든 플레이어 사망 , 보스가 죽지않았다면 패배
-                photonView.RPC("EndGame", RpcTarget.All , false); 
-            }
+            //모든 플레이어 사망 , 보스가 죽지않았다면 패배
+            photonView.RPC("EndGame", RpcTarget.All);
         }
     }
-  //  게임 종료를 모든 클라이언트에 동기화하는 RPC
+
+    //  게임 종료를 모든 클라이언트에 동기화하는 RPC
     [PunRPC]
-    private void EndGame(bool isClear)
+    private void EndGame()
     {
         if (gameEnded) return;
 
         gameEnded = true;
 
-        Debug.Log(isClear ? " 승리! 클리어 성공!" : " 전멸. 게임 오버.");
+        Debug.Log(isBossDead ? " 승리! 클리어 성공!" : " 전멸. 게임 오버.");
 
         if (GameEndUIController.Instance != null)
         {
-            GameEndUIController.Instance.ShowResult(isClear);
+            GameEndUIController.Instance.ShowResult(isBossDead);
         }
         else
         {
@@ -99,15 +93,6 @@ public class GameEndManager : MonoBehaviourPunCallbacks
         }
 
         StartCoroutine(LeaveRoomAfterDelay());
-    }
-
-    // 외부에서 호출해 전체 종료
-    public void TriggerGameEnd(bool isClear)
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("EndGame", RpcTarget.All, isClear);
-        }
     }
 
     private IEnumerator LeaveRoomAfterDelay()
