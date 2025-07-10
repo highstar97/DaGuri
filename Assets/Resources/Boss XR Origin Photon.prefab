@@ -3881,8 +3881,8 @@ MonoBehaviour:
   floorLayer:
     serializedVersion: 2
     m_Bits: 512
-  attackRangeLength: 40
-  attackRangeWidth: 40
+  attackRangeLength: 20
+  attackRangeWidth: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 1024

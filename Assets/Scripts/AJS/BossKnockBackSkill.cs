@@ -21,6 +21,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
     public float maxDetectionTime;       // 트리거 누른 후 바닥에 닿을 수 있는 최대 시간 (초)
     public float minHeightDifference;    // 최초 누른 Y값과 닿은 Y값의 최소 차이 (미터)
     public LayerMask floorLayer;                // Floor 오브젝트의 Layer Mask
+    public float floorY;                // Floor 오브젝트의 Layer Mask
 
     [Header("Skill Stat")]
     public float attackRangeLength = 5f; // 사각형 공격 범위의 길이 (전방으로 뻗어나가는 길이)
@@ -39,6 +40,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
         rb.useGravity = false;
 
         floorLayer = LayerMask.GetMask("Floor");
+        playerLayer = LayerMask.GetMask("Player");
 
         maxDetectionTime = 1f;
         minHeightDifference = 0.25f;
@@ -182,20 +184,34 @@ public class BossKnockBackSkill : MonoBehaviourPun
         // 넉백 성공시 진동
         directInteractor.xrController.SendHapticImpulse(1f, 0.2f);
 
-        // 스킬 시작 위치, 바닥 높이하고 동일하게
-        Vector3 skillStartPoint = new Vector3(impactPoint.x, 1.3f, impactPoint.z);
+        // 넉백 스킬 시작 위치, 바닥 높이(1.3f) 하고 동일하게
+        Vector3 skillStartPoint = new Vector3(impactPoint.x, floorY, impactPoint.z);
 
-        Vector3 boxCenter = skillStartPoint + Vector3.forward * (attackRangeLength / 2f);
+        // 시작 위치를 바탕으로 평평한 전방 벡터 계산: Y축을 0으로 만들고 정규화
+        Vector3 flatForward = transform.forward;
+        flatForward.y = 0f;
 
-        Vector3 halfExtents = new Vector3(attackRangeWidth / 2f, 2f, attackRangeLength / 2f); // Y축은 높이, 바닥 좌표의 높이
-        Quaternion boxRotation = Quaternion.identity;
+        // 넉백 스킬 범위 중심 좌표 계산
+        Vector3 boxCenter = skillStartPoint + flatForward * (attackRangeLength / 2f);
+        // 넉백 스킬 범위 계산 /  Y축은 높이, 바닥 좌표의 높이
+        Vector3 halfExtents = new Vector3(attackRangeWidth / 2f, 2f, attackRangeLength / 2f);
 
+        // 넉백 스킬 범위 각도 계산
+        Quaternion boxRotation = Quaternion.LookRotation(flatForward);
+
+        // 계산한 값을 바탕으로 해당 범위에 있는 Player만 탐지
         Collider[] hitColliders = Physics.OverlapBox(boxCenter, halfExtents, boxRotation, playerLayer);
 
         // 5. 감지된 콜라이더 처리
         foreach (Collider hitCollider in hitColliders)
         {
             Debug.Log(hitCollider.name + "가 공격 범위에 들어왔습니다!");
+            ITakeDamageable playerHP = hitCollider.GetComponent<ITakeDamageable>();
+            if (playerHP != null)
+            {
+                Debug.Log(hitCollider.name + "넉백 피해");
+                playerHP.TakeDamage(1);
+            }
         }
 
         DrawOverlapBoxDebug(boxCenter, halfExtents, boxRotation, 10f);
