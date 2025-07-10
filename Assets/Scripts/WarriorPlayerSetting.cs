@@ -27,10 +27,7 @@ public class WarriorPlayerSetting : MonoBehaviourPunCallbacks
     [Header("Right Controller")]
     [SerializeField] private TrackedPoseDriver RightControllertrackedPoseDriver;
 
-    [Header("Right Hand Target")]
-    [SerializeField] private BoxCollider boxCollider;
-
-    void Awake()
+    private void Start()
     {
         // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
         if (photonView.IsMine)
@@ -47,16 +44,8 @@ public class WarriorPlayerSetting : MonoBehaviourPunCallbacks
             trackedPoseDriver.enabled = true;
             universalAdditionalCameraData.enabled = true;
 
-
-
             // RightController
             RightControllertrackedPoseDriver.enabled = true;
-
-            boxCollider.enabled = true;
-        }
-        else
-        {
-
         }
     }
 }

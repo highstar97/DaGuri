@@ -185,4 +185,21 @@ public static class GestureUtils
 
         return true;
     }
+
+    public static bool IsDiagonalGesture(List<Vector3> positions, float threshold = 0.1f)
+    {
+        Vector3 start = positions[0];
+        Vector3 end = positions[positions.Count - 1];
+
+        Vector3 delta = end - start;
+
+        // 각 축의 이동 거리 절대값, 이동한 축 개수 카운트
+        int activeAxisCount = 0;
+        if (Mathf.Abs(delta.x) > threshold) activeAxisCount++;
+        if (Mathf.Abs(delta.y) > threshold) activeAxisCount++;
+        if (Mathf.Abs(delta.z) > threshold) activeAxisCount++;
+
+        // 2축 이상이면 대각선
+        return activeAxisCount >= 2;
+    }
 }
