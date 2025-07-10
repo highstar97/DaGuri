@@ -9,7 +9,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     public List<string> prefabs;
     public List<Transform> instantiateTransforms;
     public DemonicAltar_Controller demonicAlterController;
+    #endregion
 
+    #region Unity Functions
+    private void Awake()
+    {
+        if (!(PhotonNetwork.PrefabPool is ProjectilePool))
+        {
+            PhotonNetwork.PrefabPool = new ProjectilePool();
+        }
+    }
     #endregion
 
     #region User Functions

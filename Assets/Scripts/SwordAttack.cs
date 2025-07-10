@@ -5,31 +5,32 @@ using Photon.Pun;
 
 public class SwordAttack : MonoBehaviour
 {
-    public float swingThreshold = 2.5f;
-    public float swingDurationRequired = 0.1f;
+    #region Variables
+    public Transform SwordOffset;                   // 검 시작지점
 
-    public bool IsSwinging { get; private set; } = false;
+    public ProjectileSpawner swordSpawner;          // 검격 스포너
 
-    private Vector3 prevPos;
+    public SwordInput swordInput;                   // 검 입력
+    #endregion
 
     void Start()
     {
-        prevPos = transform.position;
+        swordInput.OnPressingFinished += CheckGesture;
     }
 
-    void Update()
+    #region User Functions
+    private void CheckGesture()
     {
-        Vector3 velocity = (transform.position - prevPos) / Time.deltaTime;
-        prevPos = transform.position;
+        List<Vector3> trail = new();
+        trail.Add(swordInput.StartPosition);
+        trail.Add(swordInput.EndPosition);
 
-        IsSwinging = velocity.magnitude > swingThreshold;
-
-        if (IsSwinging) {// Debug.Log("🔺 Swinging! (속도: " + velocity.magnitude.ToString("F2") + ")");
+        // 대각선 체크
+        if (GestureUtils.IsDiagonalGesture(trail))
+        {
+            Debug.Log("대각선 제스처 인식 → 검격 발동");
+            swordSpawner.SpawnProjectile("Sword", SwordOffset.position, this.transform.forward, this.gameObject);
         }
-
-
-       
-        
-       
     }
+    #endregion
 }

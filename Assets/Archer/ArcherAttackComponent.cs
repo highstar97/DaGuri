@@ -8,15 +8,8 @@ using UnityEngine.InputSystem;
 public class ArcherAttackComponent : MonoBehaviour
 {
     public Transform ArrowOffset; //화살 발사 지점
-    public Bow bow;
-
-    public ArrowSpawner arrowSpawner; //화살 스포너
+    public ProjectileSpawner arrowSpawner; //화살 스포너
     public ControllerTracking controllerTracking; //컨트롤러 트래킹
-
-    public InputActionProperty aBtnAction; //a버튼 액션 등록
-
-  
-
  
     private void Start()
     {
@@ -36,10 +29,7 @@ public class ArcherAttackComponent : MonoBehaviour
 
         if (GestureUtils.IsLineGesture(trail))
         {
-            arrowSpawner.SpawnArrow(ArrowOffset.position, this.transform.forward, this.gameObject);
+            arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
         }
     }
-    
-
-
 }
