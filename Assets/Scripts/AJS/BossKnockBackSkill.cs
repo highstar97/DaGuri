@@ -211,7 +211,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
             if (playerHP != null)
             {
                 Debug.Log(hitCollider.name + "넉백 피해");
-                playerHP.TakeDamage(1);
+                playerHP.BroadcastTakeDamage(10, this.gameObject);
             }
         }
 

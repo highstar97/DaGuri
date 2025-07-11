@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Target
+  - Boss
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Projectile
   - Floor
   - Player
-  - 
+  - Boss
   - 
   - 
   - 
