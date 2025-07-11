@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 404235495220499494}
   - component: {fileID: 2340766991130151577}
   m_Layer: 0
-  m_Name: ArrowSpawner
+  m_Name: Projectile Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4396,13 +4396,15 @@ GameObject:
   - component: {fileID: 5976879593180414196}
   - component: {fileID: 2284840389299173098}
   - component: {fileID: 991047248086005034}
+  - component: {fileID: 7714377558721571308}
   - component: {fileID: 1204305321947358940}
   - component: {fileID: 6160548622158037366}
+  - component: {fileID: 8095744939248373897}
   - component: {fileID: 1394543838166876736}
   - component: {fileID: 1394543838166876741}
   - component: {fileID: 1585000321739482603}
   - component: {fileID: 71746737040080059}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Archer Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4450,6 +4452,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 991047248086005034}
+  - {fileID: 7714377558721571308}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4469,6 +4472,33 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &7714377558721571308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976879593180414199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack:
+    baseValue: 0
+  attackSpeed:
+    baseValue: 0
+  criticalRate:
+    baseValue: 0
+  criticalCoefficient:
+    baseValue: 0
+  maxHealth:
+    baseValue: 0
+  currentHealth:
+    baseValue: 0
+  moveVelocity:
+    baseValue: 0
+  healthBarUI: {fileID: 6515842530058400105}
 --- !u!114 &1204305321947358940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4482,7 +4512,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 6160548622158037366}
-  characterController: {fileID: 1394543838166876736}
   characterControllerDriver: {fileID: 1394543838166876741}
   xRInputModalityManager: {fileID: 1585000321739482603}
   camera: {fileID: 4982461958370400685}
@@ -4523,6 +4552,33 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 4982461958158534024}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.36144
+--- !u!54 &8095744939248373897
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976879593180414199}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!143 &1394543838166876736
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4540,7 +4596,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
   m_Radius: 0.1
@@ -6212,10 +6268,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1198489838310940712}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2763580488212226067}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f374bc51cbb40dd4fa276464909f821a,
         type: 3}
@@ -6270,7 +6322,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 204263337052229419}
-  - {fileID: 1198489838310940712}
   - {fileID: 5813315018800752665}
   - {fileID: 1701613718063727722}
   - {fileID: 4590175975120614243}
@@ -6313,33 +6364,6 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
---- !u!114 &1198489838310940712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 304318751009328967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack:
-    baseValue: 0
-  attackSpeed:
-    baseValue: 0
-  criticalRate:
-    baseValue: 0
-  criticalCoefficient:
-    baseValue: 0
-  maxHealth:
-    baseValue: 0
-  currentHealth:
-    baseValue: 0
-  moveVelocity:
-    baseValue: 0
-  healthBarUI: {fileID: 6515842530058400105}
 --- !u!114 &2763580488212226067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6353,7 +6377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowOffset: {fileID: 8525264346969776728}
-  arrowSpawner: {fileID: 0}
+  arrowSpawner: {fileID: 2340766991130151577}
   controllerTracking: {fileID: 7669849065665860813}
 --- !u!114 &1016744657280971996
 MonoBehaviour:

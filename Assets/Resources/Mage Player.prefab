@@ -205,13 +205,15 @@ GameObject:
   - component: {fileID: 1087200251345095036}
   - component: {fileID: 4770230058878209961}
   - component: {fileID: 5431024721411742731}
+  - component: {fileID: 3227815967428247968}
   - component: {fileID: 6985833546667210555}
   - component: {fileID: 619822020580837630}
+  - component: {fileID: 5988867793250932755}
   - component: {fileID: 5674197669103963080}
   - component: {fileID: 5674197669103963085}
   - component: {fileID: 5195935616340487267}
   - component: {fileID: 6708749129834444083}
-  m_Layer: 2
+  m_Layer: 10
   m_Name: Mage Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,6 +260,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5431024721411742731}
+  - {fileID: 3227815967428247968}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -277,6 +280,33 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3227815967428247968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087200251345095039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack:
+    baseValue: 0
+  attackSpeed:
+    baseValue: 0
+  criticalRate:
+    baseValue: 0
+  criticalCoefficient:
+    baseValue: 0
+  maxHealth:
+    baseValue: 0
+  currentHealth:
+    baseValue: 0
+  moveVelocity:
+    baseValue: 0
+  healthBarUI: {fileID: 8110341657076532094}
 --- !u!114 &6985833546667210555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 619822020580837630}
-  characterController: {fileID: 5674197669103963080}
   characterControllerDriver: {fileID: 5674197669103963085}
   xRInputModalityManager: {fileID: 5195935616340487267}
   camera: {fileID: 1783957943733948453}
@@ -331,6 +360,33 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 1783957943675309056}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.36144
+--- !u!54 &5988867793250932755
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087200251345095039}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!143 &5674197669103963080
 CharacterController:
   m_ObjectHideFlags: 0
@@ -348,7 +404,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
   m_Radius: 0.1
@@ -1528,7 +1584,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032646545018422930}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -1710,7 +1766,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2541284221068347123}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -1992,7 +2048,7 @@ GameObject:
   - component: {fileID: 485890988168318192}
   - component: {fileID: 2197361358169488859}
   m_Layer: 2
-  m_Name: FireBall Spawner
+  m_Name: Projectile Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2380,7 +2436,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7552062765431842772}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -3039,6 +3095,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TunnelingVignette
       objectReference: {fileID: 0}
+    - target: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8429981633443581382, guid: 6c8af5c8012f01440af6cb2bc3eb987c,
         type: 3}
       propertyPath: m_RootOrder
@@ -3532,10 +3593,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1637005946957971741}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3768458648181446346}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73a4ec5b8853bdc49b429b30b1ce0e7e,
         type: 3}
@@ -3572,7 +3629,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1644687751097337962}
-  - {fileID: 1637005946957971741}
+  - {fileID: 3768458648181446346}
   - {fileID: 5149111816238891652}
   - {fileID: 6879932321659746548}
   - {fileID: 7200085394688833470}
@@ -3611,33 +3668,6 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 1
     LayerIndex: 1
---- !u!114 &1637005946957971741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662546950399215559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9bee8c368c1d8478cb9e1d75e396dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack:
-    baseValue: 0
-  attackSpeed:
-    baseValue: 0
-  criticalRate:
-    baseValue: 0
-  criticalCoefficient:
-    baseValue: 0
-  maxHealth:
-    baseValue: 100
-  currentHealth:
-    baseValue: 10
-  moveVelocity:
-    baseValue: 0
-  healthBarUI: {fileID: 8110341657076532094}
 --- !u!114 &3768458648181446346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3683,7 +3713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 40345852024348576}
-  fireBallSpawner: {fileID: 2197361358169488859}
+  projectileSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 313937521762157228}
 --- !u!114 &7056962894386771573
 MonoBehaviour:
@@ -3698,7 +3728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 4491148624502589823}
-  fireBallSpawner: {fileID: 2197361358169488859}
+  projectileSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 8091370245721372290}
 --- !u!4 &4150115054039866749 stripped
 Transform:

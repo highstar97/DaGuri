@@ -44,7 +44,7 @@ public class BasicProjectile : MonoBehaviourPun
         ITakeDamageable victim = other.GetComponent<ITakeDamageable>();
         if (victim == null) return;
 
-        victim.TakeDamage(ownerStat.attack.BaseValue);
+        victim.BroadcastTakeDamage(ownerStat.attack.BaseValue, ownerStat.gameObject);
 
         OnProjectileTriggeredWithBoss?.Invoke(this);
 

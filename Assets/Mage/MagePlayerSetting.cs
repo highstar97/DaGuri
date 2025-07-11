@@ -13,7 +13,6 @@ public class MagePlayerSetting : MonoBehaviourPunCallbacks
 {
     [Header("XR Origin")]
     [SerializeField] private XROrigin xrOrigin;
-    [SerializeField] private CharacterController characterController;
     [SerializeField] private CharacterControllerDriver characterControllerDriver;
     [SerializeField] private XRInputModalityManager xRInputModalityManager;
 
@@ -60,7 +59,6 @@ public class MagePlayerSetting : MonoBehaviourPunCallbacks
         {
             // XR Origin
             xrOrigin.enabled = true;
-            characterController.enabled = true;
             characterControllerDriver.enabled = true;
             xRInputModalityManager.enabled = true;
 
