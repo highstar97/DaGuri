@@ -162,6 +162,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.LocalPlayer.SetCustomProperties(state.ToHashtable());
     }
+
     public void ToggleRequestSwap(int targetIndex)
     {
         foreach (var player in PhotonNetwork.PlayerList)
@@ -174,6 +175,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
         }
     }
+
     public void ToggleRequestSwap(Photon.Realtime.Player applicant, Photon.Realtime.Player respondent)
     {
         if (applicant == null || respondent == null) return;
