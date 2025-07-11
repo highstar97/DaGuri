@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,7 +17,7 @@ public class StatProperty
     }
 }
 
-public class StatComponent : MonoBehaviour, ITakeDamageable
+public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
 {
     #region Variables
     public StatProperty attack = new();
@@ -27,13 +28,30 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
     public StatProperty currentHealth = new();
     public StatProperty moveVelocity = new();
 
-    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); };
+    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); GameEndManager.Instance.NotifyAdventureDied(); };
+
+    public HealthBarUI healthBarUI;        //체력바 UI
     #endregion
 
     #region Unity Functions
     private void Start()
     {
+        currentHealth.OnValueChanged += UpdateCurrentHealthUI;
+        maxHealth.OnValueChanged += UpdateMaxHealthUI;
+
         InitStatProperty();
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth.BaseValue);
+        }
+        else
+        {
+            this.currentHealth.SetBaseValue((float)stream.ReceiveNext());
+        }
     }
     #endregion
 
@@ -49,6 +67,13 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
         moveVelocity.SetBaseValue(2.0f);
     }
 
+    public void BroadcastTakeDamage(float damageAmount, GameObject instigator)
+    {
+        Debug.Log($"{this.gameObject} take damage {damageAmount} by {instigator}.");
+        photonView.RPC("TakeDamage", RpcTarget.All, damageAmount);
+    }
+
+    [PunRPC]
     public void TakeDamage(float damageAmount)
     {
         float remainingCurrentHealth = currentHealth.BaseValue - damageAmount;
@@ -57,10 +82,30 @@ public class StatComponent : MonoBehaviour, ITakeDamageable
         {
             currentHealth.SetBaseValue(0.0f);
             OnCurrentHealthBeZero.Invoke();
+            if(this.gameObject.CompareTag("Boss"))
+            {
+                GameEndManager.Instance.NotifyBossDied();
+            }
             return;
         }
 
         currentHealth.SetBaseValue(remainingCurrentHealth);
+    }
+
+    private void UpdateHealthUI()
+    {
+        healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealth.BaseValue);
+    }
+
+    private void UpdateCurrentHealthUI(float currentHealthAmount)
+    {
+        healthBarUI.UpdateHealth(currentHealthAmount, maxHealth.BaseValue);
+    }
+
+    private void UpdateMaxHealthUI(float maxHealthAmout)
+    {
+        currentHealth.SetBaseValue(Mathf.Min(currentHealth.BaseValue, maxHealthAmout));
+        healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealthAmout);
     }
     #endregion
 }

@@ -41,6 +41,12 @@ MonoBehaviour:
   - RespawnSpaceship
   - UpdateHandTargets
   - UpdateRightHandTarget
+  - ShowHitEffect
+  - StartGame
+  - EndGame
+  - RpcPlayerDied
+  - RpcAdventureDied
+  - TakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

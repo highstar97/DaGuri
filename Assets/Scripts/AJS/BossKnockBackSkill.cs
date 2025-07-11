@@ -21,6 +21,13 @@ public class BossKnockBackSkill : MonoBehaviourPun
     public float maxDetectionTime;       // 트리거 누른 후 바닥에 닿을 수 있는 최대 시간 (초)
     public float minHeightDifference;    // 최초 누른 Y값과 닿은 Y값의 최소 차이 (미터)
     public LayerMask floorLayer;                // Floor 오브젝트의 Layer Mask
+    public float floorY;                // Floor 오브젝트의 Layer Mask
+
+    [Header("Skill Stat")]
+    public GameObject handControllerPhysics; // 넉백 스킬을 발사하는 손 위치
+    public float attackRangeLength = 5f; // 사각형 공격 범위의 길이 (전방으로 뻗어나가는 길이)
+    public float attackRangeWidth = 3f;  // 사각형 공격 범위의 너비 (좌우 폭)
+    public LayerMask playerLayer;                // Player 오브젝트의 Layer Mask
 
     // --- 내부 변수 ---
     private float initialControllerY; // 트리거 처음 눌렀을 때, 컨트롤로 Y 좌표
@@ -34,6 +41,7 @@ public class BossKnockBackSkill : MonoBehaviourPun
         rb.useGravity = false;
 
         floorLayer = LayerMask.GetMask("Floor");
+        playerLayer = LayerMask.GetMask("Player");
 
         maxDetectionTime = 1f;
         minHeightDifference = 0.25f;
@@ -136,8 +144,9 @@ public class BossKnockBackSkill : MonoBehaviourPun
             // 높이 차이가 충분하면
             if (Mathf.Abs(initialControllerY - currentControllerY) >= minHeightDifference)
             {
-                Debug.Log($"성공! 시작 Y: {initialControllerY}, 현재 Y: {currentControllerY}, 차이: {initialControllerY - currentControllerY}");
-                ActivateKnockbackSkill(currentControllerVector); // 스킬 발동
+                //Debug.Log($"성공! 시작 Y: {initialControllerY}, 현재 Y: {currentControllerY}, 차이: {initialControllerY - currentControllerY}");
+                Debug.Log(currentControllerVector);
+                ActivateKnockbackSkill(handControllerPhysics.transform.position); // 스킬 발동
 
                 if (smashDetectionCoroutine != null)
                 {
@@ -175,5 +184,86 @@ public class BossKnockBackSkill : MonoBehaviourPun
         Debug.Log("넉백 발동");
         // 넉백 성공시 진동
         directInteractor.xrController.SendHapticImpulse(1f, 0.2f);
+
+        // 넉백 스킬 시작 위치, 바닥 높이(1.3f) 하고 동일하게
+        Vector3 skillStartPoint = new Vector3(impactPoint.x, floorY, impactPoint.z);
+
+        // 시작 위치를 바탕으로 평평한 전방 벡터 계산: Y축을 0으로 만들고 정규화
+        Vector3 flatForward = handControllerPhysics.transform.forward;
+        flatForward.y = 0f;
+
+        // 넉백 스킬 범위 중심 좌표 계산
+        Vector3 boxCenter = skillStartPoint + flatForward * (attackRangeLength / 2f);
+        // 넉백 스킬 범위 계산 /  Y축은 높이, 바닥 좌표의 높이
+        Vector3 halfExtents = new Vector3(attackRangeWidth / 2f, 2f, attackRangeLength / 2f);
+
+        // 넉백 스킬 범위 각도 계산
+        Quaternion boxRotation = Quaternion.LookRotation(flatForward);
+
+        // 계산한 값을 바탕으로 해당 범위에 있는 Player만 탐지
+        Collider[] hitColliders = Physics.OverlapBox(boxCenter, halfExtents, boxRotation, playerLayer);
+
+        // 5. 감지된 콜라이더 처리
+        foreach (Collider hitCollider in hitColliders)
+        {
+            Debug.Log(hitCollider.name + "가 공격 범위에 들어왔습니다!");
+            ITakeDamageable playerHP = hitCollider.GetComponent<ITakeDamageable>();
+            if (playerHP != null)
+            {
+                Debug.Log(hitCollider.name + "넉백 피해");
+                playerHP.BroadcastTakeDamage(10, this.gameObject);
+            }
+        }
+
+        DrawOverlapBoxDebug(boxCenter, halfExtents, boxRotation, 10f);
+    }
+
+    /// <summary>
+    /// OverlapBox의 경계를 Debug.DrawLine으로 그려 시각화합니다.
+    /// </summary>
+    /// <param name="center">박스의 중심점</param>
+    /// <param name="halfExtents">박스 크기의 절반</param>
+    /// <param name="rotation">박스의 회전</param>
+    /// <param name="duration">선이 유지될 시간 (초)</param>
+    void DrawOverlapBoxDebug(Vector3 center, Vector3 halfExtents, Quaternion rotation, float duration)
+    {
+        // 박스의 8개 꼭짓점 계산
+        Vector3[] corners = new Vector3[8];
+        Vector3 size = halfExtents * 2f; // 실제 박스 크기
+
+        // 로컬 좌표계에서의 꼭짓점 (중심이 원점이라고 가정)
+        corners[0] = new Vector3(-size.x / 2, -size.y / 2, -size.z / 2);
+        corners[1] = new Vector3(size.x / 2, -size.y / 2, -size.z / 2);
+        corners[2] = new Vector3(-size.x / 2, size.y / 2, -size.z / 2);
+        corners[3] = new Vector3(size.x / 2, size.y / 2, -size.z / 2);
+        corners[4] = new Vector3(-size.x / 2, -size.y / 2, size.z / 2);
+        corners[5] = new Vector3(size.x / 2, -size.y / 2, size.z / 2);
+        corners[6] = new Vector3(-size.x / 2, size.y / 2, size.z / 2);
+        corners[7] = new Vector3(size.x / 2, size.y / 2, size.z / 2);
+
+        // 각 꼭짓점을 월드 좌표계로 변환 (회전과 위치 적용)
+        for (int i = 0; i < 8; i++)
+        {
+            corners[i] = center + rotation * corners[i];
+        }
+
+        // 박스의 12개 모서리 그리기
+        // 하단 사각형
+        Debug.DrawLine(corners[0], corners[1], Color.green, duration);
+        Debug.DrawLine(corners[1], corners[5], Color.green, duration);
+        Debug.DrawLine(corners[5], corners[4], Color.green, duration);
+        Debug.DrawLine(corners[4], corners[0], Color.green, duration);
+
+        // 상단 사각형
+        Debug.DrawLine(corners[2], corners[3], Color.green, duration);
+        Debug.DrawLine(corners[3], corners[7], Color.green, duration);
+        Debug.DrawLine(corners[7], corners[6], Color.green, duration);
+        Debug.DrawLine(corners[6], corners[2], Color.green, duration);
+
+        // 수직선
+        Debug.DrawLine(corners[0], corners[2], Color.green, duration);
+        Debug.DrawLine(corners[1], corners[3], Color.green, duration);
+        Debug.DrawLine(corners[4], corners[6], Color.green, duration);
+        Debug.DrawLine(corners[5], corners[7], Color.green, duration);
     }
 }
