@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossFireBall : MonoBehaviour
+public class BossFireBall : MonoBehaviourPun
 {
     private Vector3 startPosition;    // 이동을 시작할 위치
     private Vector3 endPosition;      // 이동을 마칠 위치
@@ -87,7 +88,7 @@ public class BossFireBall : MonoBehaviour
             }
         }
         Debug.Log(currentRadius);
-        Destroy(gameObject); // Hack: 포톤 오브젝트 풀링으로 대체 예정
+        PhotonNetwork.Destroy(gameObject); // Hack: 포톤 오브젝트 풀링으로 대체 예정
     }
 
     void OnDrawGizmosSelected()

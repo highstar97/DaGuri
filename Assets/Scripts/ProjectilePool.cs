@@ -14,7 +14,7 @@ public class ProjectilePool : IPunPrefabPool
     private readonly Dictionary<string, Transform> prefabRoots = new();     // prefabId별 루트 Transform
 
     // 풀링 대상으로 지정한 프리팹 이름들
-    private readonly HashSet<string> pooledPrefabs = new() { "FireBall", "Thunder", "Arrow", "Sword", "Shield", "Warrior_Bomb" };
+    private readonly HashSet<string> pooledPrefabs = new() { "FireBall", "Thunder", "Arrow", "Sword", "Shield", "Warrior_Bomb" , "BossFireBall" };
 
     private Transform poolRoot;                                             // 비활성화된 오브젝트들을 담아 둘 부모 트랜스폼
     #endregion
