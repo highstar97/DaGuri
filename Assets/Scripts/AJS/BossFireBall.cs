@@ -84,7 +84,7 @@ public class BossFireBall : MonoBehaviourPun
             if (playerHP != null)
             {
                 Debug.Log(hitCollider.name + "Fireball 피해");
-                playerHP.BroadcastTakeDamage(1f, this.gameObject);
+                playerHP.BroadcastTakeDamage(10f, this.gameObject);
             }
         }
         Debug.Log(currentRadius);
