@@ -320,7 +320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 619822020580837630}
-  characterController: {fileID: 5674197669103963080}
   characterControllerDriver: {fileID: 5674197669103963085}
   xRInputModalityManager: {fileID: 5195935616340487267}
   camera: {fileID: 1783957943733948453}
@@ -3095,6 +3094,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TunnelingVignette
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429981633443581377, guid: 6c8af5c8012f01440af6cb2bc3eb987c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8429981633443581382, guid: 6c8af5c8012f01440af6cb2bc3eb987c,
         type: 3}
