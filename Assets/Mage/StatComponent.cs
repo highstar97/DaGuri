@@ -85,6 +85,24 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
         currentHealth.SetBaseValue(remainingCurrentHealth);
     }
 
+    [PunRPC]
+    public void RequestTakeDamage(float damageAmount)
+    {
+        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            // 이 TakeDamage 메서드는 체력 감소 및 0 처리 로직을 가지고 있습니다.
+            TakeDamage(damageAmount);
+
+      
+            // if (currentHealth.BaseValue <= 0 && photonView.IsMine)
+            // {
+            //     PhotonNetwork.Destroy(this.gameObject);
+            // }
+        }
+    }
+
+
     private void UpdateHealthUI()
     {
         healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealth.BaseValue);

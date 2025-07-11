@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 118d5cd0e90bbb54aaef5ff8649c8aa7,
         type: 3}
       propertyPath: m_Name
-      value: RMB_04
+      value: Warrior_Bomb
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99,6 +99,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8975711210172079776}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 118d5cd0e90bbb54aaef5ff8649c8aa7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2394904337084076852}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 118d5cd0e90bbb54aaef5ff8649c8aa7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 999748377226865871}
   m_SourcePrefab: {fileID: 100100000, guid: 118d5cd0e90bbb54aaef5ff8649c8aa7, type: 3}
 --- !u!1 &8481020075582228098 stripped
 GameObject:
@@ -168,3 +176,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9644b9eedce3c154c8108594b738bf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 5
+  damageAmount: 10
+--- !u!114 &2394904337084076852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481020075582228098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &999748377226865871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8481020075582228098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
