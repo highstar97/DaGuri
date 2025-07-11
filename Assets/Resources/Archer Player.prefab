@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 404235495220499494}
   - component: {fileID: 2340766991130151577}
   m_Layer: 0
-  m_Name: ArrowSpawner
+  m_Name: Projectile Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6377,7 +6377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowOffset: {fileID: 8525264346969776728}
-  arrowSpawner: {fileID: 0}
+  arrowSpawner: {fileID: 2340766991130151577}
   controllerTracking: {fileID: 7669849065665860813}
 --- !u!114 &1016744657280971996
 MonoBehaviour:

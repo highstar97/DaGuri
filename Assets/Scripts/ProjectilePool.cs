@@ -13,7 +13,8 @@ public class ProjectilePool : IPunPrefabPool
     #region Variables
     private readonly Dictionary<string, Transform> prefabRoots = new();     // prefabId별 루트 Transform
 
-    private readonly HashSet<string> pooledPrefabs = new() { "FireBall", "Arrow", "Sword" };    // 풀링 대상으로 지정한 프리팹 이름들
+    // 풀링 대상으로 지정한 프리팹 이름들
+    private readonly HashSet<string> pooledPrefabs = new() { "FireBall", "Thunder", "Arrow", "Sword" };
 
     private Transform poolRoot;                                             // 비활성화된 오브젝트들을 담아 둘 부모 트랜스폼
     #endregion

@@ -2048,7 +2048,7 @@ GameObject:
   - component: {fileID: 485890988168318192}
   - component: {fileID: 2197361358169488859}
   m_Layer: 2
-  m_Name: FireBall Spawner
+  m_Name: Projectile Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3629,6 +3629,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1644687751097337962}
+  - {fileID: 3768458648181446346}
   - {fileID: 5149111816238891652}
   - {fileID: 6879932321659746548}
   - {fileID: 7200085394688833470}
@@ -3712,7 +3713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 40345852024348576}
-  fireBallSpawner: {fileID: 2197361358169488859}
+  projectileSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 313937521762157228}
 --- !u!114 &7056962894386771573
 MonoBehaviour:
@@ -3727,7 +3728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magicOffset: {fileID: 4491148624502589823}
-  fireBallSpawner: {fileID: 2197361358169488859}
+  projectileSpawner: {fileID: 2197361358169488859}
   controllerTracking: {fileID: 8091370245721372290}
 --- !u!4 &4150115054039866749 stripped
 Transform:
