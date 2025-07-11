@@ -26,6 +26,11 @@ public class ShieldController : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
+
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         if (((1 << other.gameObject.layer) & projectileLayer) != 0)
         {
             PhotonView projView = other.GetComponent<PhotonView>();
@@ -55,14 +60,9 @@ public class ShieldController : MonoBehaviourPunCallbacks
         }
 
         PhotonView targetView = PhotonView.Find(viewID);
-        if (targetView != null)
+        if (targetView != null && PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Destroy(targetView.gameObject);
-            Debug.Log($"[ShieldController] Master Client destroyed projectile with ViewID {viewID}.");
-        }
-        else
-        {
-            Debug.LogWarning($"[ShieldController] Master Client could not find Projectile with ViewID {viewID} to destroy.");
         }
     }
 }

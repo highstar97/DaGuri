@@ -4729,7 +4729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf11d68b6bd56c46ad2cc7ea0dfb193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldDuration: 5
+  shieldDuration: 100
   shieldOffset: {x: 0, y: 1, z: 1.5}
   leftHandTargetTransform: {fileID: 6382368349455400592}
 --- !u!114 &6343442559583924438

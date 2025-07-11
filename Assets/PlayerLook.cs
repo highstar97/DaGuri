@@ -25,7 +25,6 @@ public class PlayerLook : MonoBehaviourPun
     private void Update()
     {
         if (!photonView.IsMine) return;
-        Debug.Log("➡️ turnInput: " + turnInput);
         if (Mathf.Abs(turnInput) > 0.1f)
         {
             playerRoot.Rotate(Vector3.up, turnInput * turnSpeed * Time.deltaTime);

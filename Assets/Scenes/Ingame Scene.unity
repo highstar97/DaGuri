@@ -167,9 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - Boss Player
+  - Warrior Player
   - Archer XR Origin Photon
   - Mage XR Origin Photon
-  - RPGHeroPolyart
   instantiateTransforms:
   - {fileID: 1841911906}
   - {fileID: 543434760}
