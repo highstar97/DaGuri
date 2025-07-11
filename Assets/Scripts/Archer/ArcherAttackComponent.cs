@@ -33,10 +33,10 @@ public class ArcherAttackComponent : MonoBehaviourPun
             GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
 
             // 발사체의 PhotonView ID 추출
-            int projectileViewID = projectile.GetComponent<PhotonView>().ViewID;
+            // int projectileViewID = projectile.GetComponent<PhotonView>().ViewID;
 
             // 모든 클라이언트에 이펙트 생성하라고 RPC 호출
-            photonView.RPC("AttachArrowParticle", RpcTarget.All, projectileViewID);
+            // photonView.RPC("AttachArrowParticle", RpcTarget.All, projectileViewID);
         }
     }
 

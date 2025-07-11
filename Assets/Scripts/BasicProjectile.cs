@@ -16,7 +16,7 @@ public class BasicProjectile : MonoBehaviourPun
     #region Unity Functions
     private void Start()
     {
-        targetTransform = GameObject.Find("Boss").transform;
+        targetTransform = GameObject.Find("Boss Player(Clone)").transform;
     }
     private void OnEnable()
     {
