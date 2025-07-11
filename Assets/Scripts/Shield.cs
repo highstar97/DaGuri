@@ -13,19 +13,18 @@ public class Shield : MonoBehaviourPun
 
     public void ActivateShield()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-
         //플레이어 앞 위치 계산
         Vector3 sheildPos = transform.position + transform.TransformDirection(shieldOffset);
         Quaternion shieldRot = transform.rotation;
 
-        activeShield = PhotonNetwork.Instantiate("Shield", sheildPos, shieldRot);
-        activeShield.transform.SetParent(leftHandTargetTransform); //플레이어 왼손 움직일 때 같이
+        if (photonView.IsMine)
+        {
+            activeShield = PhotonNetwork.Instantiate("Shield", sheildPos, shieldRot);
+            StartCoroutine(RemoveShieldAfterTime(shieldDuration));
+            return;
+        }
 
-        StartCoroutine(RemoveShieldAfterTime(shieldDuration));
+        activeShield.transform.SetParent(leftHandTargetTransform); //플레이어 왼손 움직일 때 같이
     }
 
     IEnumerator RemoveShieldAfterTime(float seconds)

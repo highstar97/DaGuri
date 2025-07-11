@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Boss Player
   - Warrior Player
+  - Boss Player
   - Archer XR Origin Photon
   - Mage XR Origin Photon
   instantiateTransforms:
