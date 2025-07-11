@@ -17,7 +17,7 @@ public class StatProperty
     }
 }
 
-public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
+public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
 {
     #region Variables
     public StatProperty attack = new();
@@ -65,6 +65,12 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
         maxHealth.SetBaseValue(100.0f);
         currentHealth.SetBaseValue(maxHealth.BaseValue);
         moveVelocity.SetBaseValue(2.0f);
+    }
+
+    public void BroadcastTakeDamage(float damageAmount, GameObject instigator)
+    {
+        Debug.Log($"{this.gameObject} take damage {damageAmount} by {instigator}.");
+        photonView.RPC("TakeDamage", RpcTarget.All, damageAmount);
     }
 
     [PunRPC]
