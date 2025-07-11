@@ -21,7 +21,6 @@ public class Shield : MonoBehaviourPun
         {
             activeShield = PhotonNetwork.Instantiate("Shield", sheildPos, shieldRot);
             StartCoroutine(RemoveShieldAfterTime(shieldDuration));
-            return;
         }
 
         activeShield.transform.SetParent(leftHandTargetTransform); //플레이어 왼손 움직일 때 같이
