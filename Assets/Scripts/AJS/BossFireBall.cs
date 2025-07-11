@@ -22,6 +22,11 @@ public class BossFireBall : MonoBehaviourPun
         targetLayer = LayerMask.GetMask("Player");
     }
 
+    private void OnEnable()
+    {
+        transform.localScale = initialScale;
+    }
+
     private void Start()
     {
         initialScale = transform.localScale;
@@ -88,7 +93,7 @@ public class BossFireBall : MonoBehaviourPun
             }
         }
         Debug.Log(currentRadius);
-        PhotonNetwork.Destroy(gameObject); // Hack: 포톤 오브젝트 풀링으로 대체 예정
+        PhotonNetwork.Destroy (gameObject); // Hack: 포톤 오브젝트 풀링으로 대체 예정
     }
 
     void OnDrawGizmosSelected()
