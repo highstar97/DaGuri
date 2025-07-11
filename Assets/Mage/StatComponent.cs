@@ -1,0 +1,111 @@
+using Photon.Pun;
+using UnityEngine;
+
+[System.Serializable]
+public class StatProperty
+{
+    public float baseValue;
+
+    public System.Action<float> OnValueChanged = (baseValue) => { Debug.Log($"Value Changed : {baseValue}"); };
+
+    public float BaseValue => baseValue;
+
+    public void SetBaseValue(float baseValue)
+    {
+        this.baseValue = baseValue;
+        OnValueChanged.Invoke(this.baseValue);
+    }
+}
+
+public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
+{
+    #region Variables
+    public StatProperty attack = new();
+    public StatProperty attackSpeed = new();
+    public StatProperty criticalRate = new();
+    public StatProperty criticalCoefficient = new();
+    public StatProperty maxHealth = new();
+    public StatProperty currentHealth = new();
+    public StatProperty moveVelocity = new();
+
+    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); GameEndManager.Instance.NotifyAdventureDied(); };
+
+    public HealthBarUI healthBarUI;        //체력바 UI
+    #endregion
+
+    #region Unity Functions
+    private void Start()
+    {
+        currentHealth.OnValueChanged += UpdateCurrentHealthUI;
+        maxHealth.OnValueChanged += UpdateMaxHealthUI;
+
+        InitStatProperty();
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth.BaseValue);
+        }
+        else
+        {
+            this.currentHealth.SetBaseValue((float)stream.ReceiveNext());
+        }
+    }
+    #endregion
+
+    #region User Functions
+    private void InitStatProperty()
+    {
+        attack.SetBaseValue(100.0f);
+        attackSpeed.SetBaseValue(1.0f);
+        criticalRate.SetBaseValue(0.0f);
+        criticalCoefficient.SetBaseValue(2.0f);
+        maxHealth.SetBaseValue(100.0f);
+        currentHealth.SetBaseValue(maxHealth.BaseValue);
+        moveVelocity.SetBaseValue(2.0f);
+    }
+
+    public void BroadcastTakeDamage(float damageAmount, GameObject instigator)
+    {
+        Debug.Log($"{this.gameObject} take damage {damageAmount} by {instigator}.");
+        photonView.RPC("TakeDamage", RpcTarget.All, damageAmount);
+    }
+
+    [PunRPC]
+    public void TakeDamage(float damageAmount)
+    {
+        float remainingCurrentHealth = currentHealth.BaseValue - damageAmount;
+
+        if (remainingCurrentHealth < 0.0f || Mathf.Approximately(remainingCurrentHealth, 0.0f))
+        {
+            currentHealth.SetBaseValue(0.0f);
+            OnCurrentHealthBeZero.Invoke();
+            if(this.gameObject.CompareTag("Boss"))
+            {
+                GameEndManager.Instance.NotifyBossDied();
+            }
+            return;
+        }
+
+        currentHealth.SetBaseValue(remainingCurrentHealth);
+    }
+
+    private void UpdateHealthUI()
+    {
+        healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealth.BaseValue);
+    }
+
+    private void UpdateCurrentHealthUI(float currentHealthAmount)
+    {
+        healthBarUI.UpdateHealth(currentHealthAmount, maxHealth.BaseValue);
+    }
+
+    private void UpdateMaxHealthUI(float maxHealthAmout)
+    {
+        currentHealth.SetBaseValue(Mathf.Min(currentHealth.BaseValue, maxHealthAmout));
+        healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealthAmout);
+    }
+    #endregion
+}
