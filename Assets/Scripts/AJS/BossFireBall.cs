@@ -15,7 +15,6 @@ public class BossFireBall : MonoBehaviour
 
     private bool isMoving = false;   // 현재 오브젝트가 이동 중인지 여부
     public Vector3 initialScale; // 오브젝트의 초기 스케일 (인스펙터에서 조절 가능)
-    private Coroutine radiousIncrease;
 
     private void Reset()
     {
@@ -32,6 +31,12 @@ public class BossFireBall : MonoBehaviour
         // isMoving 플래그가 true일 때만 이동 로직을 실행
         if (isMoving)
         {
+            // 최대 범위 넘으면 더이상 증가하지 않음
+            if(transform.localScale.x <= maxScale.x)
+            {
+                Vector3 increaseAmount = Vector3.one * growthRate * Time.deltaTime;
+                transform.localScale += increaseAmount;
+            }
             // 현재 위치에서 도착 위치까지의 남은 거리를 계산
             float distanceToTarget = Vector3.Distance(transform.position, endPosition);
 
@@ -63,31 +68,10 @@ public class BossFireBall : MonoBehaviour
 
         // 이동 시작 시 오브젝트 위치를 시작 위치로 바로 설정
         transform.position = startPosition;
-
-        // 거리 증가 시작
-        radiousIncrease = StartCoroutine(DetetioinRadiousIncrease());
-    }
-
-    IEnumerator DetetioinRadiousIncrease()
-    {
-        // 최대 범위 넘으면 더이상 증가하지 않음
-        while (transform.localScale.x <= maxScale.x)
-        {
-            Vector3 increaseAmount = Vector3.one * growthRate;
-            transform.localScale += increaseAmount;
-            yield return new WaitForSeconds(0.01f);
-        }        
-        transform.localScale = maxScale;
-        yield break;
     }
 
     private void Explode()
     {
-        if (radiousIncrease != null)
-        {
-            StopCoroutine(radiousIncrease);
-        }
-
         float currentRadius = transform.localScale.x * 0.5f;
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, currentRadius, targetLayer);
