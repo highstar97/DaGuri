@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - RPGHeroPolyart real
   - Archer XR Origin Photon
+  - RPGHeroPolyart real
   - Mage XR Origin Photon
   - RPGHeroPolyart
   instantiateTransforms:
@@ -199,6 +199,54 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &230985130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230985132}
+  - component: {fileID: 230985131}
+  m_Layer: 0
+  m_Name: Paricle Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &230985131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230985130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e18645446ac0b4da52b5a39fe586dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paricleList:
+  - type: 2
+    particlePrefab: {fileID: 1358412939764641139, guid: dbf8fb0fb96e43b4580cb90cef230945,
+      type: 3}
+--- !u!4 &230985132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230985130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.06072, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &319558003 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 82823437518789136, guid: d77b772ad2965654697ec98fe4ad20a5,
@@ -1394,3 +1442,4 @@ SceneRoots:
   - {fileID: 1580387266}
   - {fileID: 1312172669}
   - {fileID: 535641437}
+  - {fileID: 230985132}

@@ -29,7 +29,11 @@ public class ArcherAttackComponent : MonoBehaviour
 
         if (GestureUtils.IsLineGesture(trail))
         {
-            arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
+            GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
+            ParticleManager.instance.PlayParticle(JobParticle.ArcherBasicAttack, ArrowOffset.position, Quaternion.LookRotation(this.transform.forward));
+            
+            // ParticleManager.instance.PlayParticle(JobParticle.ArcherBasicAttack, projectile.transform);
         }
+        //if(GestureUtils.IsLineGesture(trail) && )
     }
 }

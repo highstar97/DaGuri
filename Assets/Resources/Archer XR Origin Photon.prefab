@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 3
+  delayAfterRelease: 0.2
   triggerAction:
     m_UseReference: 1
     m_Action:
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 3
+  delayAfterRelease: 0.2
   triggerAction:
     m_UseReference: 1
     m_Action:
@@ -2399,7 +2399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 404235495220499494}
-  - component: {fileID: 5891034841506843621}
+  - component: {fileID: 387886758243798875}
   m_Layer: 0
   m_Name: ArrowSpawner
   m_TagString: Untagged
@@ -2422,7 +2422,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5976879593180414196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5891034841506843621
+--- !u!114 &387886758243798875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2431,13 +2431,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4205085941316971395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0372d53d0b748e4087fecf9e95abef6, type: 3}
+  m_Script: {fileID: 11500000, guid: adf8d7c52cda1024c92d20c707d820ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowPrefabs: {fileID: 805228650084806457, guid: 178d2c6132ecd6b408b99e60e91360c5,
-    type: 3}
-  skillarrowPrefabs: {fileID: 805228650084806457, guid: bbe127bc4d6eee44f80542aa9ac5d8d2,
-    type: 3}
 --- !u!1 &4634680269944195433
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,7 +3624,7 @@ Transform:
   m_GameObject: {fileID: 4982461958370400683}
   serializedVersion: 2
   m_LocalRotation: {x: -0.12186928, y: 0, z: 0, w: 0.9925462}
-  m_LocalPosition: {x: 0, y: 0.871, z: -0.868}
+  m_LocalPosition: {x: 0, y: 0.39, z: -0.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3641,7 +3637,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4982461958370400683}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -3692,7 +3688,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4982461958370400683}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &1394543838166876745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3700,7 +3696,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4982461958370400683}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
   m_Name: 
@@ -4517,7 +4513,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5976879593180414199}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
   m_Name: 
@@ -4544,7 +4540,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
   m_Radius: 0.1
@@ -6357,21 +6353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowOffset: {fileID: 8525264346969776728}
-  bow: {fileID: 4624399523467951047}
-  arrowSpawner: {fileID: 5891034841506843621}
+  arrowSpawner: {fileID: 387886758243798875}
   controllerTracking: {fileID: 7669849065665860813}
-  aBtnAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: A Btn
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 884ffeea-0873-4bb7-8c7f-536bfd294b0b
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
 --- !u!114 &1016744657280971996
 MonoBehaviour:
   m_ObjectHideFlags: 0
