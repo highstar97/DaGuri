@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -5,7 +6,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ArcherAttackComponent : MonoBehaviour
+public class ArcherAttackComponent : MonoBehaviourPun
 {
     public Transform ArrowOffset; //화살 발사 지점
     public ProjectileSpawner arrowSpawner; //화살 스포너
@@ -30,10 +31,30 @@ public class ArcherAttackComponent : MonoBehaviour
         if (GestureUtils.IsLineGesture(trail))
         {
             GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
-            ParticleManager.instance.PlayParticle(JobParticle.ArcherBasicAttack, ArrowOffset.position, Quaternion.LookRotation(this.transform.forward));
             
-            // ParticleManager.instance.PlayParticle(JobParticle.ArcherBasicAttack, projectile.transform);
+            // 1. 파티클 프리팹 획득
+            ParticleSystem particlePrefab = ParticleManager.instance.GetParticleSystem(JobParticle.ArcherBasicAttack);
+
+            // 발사체의 PhotonView ID 추출
+            int projectileViewID = projectile.GetComponent<PhotonView>().ViewID;
+
+            // 모든 클라이언트에 이펙트 생성하라고 RPC 호출
+            photonView.RPC("AttachArrowParticle", RpcTarget.All, projectileViewID, particlePrefab);
         }
-        //if(GestureUtils.IsLineGesture(trail) && )
     }
+
+    [PunRPC]
+    void AttachArrowParticle(int viewID, ParticleSystem particlePrefab)
+    {
+        PhotonView pv = PhotonView.Find(viewID);
+        if (pv == null) return;
+
+        GameObject projectile = pv.gameObject;
+
+        // 파티클 생성해서 projectile에 붙이기
+        ParticleSystem ps = Instantiate(particlePrefab, projectile.transform);
+        ps.transform.localPosition = Vector3.zero;
+        ps.Play();
+    }
+
 }
