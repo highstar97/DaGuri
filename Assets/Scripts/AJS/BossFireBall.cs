@@ -10,12 +10,12 @@ public class BossFireBall : MonoBehaviourPun
     private float moveSpeed = 5f;     // 이동 속도 (초당 유니티 단위)
 
     [Header("FireBall Stat")]
+    public Vector3 initialScale = new Vector3(1f, 1f, 1f); //     public Vector3 initialScale; // 오브젝트의 초기 스케일 (인스펙터에서 조절 가능)
     public Vector3 maxScale = new Vector3(5f, 5f, 5f); // 최대 스케일 (이 이상 커지지 않음, 선택 사항)
     public float growthRate = 0.1f; // 탐지 범위 증가값
     public LayerMask targetLayer; // 특정 레이어의 오브젝트만 탐지하고 싶을 때 사용
 
     private bool isMoving = false;   // 현재 오브젝트가 이동 중인지 여부
-    public Vector3 initialScale; // 오브젝트의 초기 스케일 (인스펙터에서 조절 가능)
 
     private void Reset()
     {
@@ -25,11 +25,6 @@ public class BossFireBall : MonoBehaviourPun
     private void OnEnable()
     {
         transform.localScale = initialScale;
-    }
-
-    private void Start()
-    {
-        initialScale = transform.localScale;
     }
 
     void Update()
