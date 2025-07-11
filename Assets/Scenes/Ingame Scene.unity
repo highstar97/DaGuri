@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 41732352}
   - component: {fileID: 41732353}
   - component: {fileID: 41732354}
+  - component: {fileID: 41732355}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Boss XR Origin Photon
+  - Boss Player
   - Archer XR Origin Photon
   - Mage XR Origin Photon
   - RPGHeroPolyart
@@ -199,6 +200,20 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &41732355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41732351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd146412a1b77964ebdd3d78da6c8444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnSceneName: Ingame Scene
+  delayBeforeExit: 5
 --- !u!82 &319558003 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 82823437518789136, guid: d77b772ad2965654697ec98fe4ad20a5,
