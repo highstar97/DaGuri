@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun; 
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviourPun
 {
-    public GameObject shieldPrefab;
     public float shieldDuration = 10f;
     public Vector3 shieldOffset = new Vector3(0, 1f, 1.5f);
+    public Transform leftHandTargetTransform;
 
     private GameObject activeShield;
 
     public void ActivateShield()
     {
-        if (activeShield != null)
+        if (!photonView.IsMine)
         {
             return;
         }
@@ -21,8 +22,8 @@ public class Shield : MonoBehaviour
         Vector3 sheildPos = transform.position + transform.TransformDirection(shieldOffset);
         Quaternion shieldRot = transform.rotation;
 
-        activeShield = Instantiate(shieldPrefab, sheildPos, shieldRot);
-        activeShield.transform.SetParent(transform); //플레이어 움직일 때 같이
+        activeShield = PhotonNetwork.Instantiate("Shield", sheildPos, shieldRot);
+        activeShield.transform.SetParent(leftHandTargetTransform); //플레이어 왼손 움직일 때 같이
 
         StartCoroutine(RemoveShieldAfterTime(shieldDuration));
     }
@@ -30,6 +31,6 @@ public class Shield : MonoBehaviour
     IEnumerator RemoveShieldAfterTime(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Destroy(activeShield);
+        PhotonNetwork.Destroy(activeShield);
     }
 }

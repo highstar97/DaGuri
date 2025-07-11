@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "272e7bb6-d55b-45c2-9d2b-efc0852e3830",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -133,8 +142,8 @@
                 },
                 {
                     "name": "",
-                    "id": "3edf279f-010f-4afc-a891-c76f42f438d1",
-                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "id": "a1c61e89-d372-422f-b6d5-4c702f0684d8",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -145,11 +154,22 @@
                 {
                     "name": "",
                     "id": "4cf771bd-4059-47e5-a40b-182e57d29c19",
-                    "path": "<XRController>{RightHand}/{SecondaryButton}",
-                    "interactions": "",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f329002-e265-4a00-81e5-a5beed9b62ae",
+                    "path": "<XRController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "StickDeadzone,NormalizeVector2",
+                    "groups": "",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

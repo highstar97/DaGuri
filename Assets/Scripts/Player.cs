@@ -8,6 +8,8 @@ public class Player : MonoBehaviourPun
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform rightHandController;
     [SerializeField] private Transform rightHandTarget;
+    [SerializeField] private Transform leftHandController;
+    [SerializeField] private Transform leftHandTarget;
     [SerializeField] private Transform avatarCameraTarget;
     [SerializeField] private Transform rightElbowHint;  
     [SerializeField] private Animator animator;
@@ -22,8 +24,6 @@ public class Player : MonoBehaviourPun
     public Shield shield;
     public SkillShooter skillShooter;
 
-
-
     private Vector3 remoteRightHandPos;
     private Quaternion remoteRightHandRot;
     private void Start()
@@ -33,18 +33,6 @@ public class Player : MonoBehaviourPun
         {
             animator = GetComponentInChildren<Animator>();
         }
-
-        // 다른 플레이어의 입력, 카메라 등 비활성화
-        if (!photonView.IsMine)
-        {
-            // 컨트롤러 스크립트, 카메라 비활성화
-            GetComponent<PlayerInput>()?.DeactivateInput();
-            GetComponentInChildren<Camera>()?.gameObject.SetActive(false);
-            //this.enabled = false;
-            //return;
-        }
-
-
     }
 
     // Input System에서 호출됨 (Move 액션 이벤트 연결 필요)
@@ -71,26 +59,45 @@ public class Player : MonoBehaviourPun
         }
        
     }
-    public void OnFire(InputAction.CallbackContext context)
+    //public void OnFire(InputAction.CallbackContext context)
+    //{
+    //    if (!photonView.IsMine)
+    //    {
+    //        return;
+    //    }
+    //    if (context.performed)
+    //    {
+    //        if (skillShooter != null)
+    //        {
+    //            skillShooter.Fire();
+    //        }
+    //        else
+    //        {
+    //            Debug.LogWarning("🚫 skillShooter가 연결되어 있지 않습니다!");
+    //        }
+    //    }
+    //}
+    public void OnFireHold(InputAction.CallbackContext context)
     {
-        if (!photonView.IsMine)
+        if (!photonView.IsMine || !context.performed) return;
+
+        if (skillShooter != null)
         {
-            return;
-        }
-        if (context.performed)
-        {
-            if (skillShooter != null)
-            {
-                skillShooter.Fire();
-            }
-            else
-            {
-                Debug.LogWarning("🚫 skillShooter가 연결되어 있지 않습니다!");
-            }
+            skillShooter.OnStartAiming();
         }
     }
 
-    
+    // 손 뗐을 때
+    public void OnFireRelease(InputAction.CallbackContext context)
+    {
+        if (!photonView.IsMine || !context.canceled) return;
+
+        if (skillShooter != null)
+        {
+            skillShooter.Fire();
+        }
+    }
+
 
     private void Update()
     {
@@ -102,6 +109,11 @@ public class Player : MonoBehaviourPun
         rightHandTarget.position = avatarCameraTarget.position + rightHandController.position - cameraTransform.position;
         // 아바타에서 오른손의 회전 크기 조정
         rightHandTarget.rotation = avatarCameraTarget.rotation * Quaternion.Inverse(cameraTransform.rotation) * rightHandController.rotation;
+
+        // 아바타에서 왼손이 위치할 곳 조정
+        leftHandTarget.position = avatarCameraTarget.position + leftHandController.position - cameraTransform.position;
+        // 아바타에서 왼손의 회전 크기 조정
+        leftHandTarget.rotation = avatarCameraTarget.rotation * Quaternion.Inverse(cameraTransform.rotation) * leftHandController.rotation;
     }
 
     private void FixedUpdate()
@@ -123,15 +135,20 @@ public class Player : MonoBehaviourPun
 
     private void OnAnimatorIK(int layerIndex)
     {
-
         if (rightHandTarget == null || animator == null) return;
-       // if (animator == null) return;
+        // if (animator == null) return;
 
-        // 손 위치 IK
+        // 오른손 위치 IK
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
         animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
         animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position);
         animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.rotation);
+
+        // 왼손 위치 IK
+        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
+        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
+        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTarget.position);
+        animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandTarget.rotation);
 
         // 팔꿈치 힌트
         if (rightElbowHint != null)
@@ -140,7 +157,4 @@ public class Player : MonoBehaviourPun
             animator.SetIKHintPosition(AvatarIKHint.RightElbow, rightElbowHint.position);
         }
     }
-
-   
-    
 }
