@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Target
+  - Boss
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -13,11 +14,11 @@ TagManager:
   - Water
   - UI
   - AlwaysOnTop
-  - RightHandLayer
-  - LeftHandLayer
+  - HandLayer
+  - Projectile
   - Floor
   - Player
-  - 
+  - Boss
   - 
   - 
   - 

@@ -17,7 +17,7 @@ public class StatProperty
     }
 }
 
-public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
+public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
 {
     #region Variables
     public StatProperty attack = new();
@@ -28,7 +28,7 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
     public StatProperty currentHealth = new();
     public StatProperty moveVelocity = new();
 
-    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); };
+    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); GameEndManager.Instance.NotifyAdventureDied(); };
 
     public HealthBarUI healthBarUI;        //체력바 UI
     #endregion
@@ -46,7 +46,7 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(currentHealth);
+            stream.SendNext(currentHealth.BaseValue);
         }
         else
         {
@@ -67,6 +67,13 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
         moveVelocity.SetBaseValue(2.0f);
     }
 
+    public void BroadcastTakeDamage(float damageAmount, GameObject instigator)
+    {
+        Debug.Log($"{this.gameObject} take damage {damageAmount} by {instigator}.");
+        photonView.RPC("TakeDamage", RpcTarget.All, damageAmount);
+    }
+
+    [PunRPC]
     public void TakeDamage(float damageAmount)
     {
         float remainingCurrentHealth = currentHealth.BaseValue - damageAmount;
@@ -75,6 +82,10 @@ public class StatComponent : MonoBehaviour, IPunObservable, ITakeDamageable
         {
             currentHealth.SetBaseValue(0.0f);
             OnCurrentHealthBeZero.Invoke();
+            if(this.gameObject.CompareTag("Boss"))
+            {
+                GameEndManager.Instance.NotifyBossDied();
+            }
             return;
         }
 

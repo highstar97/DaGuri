@@ -13,9 +13,6 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public class WarriorPlayerSetting : MonoBehaviourPunCallbacks
 {
     [Header("XR Origin")]
-    [SerializeField] private CapsuleCollider capsuleCollider;
-    [SerializeField] private Rigidbody rigidBody;
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private XROrigin xrOrigin;
 
     [Header("Main Camera")]
@@ -33,9 +30,6 @@ public class WarriorPlayerSetting : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             // XR Origin
-            capsuleCollider.enabled = true;
-            rigidBody.isKinematic = false;
-            playerInput.enabled = true;
             xrOrigin.enabled = true;
 
             // 카메라 활성화 (다른 플레이어의 카메라는 비활성화)
