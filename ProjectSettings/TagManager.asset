@@ -13,8 +13,8 @@ TagManager:
   - Water
   - UI
   - AlwaysOnTop
-  - RightHandLayer
-  - LeftHandLayer
+  - HandLayer
+  - Projectile
   - Floor
   - Player
   - 
