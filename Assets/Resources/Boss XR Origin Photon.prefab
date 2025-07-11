@@ -2104,7 +2104,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 370593587778575123}
   landingMarkerPrefab: {fileID: 8748868027195207512, guid: 893219773891c784ab469a39151879b4,
     type: 3}
-  maxRaycastDistance: 20
+  maxRaycastDistance: 50
   collisionLayers:
     serializedVersion: 2
     m_Bits: 512
@@ -2112,7 +2112,7 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 4483393850018047256}
   fireBall: BossFireBall
-  fireBallSpeed: 40
+  fireBallSpeed: 10
 --- !u!1 &5621387576345392111
 GameObject:
   m_ObjectHideFlags: 0
