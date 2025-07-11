@@ -26,25 +26,43 @@ public class ShieldController : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(!photonView.IsMine)
+        if (((1 << other.gameObject.layer) & projectileLayer) != 0)
+        {
+            PhotonView projView = other.GetComponent<PhotonView>();
+
+            if (projView != null)
+            {
+                // PhotonView가 있는 발사체는 마스터 클라이언트에게 파괴 요청
+                // 발사체의 소유권과 관계없이 마스터 클라이언트가 파괴하도록 요청
+                photonView.RPC("RequestDestroyProjectile", RpcTarget.MasterClient, projView.ViewID);
+                Debug.Log($"[ShieldController] Projectile with ViewID {projView.ViewID} hit my shield. Requesting destroy to Master Client.");
+            }
+            else // PhotonView가 없는 경우 (로컬에서 생성된 발사체이거나 테스트용)
+            {
+                Destroy(other.gameObject);
+                Debug.Log("[ShieldController] Non-networked projectile hit my shield. Destroying locally.");
+            }
+        }
+
+    }
+    [PunRPC]
+    private void RequestDestroyProjectile(int viewID)
+    {
+        // 이 RPC는 마스터 클라이언트에서만 실행되어야 합니다.
+        if (!PhotonNetwork.IsMasterClient)
         {
             return;
         }
-        if(((1 << other.gameObject.layer) & projectileLayer ) != 0)
+
+        PhotonView targetView = PhotonView.Find(viewID);
+        if (targetView != null)
         {
-            PhotonView projView = other.GetComponent<PhotonView>();
-        
-                if (projView != null && projView.IsMine)
-                {
-                    PhotonNetwork.Destroy(other.gameObject);
-                }
-                else if (projView == null) // PhotonView 없는 경우 (테스트용)
-                {
-                    Destroy(other.gameObject);
-                }
-           
+            PhotonNetwork.Destroy(targetView.gameObject);
+            Debug.Log($"[ShieldController] Master Client destroyed projectile with ViewID {viewID}.");
+        }
+        else
+        {
+            Debug.LogWarning($"[ShieldController] Master Client could not find Projectile with ViewID {viewID} to destroy.");
         }
     }
-
-
 }
