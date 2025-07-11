@@ -13,7 +13,7 @@ public class StatProperty
     public void SetBaseValue(float baseValue)
     {
         this.baseValue = baseValue;
-        // OnValueChanged.Invoke(this.baseValue);
+        OnValueChanged.Invoke(this.baseValue);
     }
 }
 
