@@ -30,7 +30,7 @@ public enum PhotonEventCode : byte
     ParticlePlay = 100
 }
 
-public class ParticleManager : MonoBehaviour, IOnEventCallback
+public class ParticleManager : MonoBehaviourPun, IOnEventCallback
 {
     public static ParticleManager instance;
 
@@ -75,13 +75,9 @@ public class ParticleManager : MonoBehaviour, IOnEventCallback
         return particleDict[type];
     }
 
-    public void AttachParticle(GameObject projectile, JobParticle type)
+    public void BroadcastAttachParticle(GameObject projectile, JobParticle type)
     {
-        // 파티클 생성해서 projectile에 붙이기
-        ParticleSystem ps = Instantiate(GetParticleSystem(type), projectile.transform);
-        ps.transform.localPosition = Vector3.zero;
-        ps.transform.rotation = projectile.transform.rotation;
-        ps.Play();
+        photonView.RPC("AttachParticle", RpcTarget.All, projectile, type);
     }
 
     public void PlayParticle(JobParticle type, Vector3 tramsform, Quaternion rotation)

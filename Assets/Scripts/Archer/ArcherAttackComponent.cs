@@ -31,14 +31,6 @@ public class ArcherAttackComponent : MonoBehaviourPun
         if (GestureUtils.IsLineGesture(trail))
         {
             GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
-
-            photonView.RPC("AttachParticle", RpcTarget.All, projectile, JobParticle.ArcherBasicAttack);
         }
-    }
-
-    [PunRPC]
-    private void AttachParticle(GameObject projectile, JobParticle type)
-    {
-        ParticleManager.instance.AttachParticle(projectile, JobParticle.ArcherBasicAttack);
     }
 }
