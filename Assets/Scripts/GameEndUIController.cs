@@ -1,9 +1,11 @@
-using UnityEngine;
-using TMPro;
 using Photon.Pun;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class GameEndUIController : MonoBehaviour
+public class GameEndUIController : MonoBehaviourPunCallbacks
 {
     public GameObject panel;
     public TextMeshProUGUI titleText;
@@ -14,6 +16,28 @@ public class GameEndUIController : MonoBehaviour
     public Vector3 offsetFromCamera = new Vector3(0f, 0f, 2f);
     public static GameEndUIController Instance;
 
+
+    [SerializeField] 
+    private XRRayInteractor rightRay;
+
+    private void Start()
+    {
+        if (!photonView.IsMine)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        ShowResult(false); // 테스트용s
+
+    }
+
+    void SetUIInteractionMode(bool enabled)
+    {
+        // UI용 레이 인터랙션 활성화
+        rightRay.gameObject.SetActive(enabled);
+
+    }
     private void Awake()
     {
         // 싱글톤 패턴 구현
@@ -26,7 +50,7 @@ public class GameEndUIController : MonoBehaviour
         {
             Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트 파괴
         }
-        panel.SetActive(false);
+    //    panel.SetActive(false);
     }
 
     void LateUpdate()
@@ -53,21 +77,23 @@ public class GameEndUIController : MonoBehaviour
 
         if (isWin)
         {
-            titleText.text = " 승리!";
+            titleText.text = " Win! ";
         }
         else
         {
-            titleText.text = " 패배!";
+            titleText.text = " Lose!";
         }
 
-       
+        SetUIInteractionMode(true); // UI 상호작용 모드로 전환
+
     }
-    // 카메라 앞에 UI 위치 및 회전 조정
-    
+
 
     public void OnClickExit()
     {
+        Debug.Log("OnClickExit() 함수 호출됨! 포톤 룸을 나가려고 시도합니다.");
         PhotonNetwork.LeaveRoom(); // 이후 OnLeftRoom에서 씬 이동
+        Application.Quit();
     }
 
     public void OnClickRetry()
