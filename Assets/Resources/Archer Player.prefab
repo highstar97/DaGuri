@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 1
+  delayAfterRelease: 0.5
   triggerAction:
     m_UseReference: 1
     m_Action:
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 1
+  delayAfterRelease: 0.5
   triggerAction:
     m_UseReference: 1
     m_Action:
