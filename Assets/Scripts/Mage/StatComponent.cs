@@ -28,7 +28,7 @@ public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
     public StatProperty currentHealth = new();
     public StatProperty moveVelocity = new();
 
-    public System.Action OnCurrentHealthBeZero;
+    public System.Action OnCurrentHealthBeZero = () => { Debug.Log("Character's current health set zero."); GameEndManager.Instance.NotifyAdventureDied(); };
 
     public HealthBarUI healthBarUI;        //체력바 UI
     #endregion
@@ -38,7 +38,6 @@ public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
     {
         currentHealth.OnValueChanged += UpdateCurrentHealthUI;
         maxHealth.OnValueChanged += UpdateMaxHealthUI;
-        OnCurrentHealthBeZero += DestroyPlayer;
 
         InitStatProperty();
     }
@@ -93,12 +92,9 @@ public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
         currentHealth.SetBaseValue(remainingCurrentHealth);
     }
     
-    private void DestroyPlayer()
+    private void UpdateHealthUI()
     {
-        Debug.Log("Character's current health set zero.");
-        GameEndManager.Instance.NotifyAdventureDied();
-
-        PhotonNetwork.Destroy(gameObject);
+        healthBarUI.UpdateHealth(currentHealth.BaseValue, maxHealth.BaseValue);
     }
 
     private void UpdateCurrentHealthUI(float currentHealthAmount)

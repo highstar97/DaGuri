@@ -30,7 +30,7 @@ public enum PhotonEventCode : byte
     ParticlePlay = 100
 }
 
-public class ParticleManager : MonoBehaviourPun, IOnEventCallback
+public class ParticleManager : MonoBehaviour, IOnEventCallback
 {
     public static ParticleManager instance;
 
@@ -75,11 +75,6 @@ public class ParticleManager : MonoBehaviourPun, IOnEventCallback
         return particleDict[type];
     }
 
-    public void BroadcastAttachParticle(GameObject projectile, JobParticle type)
-    {
-        photonView.RPC("AttachParticle", RpcTarget.All, projectile, type);
-    }
-
     public void PlayParticle(JobParticle type, Vector3 tramsform, Quaternion rotation)
     {
         object[] data = new object[] {(int)type, tramsform, rotation};
@@ -111,4 +106,7 @@ public class ParticleManager : MonoBehaviourPun, IOnEventCallback
             }
         }
     }
+    
+
+
 }

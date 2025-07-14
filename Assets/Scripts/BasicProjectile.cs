@@ -2,12 +2,11 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 
-public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
+public class BasicProjectile : MonoBehaviourPun
 {
     #region Variables
     public float moveSpeed = 3f;
     public float lifeTime = 5f;
-    public JobParticle jobParticleType;
     public Transform targetTransform;
     public StatComponent ownerStat;
 
@@ -19,7 +18,6 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         targetTransform = GameObject.Find("Boss Player(Clone)").transform;
     }
-
     private void OnEnable()
     {
         Invoke(nameof(Release), lifeTime);
@@ -52,10 +50,6 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         Release();
     }
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        info.photonView.RPC("AttachParticle", RpcTarget.All);
-    }
     #endregion
 
     #region User Functions
@@ -65,23 +59,6 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
         {
             PhotonNetwork.Destroy(gameObject); // 커스텀 풀로 반환됨
         }
-    }
-
-    [PunRPC]
-    private void AttachParticle() 
-    {
-        ParticleSystem particleSystem = ParticleManager.instance.GetParticleSystem(jobParticleType);
-        
-        if (particleSystem == null || GetComponentInChildren<ParticleSystem>() != null)
-        {
-            return;
-        }
-
-        // 파티클 생성해서 projectile에 붙이기
-        ParticleSystem ps = Instantiate(particleSystem, this.transform);
-        ps.transform.localPosition = Vector3.zero;
-        ps.transform.rotation = this.transform.rotation;
-        ps.Play();
     }
     #endregion
 }

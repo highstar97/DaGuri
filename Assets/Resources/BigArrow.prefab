@@ -165,6 +165,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   lifeTime: 5
-  jobParticleType: 5
   targetTransform: {fileID: 0}
   ownerStat: {fileID: 0}
