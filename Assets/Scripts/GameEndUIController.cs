@@ -23,6 +23,12 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
     private void Start()
     {
         panel.SetActive(false);
+        // GameEndUIController의 Awake()가 GameEndManager보다 먼저 호출될 수도 있기 때문에, GameEndManager.Instance가 null일 경우를 잠깐 체크
+        if (photonView.IsMine && GameEndManager.Instance != null)
+        {
+            Debug.Log(10);
+            GameEndManager.Instance.myUIController = this;
+        }
     }
 
     void SetUIInteractionMode(bool enabled)
@@ -39,6 +45,7 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
         // GameEndUIController의 Awake()가 GameEndManager보다 먼저 호출될 수도 있기 때문에, GameEndManager.Instance가 null일 경우를 잠깐 체크
         if (photonView.IsMine && GameEndManager.Instance != null)
         {
+            Debug.Log(0);
             GameEndManager.Instance.myUIController = this;
         }
     }
