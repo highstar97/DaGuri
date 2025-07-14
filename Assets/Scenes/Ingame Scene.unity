@@ -248,7 +248,8 @@ MonoBehaviour:
   - type: 6
     particlePrefab: {fileID: 0}
   - type: 7
-    particlePrefab: {fileID: 0}
+    particlePrefab: {fileID: 1432503776327017652, guid: ccf28ea29cf499744ac31bab90073aba,
+      type: 3}
 --- !u!82 &41732357
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1504,6 +1505,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1062943960}
+  - {fileID: 1095930087}
   - {fileID: 567227200}
   - {fileID: 1748716901}
   - {fileID: 1687254733}
@@ -1512,4 +1514,3 @@ SceneRoots:
   - {fileID: 805195718}
   - {fileID: 1917318383}
   - {fileID: 535641437}
-  - {fileID: 1095930087}
