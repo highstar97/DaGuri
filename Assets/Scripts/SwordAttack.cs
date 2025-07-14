@@ -33,7 +33,7 @@ public class SwordAttack : MonoBehaviour
         if (GestureUtils.IsDiagonalGesture(trail))
         {
             Debug.Log("대각선 제스처 인식 → 검격 발동");
-            swordSpawner.SpawnProjectile("Sword", SwordOffset.position, this.transform.forward, this.gameObject);
+            swordSpawner.SpawnProjectile("Sword", SwordOffset.position, new Vector3(0f, 2f, 0f), this.gameObject);
         }
 
         StartCoroutine(CoAttackDelay());
