@@ -1,7 +1,8 @@
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameEndManager : MonoBehaviourPunCallbacks
 {
@@ -16,6 +17,11 @@ public class GameEndManager : MonoBehaviourPunCallbacks
     private bool isBossDead = false;
     private bool gameEnded = false;
 
+
+    public GameObject playerRigRoot; // XR Rig 또는 플레이어의 최상위 GameObject
+    public XRRayInteractor uiRayInteractor; // 
+
+    public GameEndUIController myUIController;
     private void Awake()
     {
         if (Instance == null)
@@ -83,13 +89,13 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
         Debug.Log(isBossDead ? " 승리! 클리어 성공!" : " 전멸. 게임 오버.");
 
-        if (GameEndUIController.Instance != null)
+        if (myUIController != null)
         {
-            GameEndUIController.Instance.ShowResult(isBossDead);
+            myUIController.ShowResult(isBossDead);
         }
         else
         {
-            Debug.LogError("[GameEndManager] GameEndUIController.Instance가 씬에 없습니다. UI를 표시할 수 없습니다.");
+            Debug.LogError("[GameEndManager] 로컬 UI 컨트롤러가 등록되어 있지 않습니다.");
         }
 
         StartCoroutine(LeaveRoomAfterDelay());

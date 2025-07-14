@@ -14,7 +14,6 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
 
     // UI를 플레이어 카메라 앞 fixedPosition 거리만큼 띄움
     public Vector3 offsetFromCamera = new Vector3(0f, 0f, 2f);
-    public static GameEndUIController Instance;
 
 
     [SerializeField] 
@@ -22,35 +21,25 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (!photonView.IsMine)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-
-        //ShowResult(false); // 테스트용s
-
+        panel.SetActive(false);
     }
 
     void SetUIInteractionMode(bool enabled)
     {
-        // UI용 레이 인터랙션 활성화
-        rightRay.gameObject.SetActive(enabled);
+         if (rightRay != null)
+        {
+            rightRay.gameObject.SetActive(enabled);
+        }
 
     }
+
     private void Awake()
     {
-        // 싱글톤 패턴 구현
-        if (Instance == null)
+        // GameEndUIController의 Awake()가 GameEndManager보다 먼저 호출될 수도 있기 때문에, GameEndManager.Instance가 null일 경우를 잠깐 체크
+        if (photonView.IsMine && GameEndManager.Instance != null)
         {
-            Instance = this;
-            // DontDestroyOnLoad(gameObject); // 필요하다면 씬 전환 시 파괴되지 않도록 설정
+            GameEndManager.Instance.myUIController = this;
         }
-        else if (Instance != this)
-        {
-            Destroy(gameObject); // 이미 인스턴스가 존재하면 현재 오브젝트 파괴
-        }
-    //    panel.SetActive(false);
     }
 
     void LateUpdate()
@@ -73,6 +62,8 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
 
     public void ShowResult(bool isWin)
     {
+        if (!photonView.IsMine) return;
+
         panel.SetActive(true);
 
         if (isWin)
