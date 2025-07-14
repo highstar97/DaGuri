@@ -8,6 +8,7 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
     public float moveSpeed = 3f;
     public float lifeTime = 5f;
     public JobParticle jobParticleType;
+    public AudioClip audioClip;
     public Transform targetTransform;
     public StatComponent ownerStat;
 
@@ -54,7 +55,7 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        info.photonView.RPC("AttachParticle", RpcTarget.All);
+        info.photonView.RPC("AttachParticleAndSound", RpcTarget.All);
     }
     #endregion
 
@@ -68,9 +69,11 @@ public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     [PunRPC]
-    private void AttachParticle() 
+    private void AttachParticleAndSound() 
     {
         ParticleSystem particleSystem = ParticleManager.instance.GetParticleSystem(jobParticleType);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioClip);
         
         if (particleSystem == null || GetComponentInChildren<ParticleSystem>() != null)
         {

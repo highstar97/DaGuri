@@ -167,9 +167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Mage Player
   - Boss Player
   - Warrior Player
+  - Mage Player
   - Archer Player
   instantiateTransforms:
   - {fileID: 1841911906}
@@ -229,7 +229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paricleList:
   - type: 0
-    particlePrefab: {fileID: 0}
+    particlePrefab: {fileID: 4321358288067726026, guid: 460babe280fe4aa41adc3fefd46f0c0b,
+      type: 3}
   - type: 1
     particlePrefab: {fileID: 0}
   - type: 2
