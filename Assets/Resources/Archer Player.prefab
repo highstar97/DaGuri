@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 3
+  delayAfterRelease: 1
   triggerAction:
     m_UseReference: 1
     m_Action:
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898c76617dee0c04d9120c28519d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAfterRelease: 3
+  delayAfterRelease: 1
   triggerAction:
     m_UseReference: 1
     m_Action:
@@ -6674,7 +6674,7 @@ MonoBehaviour:
   ArrowForce: 50
   leftHandIKTarget: {fileID: 2332246493324751163}
   rightHandIKTarget: {fileID: 5640622480654172556}
-  minBowDrawDistance: 0.3
+  minBowDrawDistance: 0.5
   maxBowDrawDistance: 0.8
 --- !u!114 &675766789652656825
 MonoBehaviour:
