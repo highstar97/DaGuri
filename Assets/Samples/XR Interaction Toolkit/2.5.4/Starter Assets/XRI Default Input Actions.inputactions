@@ -2082,6 +2082,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "235e2601-6085-4f72-ad50-025374a28b50",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Gamepad",
                     "id": "4c9a5170-d325-45ee-8ef9-fc12d1f5a97e",
                     "path": "2DVector",
@@ -2371,6 +2382,17 @@
                     "name": "",
                     "id": "198e6869-709e-448d-96d4-27186c9d56e6",
                     "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5f6c1b6-4f52-4cb5-a56f-570d8125d824",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
