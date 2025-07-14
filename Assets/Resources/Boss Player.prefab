@@ -1974,6 +1974,7 @@ MonoBehaviour:
   rightStabilized: {fileID: 7843361136094564153}
   locomotionSytem: {fileID: 6872138163145197585}
   FrontFace: {fileID: 5338008378207863320}
+  fireInteractor: {fileID: 5483126916385905863}
 --- !u!114 &4461774033872559168
 MonoBehaviour:
   m_ObjectHideFlags: 0
