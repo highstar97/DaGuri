@@ -58,7 +58,7 @@ public class StatComponent : MonoBehaviourPun, IPunObservable, ITakeDamageable
     #region User Functions
     private void InitStatProperty()
     {
-        attack.SetBaseValue(100.0f);
+        attack.SetBaseValue(10.0f);
         attackSpeed.SetBaseValue(1.0f);
         criticalRate.SetBaseValue(0.0f);
         criticalCoefficient.SetBaseValue(2.0f);

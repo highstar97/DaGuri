@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 1142810100636193849}
   - component: {fileID: 5282112970936721377}
   - component: {fileID: 3920534771765026996}
+  - component: {fileID: 2232594818975962790}
   m_Layer: 11
   m_Name: Cube
   m_TagString: Boss
@@ -575,6 +576,29 @@ MonoBehaviour:
   moveVelocity:
     baseValue: 0
   healthBarUI: {fileID: 238966927633664020}
+--- !u!114 &2232594818975962790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584275475629123127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3920534771765026996}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1830928540153347927
 GameObject:
   m_ObjectHideFlags: 0
