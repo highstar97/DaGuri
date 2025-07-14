@@ -2,11 +2,13 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 
-public class BasicProjectile : MonoBehaviourPun
+public class BasicProjectile : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     #region Variables
     public float moveSpeed = 3f;
     public float lifeTime = 5f;
+    public JobParticle jobParticleType;
+    public AudioClip audioClip;
     public Transform targetTransform;
     public StatComponent ownerStat;
 
@@ -16,8 +18,9 @@ public class BasicProjectile : MonoBehaviourPun
     #region Unity Functions
     private void Start()
     {
-        targetTransform = GameObject.Find("Boss").transform;
+        targetTransform = GameObject.Find("Boss Player(Clone)").transform;
     }
+
     private void OnEnable()
     {
         Invoke(nameof(Release), lifeTime);
@@ -50,6 +53,10 @@ public class BasicProjectile : MonoBehaviourPun
 
         Release();
     }
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        info.photonView.RPC("AttachParticleAndSound", RpcTarget.All);
+    }
     #endregion
 
     #region User Functions
@@ -59,6 +66,25 @@ public class BasicProjectile : MonoBehaviourPun
         {
             PhotonNetwork.Destroy(gameObject); // 커스텀 풀로 반환됨
         }
+    }
+
+    [PunRPC]
+    private void AttachParticleAndSound() 
+    {
+        ParticleSystem particleSystem = ParticleManager.instance.GetParticleSystem(jobParticleType);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioClip);
+        
+        if (particleSystem == null || GetComponentInChildren<ParticleSystem>() != null)
+        {
+            return;
+        }
+
+        // 파티클 생성해서 projectile에 붙이기
+        ParticleSystem ps = Instantiate(particleSystem, this.transform);
+        ps.transform.localPosition = Vector3.zero;
+        ps.transform.rotation = this.transform.rotation;
+        ps.Play();
     }
     #endregion
 }

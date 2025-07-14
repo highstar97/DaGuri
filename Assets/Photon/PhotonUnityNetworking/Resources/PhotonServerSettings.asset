@@ -50,6 +50,9 @@ MonoBehaviour:
   - RequestTakeDamage
   - ShootBomb
   - RequestDestroyProjectile
+  - AttachArrowParticle
+  - AttachParticle
+  - AttachParticleAndSound
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
