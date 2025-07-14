@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305213799352955914}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -163,5 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   lifeTime: 5
+  jobParticleType: 0
+  audioClip: {fileID: 8300000, guid: 1667317bbee7f2041a4be8efb38a1efe, type: 3}
   targetTransform: {fileID: 0}
   ownerStat: {fileID: 0}

@@ -34,7 +34,7 @@ public class MageAttackComponent : MonoBehaviour
         else if (GestureUtils.IsStabDownGesture(trail))
         {
             Debug.Log("찌르기 제스처 인식 → 낙뢰 발동");
-            projectileSpawner.SpawnProjectile("Thunder", magicOffset.position, this.transform.forward, this.gameObject);
+            projectileSpawner.SpawnProjectile("Thunder", magicOffset.position + new Vector3(0f, 5f, 0f), new Vector3(0f, 2f, 0f), this.gameObject);
         }
     }
     #endregion
