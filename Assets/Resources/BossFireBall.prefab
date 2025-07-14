@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  lifeTime: 5
+  lifeTime: 100
   jobParticleType: 7
   audioClip: {fileID: 8300000, guid: 62b07fea70229ca41b76f34cd0c86ebf, type: 3}
   ownerStat: {fileID: 0}

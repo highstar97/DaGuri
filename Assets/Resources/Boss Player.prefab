@@ -426,9 +426,9 @@ GameObject:
   - component: {fileID: 1142810100636193849}
   - component: {fileID: 5282112970936721377}
   - component: {fileID: 3920534771765026996}
-  m_Layer: 2
+  m_Layer: 11
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
