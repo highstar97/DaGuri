@@ -19,9 +19,9 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
 
     public GameObject playerRigRoot; // XR Rig 또는 플레이어의 최상위 GameObject
-    public XRRayInteractor uiRayInteractor; 
+    public XRRayInteractor uiRayInteractor; // 
 
-
+    public GameEndUIController myUIController;
     private void Awake()
     {
         if (Instance == null)
@@ -89,14 +89,14 @@ public class GameEndManager : MonoBehaviourPunCallbacks
 
         Debug.Log(isBossDead ? " 승리! 클리어 성공!" : " 전멸. 게임 오버.");
 
-        //if (myUIController != null)
-        //{
-        //    myUIController.ShowResult(isBossDead);
-        //}
-        //else
-        //{
-        //    Debug.LogError("[GameEndManager] 로컬 UI 컨트롤러가 등록되어 있지 않습니다.");
-        //}
+        if (myUIController != null)
+        {
+            myUIController.ShowResult(isBossDead);
+        }
+        else
+        {
+            Debug.LogError("[GameEndManager] 로컬 UI 컨트롤러가 등록되어 있지 않습니다.");
+        }
 
         StartCoroutine(LeaveRoomAfterDelay());
     }
