@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 897007473000490377}
   - component: {fileID: 7684904646785348378}
   - component: {fileID: 2377420286998328486}
+  - component: {fileID: 1828802311772286929}
   m_Layer: 8
   m_Name: BossFireBall
   m_TagString: Projectile
@@ -167,3 +168,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1828802311772286929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928586442219883629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56413715ee9d18c4d9e677a9441b7bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  lifeTime: 5
+  jobParticleType: 7
+  targetTransform: {fileID: 0}
+  ownerStat: {fileID: 0}
