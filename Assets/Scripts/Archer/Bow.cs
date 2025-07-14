@@ -30,8 +30,8 @@ public class Bow : MonoBehaviour
     public float ArrowForce = 50f; //화살이 날라가는 거리
     public Transform leftHandIKTarget; //왼손이 활을 잡을 부분
     public Transform rightHandIKTarget; //오른손이 시위을 잡을 부분
-    public float minBowDrawDistance = 0.1f;//오른손이 당기는 최소거리
-    public float maxBowDrawDistance = 0.5f; //오른손이 당기는 최대거리
+    public float minBowDrawDistance = 0.5f;//오른손이 당기는 최소거리
+    public float maxBowDrawDistance = 0.8f; //오른손이 당기는 최대거리
 
     private Vector3 drawStartPosition; //활 당기기 시작 위치
     private bool IsDrawBow = false; //활 당기는지 여부
@@ -98,10 +98,11 @@ public class Bow : MonoBehaviour
            case State.Shoot:
                 m_anim.SetBool("Ready", false);
                 m_anim.SetBool("Shoot", true);
-                if (!hasFiredThisShot)
+                if (canFire && !hasFiredThisShot)
                 {
                     hasFiredThisShot = true;
                     canFire = false;
+                    IsGesture = false;
                 }
 
                 StartCoroutine(RestartAttack(0.1f));
@@ -168,14 +169,17 @@ public class Bow : MonoBehaviour
         }
         else if (CurrentState == State.Ready)
         {
-            if (!IsLeftHandExtended || !IsRightHandExtended || !leftTriggerPressed)
+            if(!IsLeftHandExtended || lefthandTrigger.action.ReadValue<float>() <= 0.1f)
+            //if (!IsLeftHandExtended || !IsRightHandExtended || !leftTriggerPressed)
             {
                 SetBowState(State.Idle);
+                return;
             }
             else // Ready 상태를 유지하는 동안 활 당기기 및 발사 로직 체크
             {
                 float currentDrawDistance = Vector3.Distance(drawStartPosition, rightHandControllerTransform.position);
-                if (currentDrawDistance >= minBowDrawDistance && IsGesture && !rightTriggerPressed && canFire)
+                if (currentDrawDistance >= minBowDrawDistance && IsGesture && righthandTrigger.action.ReadValue<float>() <= 0.1f && canFire && !hasFiredThisShot)
+                //if (currentDrawDistance >= minBowDrawDistance && IsGesture && !rightTriggerPressed && canFire && hasFiredThisShot)
                 {
                     SetBowState(State.Shoot);
                 }
