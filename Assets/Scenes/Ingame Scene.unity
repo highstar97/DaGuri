@@ -218,7 +218,6 @@ MonoBehaviour:
   delayBeforeExit: 5
   playerRigRoot: {fileID: 0}
   uiRayInteractor: {fileID: 0}
-  myUIController: {fileID: 0}
 --- !u!114 &41732356
 MonoBehaviour:
   m_ObjectHideFlags: 0
