@@ -5264,6 +5264,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1476132454635493557, guid: 92305bb74738eec42b11ea9b1e107393,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2894325870861129520, guid: 92305bb74738eec42b11ea9b1e107393,
         type: 3}
       propertyPath: m_IsActive

@@ -28,7 +28,7 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
             return;
         }
 
-        ShowResult(false); // 테스트용s
+        //ShowResult(false); // 테스트용s
 
     }
 

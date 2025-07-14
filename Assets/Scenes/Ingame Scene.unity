@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - Boss Player
   - Warrior Player
+  - Boss Player
   - Mage Player
   - Archer Player
   instantiateTransforms:
