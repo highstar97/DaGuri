@@ -28,7 +28,9 @@ public class BowGestureTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bow == null || bow.CurrentState != Bow.State.Ready)
+        if (bow == null || bow.CurrentState != Bow.State.Ready || bow.GetIsDrawBow())
+
+        //if (bow == null || bow.CurrentState != Bow.State.Ready)
         {
             if (isTrakingGesture)
             {
@@ -47,17 +49,17 @@ public class BowGestureTracker : MonoBehaviour
             CheckBowDrawGesture();
 
         }
-        else if (isTrakingGesture)
-        {
-            float dist = Vector3.Distance(drawStartPosition, rightHandControllerTransform.position);
+        //else if (isTrakingGesture)
+        //{
+        //    float dist = Vector3.Distance(drawStartPosition, rightHandControllerTransform.position);
 
-            // draw 거리 일정 이상이면 추적 유지
-            if (dist < 0.05f) // 너무 가까이 가면 끊는다 (튜닝 가능)
-            {
-                StopTrackingGesture();
-            }
+        //    // draw 거리 일정 이상이면 추적 유지
+        //    if (dist < 0.05f) // 너무 가까이 가면 끊는다 (튜닝 가능)
+        //    {
+        //        StopTrackingGesture();
+        //    }
 
-        }
+        //}
     }
 
     private void StartTrackingGesture()
