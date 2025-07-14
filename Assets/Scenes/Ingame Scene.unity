@@ -128,9 +128,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41732352}
-  - component: {fileID: 41732353}
   - component: {fileID: 41732354}
+  - component: {fileID: 41732353}
   - component: {fileID: 41732355}
+  - component: {fileID: 41732356}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -214,6 +215,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnSceneName: Ingame Scene
   delayBeforeExit: 5
+--- !u!114 &41732356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41732351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e18645446ac0b4da52b5a39fe586dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paricleList:
+  - type: 0
+    particlePrefab: {fileID: 0}
+  - type: 1
+    particlePrefab: {fileID: 0}
+  - type: 2
+    particlePrefab: {fileID: 0}
+  - type: 3
+    particlePrefab: {fileID: 0}
+  - type: 4
+    particlePrefab: {fileID: 1358412939764641139, guid: dbf8fb0fb96e43b4580cb90cef230945,
+      type: 3}
+  - type: 5
+    particlePrefab: {fileID: 0}
+  - type: 6
+    particlePrefab: {fileID: 0}
+  - type: 7
+    particlePrefab: {fileID: 0}
 --- !u!1 &306638464
 GameObject:
   m_ObjectHideFlags: 0
