@@ -11,9 +11,12 @@ public class ArcherAttackComponent : MonoBehaviourPun
     public Transform ArrowOffset; //화살 발사 지점
     public ProjectileSpawner arrowSpawner; //화살 스포너
     public ControllerTracking controllerTracking; //컨트롤러 트래킹
- 
+
+    private StatComponent statComponent;
     private void Start()
     {
+        statComponent = GetComponentInParent<StatComponent>();
+
         if (controllerTracking != null)
         {
             controllerTracking.OnTrackingFinished += CheckGesture;
@@ -30,7 +33,7 @@ public class ArcherAttackComponent : MonoBehaviourPun
 
         if (GestureUtils.IsLineGesture(trail))
         {
-            GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
+            GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, statComponent);
 
             // 발사체의 PhotonView ID 추출
             // int projectileViewID = projectile.GetComponent<PhotonView>().ViewID;

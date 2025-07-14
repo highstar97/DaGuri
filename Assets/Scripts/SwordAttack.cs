@@ -11,12 +11,13 @@ public class SwordAttack : MonoBehaviour
     public ProjectileSpawner swordSpawner;          // 검격 스포너
 
     public SwordInput swordInput;                   // 검 입력
-
+    private StatComponent statComponent;
     private bool canAttack = true;
     #endregion
 
     void Start()
     {
+        statComponent = GetComponentInParent<StatComponent>();
         swordInput.OnPressingFinished += CheckGesture;
     }
 
@@ -33,7 +34,7 @@ public class SwordAttack : MonoBehaviour
         if (GestureUtils.IsDiagonalGesture(trail))
         {
             Debug.Log("대각선 제스처 인식 → 검격 발동");
-            swordSpawner.SpawnProjectile("Sword", SwordOffset.position, new Vector3(0f, 2f, 0f), this.gameObject);
+            swordSpawner.SpawnProjectile("Sword", SwordOffset.position, new Vector3(0f, 2f, 0f), statComponent);
         }
 
         StartCoroutine(CoAttackDelay());

@@ -12,11 +12,13 @@ public class MageAttackComponent : MonoBehaviour
     public ProjectileSpawner projectileSpawner;     // 파이어볼 스포너
 
     public ControllerTracking controllerTracking;   // 컨트롤러 트래킹
+    private StatComponent statComponent;
     #endregion
 
     #region Unity Functions
     private void Start()
     {
+        statComponent = GetComponentInParent<StatComponent>();
         controllerTracking.OnTrackingFinished += CheckGesture;
     }
     #endregion
@@ -29,12 +31,12 @@ public class MageAttackComponent : MonoBehaviour
         if (GestureUtils.IsCircleGesture(trail))
         {
             Debug.Log("원 제스처 인식 → 원형 마법 발동");
-            projectileSpawner.SpawnProjectile("FireBall", magicOffset.position, this.transform.forward, this.gameObject);
+            projectileSpawner.SpawnProjectile("FireBall", magicOffset.position, this.transform.forward, statComponent);
         }
         else if (GestureUtils.IsStabDownGesture(trail))
         {
             Debug.Log("찌르기 제스처 인식 → 낙뢰 발동");
-            projectileSpawner.SpawnProjectile("Thunder", magicOffset.position + new Vector3(0f, 5f, 0f), new Vector3(0f, 2f, 0f), this.gameObject);
+            projectileSpawner.SpawnProjectile("Thunder", magicOffset.position + new Vector3(0f, 5f, 0f), new Vector3(0f, 2f, 0f), statComponent);
         }
     }
     #endregion
