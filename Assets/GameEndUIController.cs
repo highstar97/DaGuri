@@ -3,7 +3,7 @@ using TMPro;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class GameEndUIController : MonoBehaviour
+public class GameEndUIController : MonoBehaviourPunCallbacks
 {
     public GameObject panel;
     public TextMeshProUGUI titleText;
