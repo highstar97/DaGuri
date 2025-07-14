@@ -1096,6 +1096,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eeecde2faad9fd45b4ac61d6970f791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1451634864 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198493171704989436, guid: d77b772ad2965654697ec98fe4ad20a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1687254733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1669678604 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6893896621809211936, guid: d77b772ad2965654697ec98fe4ad20a5,
@@ -1277,6 +1283,11 @@ PrefabInstance:
       propertyPath: lightningAudio
       value: 
       objectReference: {fileID: 1669678604}
+    - target: {fileID: 5060039626731099503, guid: d77b772ad2965654697ec98fe4ad20a5,
+        type: 3}
+      propertyPath: portalParticles
+      value: 
+      objectReference: {fileID: 1451634864}
     - target: {fileID: 6133522958823494969, guid: d77b772ad2965654697ec98fe4ad20a5,
         type: 3}
       propertyPath: m_Layer
