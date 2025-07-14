@@ -163,7 +163,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  lifeTime: 5
+  lifeTime: 100
   jobParticleType: 7
   audioClip: {fileID: 8300000, guid: 62b07fea70229ca41b76f34cd0c86ebf, type: 3}
   ownerStat: {fileID: 0}

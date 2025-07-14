@@ -19,6 +19,7 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
     [SerializeField] 
     private XRRayInteractor rightRay;
 
+
     private void Start()
     {
         panel.SetActive(false);
@@ -62,6 +63,7 @@ public class GameEndUIController : MonoBehaviourPunCallbacks
 
     public void ShowResult(bool isWin)
     {
+
         if (!photonView.IsMine) return;
 
         panel.SetActive(true);

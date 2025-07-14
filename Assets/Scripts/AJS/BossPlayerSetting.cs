@@ -58,6 +58,9 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
     [Header("Face Renddrer")]
     [SerializeField] private Renderer FrontFace;
 
+    [Header("Fire Interactor")]
+    [SerializeField] private GameObject fireInteractor;
+
     void Start()
     {
         // 로컬 플레이어: 모든 XR 관련 컴포넌트 활성화
@@ -103,6 +106,8 @@ public class BossPlayerSetting : MonoBehaviourPunCallbacks
             locomotionSytem.SetActive(true);
 
             FrontFace.enabled = false;
+
+            fireInteractor.SetActive(true);
         }
         else
         {
