@@ -32,29 +32,13 @@ public class ArcherAttackComponent : MonoBehaviourPun
         {
             GameObject projectile = arrowSpawner.SpawnProjectile("Arrow", ArrowOffset.position, this.transform.forward, this.gameObject);
 
-            // 발사체의 PhotonView ID 추출
-            // int projectileViewID = projectile.GetComponent<PhotonView>().ViewID;
-
-            // 모든 클라이언트에 이펙트 생성하라고 RPC 호출
-            // photonView.RPC("AttachArrowParticle", RpcTarget.All, projectileViewID);
+            photonView.RPC("AttachParticle", RpcTarget.All, projectile, JobParticle.ArcherBasicAttack);
         }
     }
 
     [PunRPC]
-    void AttachArrowParticle(int viewID)
+    private void AttachParticle(GameObject projectile, JobParticle type)
     {
-        PhotonView pv = PhotonView.Find(viewID);
-        if (pv == null) return;
-
-        GameObject projectile = pv.gameObject;
-
-        // 1. 파티클 프리팹 획득
-        ParticleSystem particlePrefab = ParticleManager.instance.GetParticleSystem(JobParticle.ArcherBasicAttack);
-        // 파티클 생성해서 projectile에 붙이기
-        ParticleSystem ps = Instantiate(particlePrefab, projectile.transform);
-        ps.transform.localPosition = Vector3.zero;
-        ps.transform.rotation = projectile.transform.rotation;
-        ps.Play();
+        ParticleManager.instance.AttachParticle(projectile, JobParticle.ArcherBasicAttack);
     }
-
 }
