@@ -164,5 +164,6 @@ MonoBehaviour:
   moveSpeed: 3
   lifeTime: 5
   jobParticleType: 4
+  audioClip: {fileID: 8300000, guid: 62b07fea70229ca41b76f34cd0c86ebf, type: 3}
   targetTransform: {fileID: 0}
   ownerStat: {fileID: 0}
